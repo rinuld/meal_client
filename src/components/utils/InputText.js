@@ -1,0 +1,23 @@
+import React from 'react';
+
+const InputText = ({ label, id, type, placeholder, name, value, onChange, disabled }) => {
+  return (
+    <div className='input-text'>
+      <label htmlFor={id}>{label}</label>
+      <br/>
+      <input
+        id={id}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
+        autoComplete='off'
+        disabled={disabled}
+        required
+      />
+    </div>
+  );
+};
+
+export default InputText;

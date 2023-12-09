@@ -1,0 +1,895 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Container-fluid */
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* styles.css */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  margin: 0;
+  padding: 0;
+  width: 16.66666667%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.navbar-brand img {
+  height: 70px;
+  width: auto;
+  display: block;
+  margin: 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.user-name {
+  font-size: 12px;
+  padding-right: 10px;
+}
+
+.nav-right {
+  margin-left: auto;
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+}
+
+
+/* Sidebar styles */
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar {
+  left: 0;
+  width: 16.66666667%;
+  height: 100%;
+  z-index: 999;
+  position: fixed;
+  background-color: #fff;
+  color: #106544;
+}
+
+.sidebar .nav-item{
+  display: flex;
+  color: #106544;
+  font-weight: 600;
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.navbar .nav-item{
+  color: gray;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 7px 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.navbar .nav-item i{
+  height: 12px;
+  width: 12px;
+  margin-right: 10px;
+}
+
+.navbar .nav-item:hover{
+  background-color: #e8fad7;
+}
+
+.project-sub-item {
+  margin-left: 25px;
+  border-left: 1px solid rgb(202, 202, 202);
+}
+
+.sidebar p {
+  color: gray;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.sidebar .nav-item img {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+}
+
+.sidebar .nav-item:hover {
+  background-color: rgba(199, 196, 196, 0.3);
+  color: #106544;
+}
+
+.active {
+  background-color: rgba(199, 196, 196, 0.3);
+}
+
+/* Main content styles */
+
+.main-content {
+  min-height: 100vh;
+  padding: 20px 20px;
+  box-shadow: inset 0px 0px 10px 5px rgba(199, 196, 196, 0.3);
+}
+
+.col-lg-10 {
+  padding: 0 0 !important;
+}
+
+/* Header Styles */
+
+.header {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  color: #106544;
+}
+
+/*  Datatable Styles */
+
+.datatable {
+  padding: 20px;
+  width: 100%;
+}
+
+.datatable table {
+  margin: 10px 0;
+}
+
+.datatable-header {
+  display: flex;
+  width: 100%;
+}
+
+.sort-columns {
+  margin-left: 20px;
+}
+
+
+table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  table-layout: fixed;
+}
+
+table th {
+  text-align: left;
+}
+
+.textbox {
+  padding: 5px;
+  outline-color: #A3C639;
+}
+
+.pagination,
+.search-btn {
+  padding: 5px;
+  float: right;
+  outline-color: #A3C639;
+}
+
+.row-count {
+  text-align: center;
+}
+
+.form-rows {
+  padding-bottom: 30px;
+}
+
+/* Active Menu */
+
+.tab-header {
+  border-bottom: 3px solid rgb(223, 220, 220);
+}
+
+.active-menu {
+  border-bottom: 3px solid #A3C639;
+  color: #106544;
+}
+
+.display-content {
+  display: block;
+}
+
+.tab-content {
+  display: none;
+}
+
+/* Create Forms */
+
+.create-forms,
+.card-custom {
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.modal-form{
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.modal-add-button{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: 
+    background-color 0.2s ease-in-out, 
+    box-shadow 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.modal-add-button i{
+  font-size: 10px;
+}
+
+.modal-add-button.primary{
+  color: #106544;
+  border: 1px solid #106544;
+}
+
+.modal-add-button.secondary{
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.modal-add-button.primary:hover{
+  background-color: #106544;
+  color: white;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.modal-add-button.secondary:hover{
+  background-color: #dc3545;
+  color: white;
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Menu */
+
+.card-menu {
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
+}
+
+.card-menu ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+  justify-content: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  color: #555;
+}
+
+li:hover {
+  color: #222;
+}
+
+.active-menu {
+  color: #222;
+}
+
+span {
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* Text input style */
+
+.input-text,
+.input-datepicker,
+.input-selection {
+  padding: 0;
+  margin: 0;
+}
+
+.input-text label,
+.input-datepicker label,
+.input-with-icon label,
+.input-sepection label,
+.input-textarea label {
+  font-size: 14px;
+  padding-bottom: 4px;
+  color: gray;
+}
+
+.input-text input,
+.input-datepicker .input,
+.input-container input {
+  width: 85%;
+  outline-color: #A3C639;
+  font-size: 14px;
+  padding: 10px 10px 10px 20px;
+}
+
+.input-textarea textarea {
+  width: 100%;
+  outline-color: #A3C639;
+  font-size: 14px;
+  padding: 10px 10px 10px 20px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.unit {
+  position: absolute;
+  left: 20px;
+  top: 12px;
+}
+
+/* Buttons */
+
+.row .button-container {
+  margin-top: 20px;
+  text-align: right;
+  align-items: center;
+}
+
+.button-save {
+  background: #a3c639;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.button-create {
+  background: #e8fad7;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.button-delete {
+  background: red;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.button-close {
+  border-radius: 5px;
+  padding: 3px 3px;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.isNotDisabled:hover,
+.button-close:hover,
+.button-create:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  margin: 0;
+}
+
+/* ID Checker */
+
+.checker-result {
+  position: absolute;
+}
+
+.checker-result .notvalid p {
+  color: red;
+  font-size: 11px;
+}
+
+.checker-result .valid p {
+  color: green;
+  font-size: 11px;
+}
+
+.no-data-cell {
+  text-align: center;
+}
+
+.no-data-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.contents {
+  margin-top: 20px;
+}
+
+/* Other Tables */
+
+.card-table {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
+}
+
+.card-table table thead tr th,
+.card-table table tbody .row-theme-1 td,
+.card-table table tbody .objective-rows td,
+.card-table table tbody .outcome-rows td,
+.datatable table tbody .datatable-row td,
+.indicator-data {
+  padding: 10px;
+}
+
+.card-table table thead tr th {
+  background-color: #106544;
+  color: white;
+}
+
+table .row-theme-1,
+table .objective-rows,
+table .outcome-rows,
+table .indicator-rows,
+table .datatable-row {
+  border-top: 0.5px solid #ece9e9;
+}
+
+table .row-theme-1:hover,
+table .indicator-rows:hover,
+table .datatable-row:hover {
+  background-color: #e9e6e6;
+}
+
+.row-theme-1 .link-text,
+.indicator-rows .link-text {
+  text-decoration: none;
+}
+
+/* Link Texts */
+
+.activity-code-txt {
+  color: #106544;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.activity-name-txt {
+  color: black;
+  font-size: 14px;
+}
+
+/* Indicator Styles Color */
+
+.objective-rows {
+  border-left: 3px solid green;
+}
+
+.outcome-rows {
+  border-left: 3px solid red;
+}
+
+/* Indicator Table */
+
+.table-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.progress-with-button{
+  width: 100%;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.delete-button-container{
+  margin-left: auto;
+}
+
+.small-button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+}
+
+.objective-rows p,
+.outcome-rows p {
+  margin: 0;
+}
+
+.indicator-rows .first-col {
+  display: flex;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.overflow-hidden td{
+  overflow: hidden;
+}
+
+.nowrap td{
+  white-space: nowrap;
+}
+
+.indicator-front-box {
+  min-width: 30px;
+  border-right: 1px solid #ece9e9;
+}
+
+/* Indicator Page */
+
+.indicator-details h4 .go-back {
+  font-size: 14px;
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  box-sizing: border-box;
+  background-color: rgb(248, 89, 89);
+  border-radius: 3px;
+}
+
+.indicator-details h4 .go-back:hover {
+  background-color: red;
+  box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
+}
+
+/* Voucher Page */
+
+.contentprint {
+  min-width: calc(100% - 20mm);
+  min-height: calc(100% - 20mm);
+  margin: 10mm;
+}
+
+.voucher-menu {
+  margin-bottom: 20px !important;
+}
+
+.modal {
+  z-index: 99999999;
+}
+
+/* Voucher NYLI logo */
+
+.voucher-nyli-logo {
+  display: flex;
+  align-items: center;
+}
+
+.voucher-nyli-logo img {
+  width: 200px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.voucher-nyli-logo .right-title {
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.voucher-nyli-logo .right-title h2 {
+  font-weight: 1000;
+}
+
+.voucher-nyli-logo .right-title p {
+  font-size: 14px;
+  font-weight: 100;
+}
+
+/* Entry Table */
+
+.add-entry {
+  padding: 10px;
+}
+
+.add-entry button {
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  background-color: rgb(50, 50, 245);
+  border: none;
+}
+
+.add-entry button:hover {
+  background-color: blue;
+}
+
+.input-cell {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.entry-table,
+.total-entry-amount {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.entry-table th,
+.entry-table td,
+.total-entry-amount th {
+  border: 1px solid gray;
+  padding: 8px;
+}
+
+.entry-table th,
+.total-entry-amount th {
+  text-align: center;
+  background-color: #106544;
+  color: white;
+}
+
+.total-entry-amount {
+  position: relative;
+  margin-top: 50px;
+}
+
+/* Approval Section */
+
+.approval-section,
+.receive-section {
+  display: flex;
+  margin-top: 20px;
+}
+
+.approval-box {
+  width: 20%;
+  padding: 5px 5px 5px 0;
+}
+
+.received-box {
+  width: 33.33%;
+  padding: 5px 5px 5px 0;
+}
+
+.approval-box h3 {
+  padding: 3px 0;
+  border: 1px solid #106544;
+  background-color: #106544;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.approval-box .signature-box,
+.received-box .signature-box {
+  border: 1px solid gray;
+  width: 100%;
+  height: 130px;
+}
+
+.approval-box .signature-box span {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+}
+
+.approval-box .person-approval,
+.received-box .person-approval {
+  width: 100%;
+  height: auto;
+  border: 1px solid gray;
+}
+
+.approval-box .person-approval h4,
+.approval-box .person-approval select,
+.received-box .person-approval h4 {
+  padding: 5px;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.approval-box .person-approval select {
+  outline: none;
+}
+
+.nyli {
+  text-align: center;
+}
+
+.balance-error {
+  position: absolute;
+  text-align: right;
+  color: rgb(253, 82, 82);
+}
+
+/* Import component */
+.import-component{
+  padding: 10px;
+  text-align: end;
+}
+
+.import-component input{
+  padding: 5px;
+  font-size: 14px;
+}
+
+.import-component button{
+  padding: 5px;
+  background-color: gray;
+  color: black;
+}
+
+/* button icon */
+
+.button-label {
+  padding-right: 8px; /* Adjust the padding value as per your preference */
+}
+
+.add-btn {
+  margin-bottom: 10px;
+  margin-left: 10px; /* Adjust the margin value as per your preference */
+}
+
+/* progress bar indicators */
+
+.progress-indicator p{
+  margin: 0;
+  color: gray;
+  font-size: 12px;
+}
+
+.no-padding{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.empty-table-data {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Nav dropdown menu */
+
+.ellipis-toggle{
+  padding: 20px;
+}
+
+.dropdown-profile{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-content-menu ul{
+  display: block;
+  margin: 0;
+}
+
+.dropdown-content-menu ul {
+  position: absolute;
+  padding: 0;
+  right: 0;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content-menu ul li{
+  padding: 7px 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dropdown-content-menu ul li i{
+  margin-right: 10px;
+}
+
+.dropdown-content-menu ul li:hover{
+  background-color: #e8fad7;
+}
+
+/* Delete Modal */
+
+.delete-modal{
+  text-align: center;
+}
+
+.header-modal-title{
+  font-size: 14px;
+  color: black;
+}
+
+.content-modal{
+  font-size: 12px;
+  color: gray;
+}
