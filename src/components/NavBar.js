@@ -1,5 +1,5 @@
 import React, { memo, useState } from 'react';
-import userimage from '../assets/images/ayan.jpg';
+import userimage from '../assets/images/user_default.svg';
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 

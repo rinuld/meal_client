@@ -47,106 +47,143 @@ export default function App() {
 
   console.log("Render App2" + auth.role);
   return (
-    <>
-      {!isLoginPage &&
-        <>
-          <NavBar auth={auth} />
-          <div className="container-fluid bg-light d-flex flex-column">
-            <div className="row flex-grow-1">
-              <div className="col-lg-2">
-                <SideBar auth={auth} />
-              </div>
-              <div className="col-lg-10 overflow-auto">
-                <div className='main-content'>
-                  <Routes>
-                    <Route path="/"
-                      element={
-                        <div>
-                          <Header title="Dashboard" />
-                          <Dashboard />
-                        </div>
-                      } />
-                    <Route path="/projects"
-                      element={
-                        <div>
-                          <Header title="Projects" />
-                          <Projects />
-                        </div>
-                      } />
-                    <Route path="/details"
-                      element={
-                        <div>
-                          <Header title="Details" />
-                          <SelectionProject onChange={handleProjectSelection} />
-                          <Details />
-                        </div>
-                      } />
-                    <Route path="/activities"
-                      element={
-                        <div>
-                          <Header title="Activity" />
-                          <SelectionProject onChange={handleProjectSelection} />
-                          <Activity />
-                        </div>
-                      } />
-                    <Route path="/indicators"
-                      element={
-                        <div>
-                          <Header title="Indicators" />
-                          <SelectionProject onChange={handleProjectSelection} />
-                          <Indicators />
-                        </div>
-                      } />
-                    {auth.role === "Super Admin" &&
-                      <Route path="/voucher" element={
-                        <div>
-                          <Header title="Voucher" />
-                          <Voucher />
-                        </div>
-                      } />
-                    }
-                    <Route path="/logs" element={
-                      <div>
-                        <Header title="Logs" />
-                        <Logs />
+      <>
+          {!isLoginPage && (
+              <>
+                  <NavBar auth={auth} />
+                  <div className="container-fluid bg-light d-flex flex-column">
+                      <div className="row flex-grow-1">
+                          <div className="col-lg-2">
+                              <SideBar auth={auth} />
+                          </div>
+                          <div className="col-lg-10 overflow-auto">
+                              <div className="main-content">
+                                  <Routes>
+                                      <Route
+                                          path="/"
+                                          element={
+                                              <div>
+                                                  <Header title="Dashboard" />
+                                                  <Dashboard />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/projects"
+                                          element={
+                                              <div>
+                                                  <Header title="Projects" />
+                                                  <Projects />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/details"
+                                          element={
+                                              <div>
+                                                  <Header title="Details" />
+                                                  <SelectionProject
+                                                      onChange={
+                                                          handleProjectSelection
+                                                      }
+                                                  />
+                                                  <Details />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/activities"
+                                          element={
+                                              <div>
+                                                  <Header title="Activity" />
+                                                  <SelectionProject
+                                                      onChange={
+                                                          handleProjectSelection
+                                                      }
+                                                  />
+                                                  <Activity />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/indicators"
+                                          element={
+                                              <div>
+                                                  <Header title="Indicators" />
+                                                  <SelectionProject
+                                                      onChange={
+                                                          handleProjectSelection
+                                                      }
+                                                  />
+                                                  <Indicators />
+                                              </div>
+                                          }
+                                      />
+                                      {auth.role === "Super Admin" && (
+                                          <Route
+                                              path="/voucher"
+                                              element={
+                                                  <div>
+                                                      <Header title="Voucher" />
+                                                      <Voucher />
+                                                  </div>
+                                              }
+                                          />
+                                      )}
+                                      <Route
+                                          path="/logs"
+                                          element={
+                                              <div>
+                                                  <Header title="Logs" />
+                                                  <Logs />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/indicatorDetails/:id"
+                                          element={
+                                              <div>
+                                                  <IndicatorDetails />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/activityDetails/:id"
+                                          element={
+                                              <div>
+                                                  <ActivityDetails />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/addmember"
+                                          element={
+                                              <div>
+                                                  <Header title="Add Member" />
+                                                  <AddUser />
+                                              </div>
+                                          }
+                                      />
+                                      <Route
+                                          path="/profile"
+                                          element={
+                                              <div>
+                                                  <Header title="Profile" />
+                                                  <Profile />
+                                              </div>
+                                          }
+                                      />
+                                  </Routes>
+                              </div>
+                          </div>
                       </div>
-                    } />
-                    <Route path="/activityDetails/:id" element={
-                      <div>
-                        <ActivityDetails />
-                      </div>
-                    } />
-                    <Route path="/activityDetails/:id" element={
-                      <div>
-                        <ActivityDetails />
-                      </div>
-                    } />
-                    <Route path="/addmember" element={
-                      <div>
-                        <Header title="Add Member" />
-                        <AddUser />
-                      </div>
-                    } />
-                    <Route path="/profile" element={
-                      <div>
-                        <Header title="Profile" />
-                        <Profile />
-                      </div>
-                    } />
-                  </Routes>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      }
-      <Routes >
-        <Route path="/login"
-          element={
-            <Login setToken={setToken} />
-          } />
-      </Routes>
-    </>
+                  </div>
+              </>
+          )}
+          <Routes>
+              <Route path="/login" element={<Login setToken={setToken} />} />
+          </Routes>
+      </>
   );
 }
 
