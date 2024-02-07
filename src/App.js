@@ -159,7 +159,7 @@ export default function App() {
                                           path="/addmember"
                                           element={
                                               <div>
-                                                  <Header title="Add Member" />
+                                                  <Header title="Add a Member" />
                                                   <AddUser />
                                               </div>
                                           }

@@ -3,6 +3,7 @@ import InputText from "../components/utils/InputText";
 import InputSelection from "../components/utils/InputSelection";
 import { InsertLogData } from "../components/InsertLogData";
 import { toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
 
 
 export default function AddUser() {
@@ -27,17 +28,25 @@ export default function AddUser() {
         setFirstname("");
         setLastName("");
         setEmail("");
+        setMiddleName("");
         setRole({});
         setDefaultPassword("");
         InsertLogData("Added new member " + firstname + " " + lastname);
         toast.success('Member Added', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });
+
+        emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
       })
       .catch(error => {
-        console.log('Error inserting data:', error);
+        toast.error(('Error inserting data:', error), {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
+        // console.log('Error inserting data:', error);
       });
   };
 
@@ -58,7 +67,7 @@ export default function AddUser() {
                 label="First Name"
                 id="firstname"
                 type="text"
-                placeholder="enter firstname"
+                placeholder="Enter First Name"
                 name="firstname"
                 value={firstname}
                 onChange={(e) => setFirstname(e.target.value)}
@@ -69,7 +78,7 @@ export default function AddUser() {
                 label="Last Name"
                 id="lastname"
                 type="text"
-                placeholder="enter last name"
+                placeholder="Enter Last Name"
                 name="lastname"
                 value={lastname}
                 onChange={(e) => setLastName(e.target.value)}
@@ -80,7 +89,7 @@ export default function AddUser() {
                 label="Middle Name"
                 id="middlename"
                 type="text"
-                placeholder="enter middlename"
+                placeholder="Enter Middle Name"
                 name="middlename"
                 value={middlename}
                 onChange={(e) => setMiddleName(e.target.value)}
@@ -90,10 +99,10 @@ export default function AddUser() {
           <div className="row">
             <div className="col-6">
               <InputText
-                label="E-mail"
+                label="Email Address"
                 id="email"
                 type="text"
-                placeholder="enter email"
+                placeholder="Enter Email Address"
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -111,10 +120,10 @@ export default function AddUser() {
           <div className="row">
             <div className="col-6">
               <InputText
-                label="Default Password"
+                label="Password"
                 id="password"
                 type="text"
-                placeholder="enter password"
+                placeholder="Enter Password"
                 name="password"
                 value={password}
                 onChange={(e) => setDefaultPassword(e.target.value)}
