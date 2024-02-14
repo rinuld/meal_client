@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import Axios from 'axios';
 import '../assets/css/login.css';
 // import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import AuthContext from '../context/AuthProvider';
@@ -60,6 +60,7 @@ export default function Login({ setToken }) {
               />
               <label htmlFor='password'>Password</label>
             </div>
+            <Link to="/forgot-password">Forgot Password?</Link>
             <ReCAPTCHA
               sitekey="6LcrxOImAAAAAHTHpKc7Rjb0cUmsM6xaYzjBO_HX"
               onChange={(value) => {
