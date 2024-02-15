@@ -14,6 +14,7 @@ const NavBar = memo(({ auth }) => {
         localStorage.removeItem('selectedProject');
         sessionStorage.removeItem('token');
         navigate("/login");
+        window.location.reload();
     };
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
