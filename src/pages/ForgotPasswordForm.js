@@ -36,11 +36,12 @@ const ForgotPasswordForm = () => {
 
     // Store verification code in local storage
     localStorage.setItem('verificationCode', code);
+    localStorage.setItem('email', email);
     
     // Set expiration time (5 minutes)
     setTimeout(() => {
       localStorage.removeItem('verificationCode');
-    }, 300000); // 5 minutes in milliseconds
+    }, 300000); // 300 seconds in milliseconds
 
     // Set cooldown
     setCooldown(true);
@@ -55,13 +56,15 @@ const ForgotPasswordForm = () => {
       verificationCode: code
     };
 
-    emailjs.send('service_j7vp4dc', 'template_rr8idxc', templateParams, 'RdZBEODH7uDlfD4ME')
-      .then(() => {
-        setVerificationSent(true); // Set verificationSent to true after sending email
-      })
-      .catch((error) => {
-        console.error('Email sending failed:', error);
-      });
+    setVerificationSent(true);
+
+    // emailjs.send('service_j7vp4dc', 'template_rr8idxc', templateParams, 'RdZBEODH7uDlfD4ME')
+    //   .then(() => {
+    //     setVerificationSent(true); // Set verificationSent to true after sending email
+    //   })
+    //   .catch((error) => {
+    //     console.error('Email sending failed:', error);
+    //   });
 
   };
 
@@ -98,10 +101,19 @@ const ForgotPasswordForm = () => {
 
   const handleVerify = () => {
     const storedVerificationCode = localStorage.getItem('verificationCode');
+    const storedEmail = localStorage.getItem('email');
     const codeInput = document.getElementById('verificationCode').value;
     const email = document.getElementById('email').value;
     if (!email || !codeInput) {
       console.error('Email and verification code are required');
+      return;
+    }
+    if (email !== storedEmail) {
+      console.error('Entered email does not match the one used to send the verification code');
+      return;
+    }
+    if (!storedVerificationCode) {
+      console.error('Verification code has expired');
       return;
     }
     if (codeInput !== storedVerificationCode) {
