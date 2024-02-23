@@ -125,7 +125,7 @@ const ForgotPasswordForm = () => {
   };
 
   const handleBackToLogin = () => {
-    navigate('/login'); // Navigate to the login page
+    navigate('/'); // Navigate to the login page
   };
 
   const onSubmit = () => {

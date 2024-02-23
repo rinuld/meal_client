@@ -9,6 +9,12 @@ const ResetPasswordForm = () => {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+
+    if (!newPassword || !confirmPassword) {
+      console.error('Please fill in all fields');
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       console.error('Passwords do not match');
       return;
@@ -30,7 +36,7 @@ const ResetPasswordForm = () => {
       const data = await response.json();
       console.log(data.message); // Password reset successful message
       localStorage.removeItem('email');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error('Error resetting password:', error);
       // Handle error response from backend, if needed
@@ -39,7 +45,7 @@ const ResetPasswordForm = () => {
 
   const handleBackToLogin = () => {
     localStorage.removeItem('email');
-    navigate('/login'); // Navigate to the login page
+    navigate('/'); // Navigate to the login page
   };
 
   return (

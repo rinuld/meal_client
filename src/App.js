@@ -5,7 +5,7 @@ import Login from './pages/Login';
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from './context/AuthProvider';
 import ProjectContext, { ProjectProvider } from './context/ProjectProvider';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import Details from './pages/Details';
@@ -27,8 +27,6 @@ export default function App() {
     const { auth, setAuth } = useContext(AuthContext);
     const { token, setToken } = useToken();
     const { project, setProject } = useContext(ProjectContext);
-    const location = useLocation();
-    const isLoginPage = location.pathname === '/login';
 
     useEffect(() => {
         const usersession = localStorage.getItem('user');
@@ -184,7 +182,7 @@ export default function App() {
             </>
         ) : (
             <Routes>
-                <Route path="/login" element={<Login setToken={setToken} />} />
+                <Route path="/" element={<Login setToken={setToken} />} />
             </Routes>
         )}
         </>
