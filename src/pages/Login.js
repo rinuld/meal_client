@@ -1,36 +1,50 @@
-import React, { useState, useContext } from 'react';
-// import AuthContext from '../context/AuthProvider';
+import React, { useState, useContext, useEffect } from 'react';
 import Axios from 'axios';
 import '../assets/css/login.css';
-// import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import AuthContext from '../context/AuthProvider';
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Login({ setToken }) {
+const Login = ({ setToken }) => {
   const { setAuth } = useContext(AuthContext);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const [recaptchaValue, setRecaptchaValue] = useState("")
+  const [recaptchaValue, setRecaptchaValue] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+  const [storedCredentials, setStoredCredentials] = useState({
+    username: '',
+    password: ''
+  });
+
+  useEffect(() => {
+    const storedCredentials = localStorage.getItem('rememberedCredentials');
+    if (storedCredentials) {
+      setStoredCredentials(JSON.parse(storedCredentials));
+    }
+  }, []);
 
   const handleLogin = async (data) => {
-    // console.log(data);
     try {
-      const response = await Axios.post('http://localhost:3001/api/login', { ...data, recaptchaValue});
+      const response = await Axios.post('http://localhost:3001/api/login', { ...data, recaptchaValue });
       const { token, user } = response.data;
-        // Save session token and user information in local storage or cookies
-        localStorage.setItem('token', JSON.stringify({ token: token }));
-        localStorage.setItem('user', JSON.stringify(user));
-        setToken({ token: token });
-        // console.log(token, user);
-        // console.log(recaptcha);
-        setAuth(user);
-        navigate("/projects");
+      setToken({ token: token });
+      setAuth(user);
+      navigate("/projects");
+
+      if (rememberMe) {
+        localStorage.setItem('rememberedCredentials', JSON.stringify({ username: data.username, password: data.password }));
+      } else {
+        localStorage.removeItem('rememberedCredentials');
+      }
     } catch (error) {
       console.error('Login failed', error);
     }
+  };
+
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
   };
 
   return (
@@ -48,6 +62,8 @@ export default function Login({ setToken }) {
                 id="username"
                 autoComplete="off"
                 {...register('username', { required: 'Username is required' })}
+                value={storedCredentials.username}
+                onChange={(e) => setStoredCredentials({ ...storedCredentials, username: e.target.value })}
               />
               <label htmlFor='username'>Username</label>
             </div>
@@ -57,8 +73,19 @@ export default function Login({ setToken }) {
                 type="password"
                 id="password"
                 {...register('password', { required: 'Password is required' })}
+                value={storedCredentials.password}
+                onChange={(e) => setStoredCredentials({ ...storedCredentials, password: e.target.value })}
               />
               <label htmlFor='password'>Password</label>
+            </div>
+            <div className="remember-me">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+              />
+              <label htmlFor="rememberMe" style={{ color: 'white' }}>Remember me</label>
             </div>
             <Link to="/forgot-password">Forgot Password?</Link>
             <ReCAPTCHA
@@ -77,4 +104,6 @@ export default function Login({ setToken }) {
 
 Login.propTypes = {
   setToken: PropTypes.func.isRequired
-}
+};
+
+export default Login;
