@@ -2,10 +2,11 @@ import React from 'react';
 
 const InputText = ({ label, id, type, placeholder, name, value, onChange, disabled }) => {
   return (
-    <div className='input-text'>
+    <div>
       <label htmlFor={id}>{label}</label>
       <br/>
       <input
+        className='input-text'
         id={id}
         type={type}
         placeholder={placeholder}

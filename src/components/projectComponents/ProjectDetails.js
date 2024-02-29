@@ -128,35 +128,35 @@ const ProjectDetails = memo(({ projectID }) => {
             <div className="row">
                 <div className="col-8">
                     <div className="create-forms">
-                        <p>{id}</p>
+                        {/* <p>{id}</p> */}
                         <form onSubmit={handleSubmit}>
-                            <div className="row">
-                                <div className="col-6">
+                            <div className="row gx-3">
+                                <div className="col-12 col-md-6">
                                     <InputText
                                         label="Project ID"
                                         id="newprojectID"
                                         type="number"
-                                        placeholder="enter project ID"
+                                        placeholder="Enter project ID"
                                         name="newprojectID"
                                         value={projectID}
                                         onChange={(e) => setProjectID(e.target.value)}
                                         disabled={true}
                                     />
                                 </div>
-                                <div className="col-6">
+                                <div className="col-12 col-md-6">
                                     <InputText
                                         label="Project Name"
                                         id="newprojectName"
                                         type="text"
-                                        placeholder="enter project name"
+                                        placeholder="Enter project name"
                                         name="newprojectName"
                                         value={projectName}
                                         onChange={(e) => setProjectName(e.target.value)}
                                     />
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-6">
+                            <div className="row gx-3">
+                                <div className="col-12 col-md-6">
                                     <InputSelection
                                         label="Status"
                                         value={status}
@@ -164,12 +164,12 @@ const ProjectDetails = memo(({ projectID }) => {
                                         onChange={(e) => setStatus(e)}
                                     />
                                 </div>
-                                <div className="col-6">
+                                <div className="col-12 col-md-6">
                                     <InputText
                                         label="Description"
                                         id="description"
                                         type="text"
-                                        placeholder="enter description"
+                                        placeholder="Enter description"
                                         name="description"
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
@@ -181,6 +181,54 @@ const ProjectDetails = memo(({ projectID }) => {
                             </div>
                         </form>
                     </div>
+                    <CreateForm header="Add Budget" className="modal-header">
+                        <form onSubmit={handleAddBudget}>
+                            <div className="row gx-3">
+                                <div className="col-12 col-md-6">
+                                    <InputText
+                                        label="Source (Partner)"
+                                        id="source"
+                                        type="text"
+                                        placeholder="Enter source"  
+                                        name="source"
+                                        value={source}
+                                        onChange={(e) => setSource(e.target.value)}
+                                    />
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <InputTexticon
+                                        icon="Php "
+                                        label="Amount"
+                                        id="amount"
+                                        type="text"
+                                        placeholder="enter amount"
+                                        name="amount"
+                                        value={addBudget}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            const formattedValue = InputCurrency(value);
+                                            setAddBudget(formattedValue);
+                                        }}
+                                        required={true}
+                                    />
+                                </div>
+                            </div>
+                            <div className="row form-rows gx-3">
+                                <div className="col-12 col-md-6">
+                                    <DatePickerInput
+                                        label="Date"
+                                        selectedDate={date}
+                                        onChange={(e) => setDate(e)} />
+                                </div>
+                                <div className="col-12 col-md-6">
+                                 
+                                </div>
+                            </div>
+                            <div className="button-container">
+                                <button type="submit" className="button-save isNotDisabled">Save</button>
+                            </div>
+                        </form>
+                    </CreateForm>
                 </div>
                 <div className="col-4">
                     <div className="create-forms">
@@ -188,54 +236,6 @@ const ProjectDetails = memo(({ projectID }) => {
                     </div>
                 </div>
             </div>
-            <CreateForm header="Add Budget">
-                <form onSubmit={handleAddBudget}>
-                    <div className="row form-rows">
-                        <div className="col-6">
-                            <InputText
-                                label="Source (Partner)"
-                                id="source"
-                                type="text"
-                                placeholder="enter source"
-                                name="source"
-                                value={source}
-                                onChange={(e) => setSource(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-6">
-                            <InputTexticon
-                                icon="Php "
-                                label="Amount"
-                                id="amount"
-                                type="text"
-                                placeholder="enter amount"
-                                name="amount"
-                                value={addBudget}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    const formattedValue = InputCurrency(value);
-                                    setAddBudget(formattedValue);
-                                }}
-                                required={true}
-                            />
-                        </div>
-                    </div>
-                    <div className="row form-rows">
-                        <div className="col-6">
-                            <DatePickerInput
-                                label="Date"
-                                selectedDate={date}
-                                onChange={(e) => setDate(e)} />
-                        </div>
-                        <div className="col-6">
-
-                        </div>
-                    </div>
-                    <div className="button-container">
-                        <button type="submit" className="button-save isNotDisabled">Save</button>
-                    </div>
-                </form>
-            </CreateForm>
         </>
     )
 })

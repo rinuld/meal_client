@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Select from 'react-select';
 
-const customStyles = {
-    control: (provided, state) => ({
-      ...provided,
-      boxShadow: state.isFocused ? '0 0 0 0' : provided.boxShadow,
-      borderColor: state.isFocused ? '#aaa' : provided.borderColor,
-      '&:hover': {
-        borderColor: state.isFocused ? '#aaa' : provided.borderColor,
-      },
-    }),
-  };
+// const customStyles = {
+//     control: (provided, state) => ({
+//       ...provided,
+//       boxShadow: state.isFocused ? '0 0 0 0' : provided.boxShadow,
+//       borderColor: state.isFocused ? '#aaa' : provided.borderColor,
+//       '&:hover': {
+//         borderColor: state.isFocused ? '#aaa' : provided.borderColor,
+//       },
+//     }),
+//   };
 
 export default function EntryTable({ entryData, handleEntryChange, budgetLineData }) {
     const [totaldebit, setTotalDebit] = useState(0);
@@ -74,7 +74,7 @@ export default function EntryTable({ entryData, handleEntryChange, budgetLineDat
                                         handleEntryChange(index, "accountCode", firstRegexValue);
                                     }
                                     }
-                                    styles={customStyles}
+                                    // styles={customStyles}
                                 />
                             </td>
                             <td>

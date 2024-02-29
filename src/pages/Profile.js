@@ -42,45 +42,45 @@ export default function Profile() {
         <>
             <div className="profile-page">
                 <div className="row">
-                    <div className="col-3">
-                        <div className="create-forms">
+                    <div className="col-12 col-lg-3">
+                        <div className="create-forms profile-div profile-img">
                             <input className="user-profile" type="file" onChange={handleFileChange} />
                             <button onClick={handleUpload}>Upload Image</button>
-                            <p>{auth.firstname} {initials}</p>
-                            <p>{auth.role}</p>
+                            {/* <p>{auth.firstname} {initials}</p>
+                            <p>{auth.role}</p> */}
                         </div>
                     </div>
-                    <div className="col-9">
-                        <div className="create-forms">
-                            <div className="row">
-                                <div className="col-4">
+                    <div className="col-12 col-lg-9">
+                        <div className="create-forms profile-div">
+                            <div className="row profile-row">
+                                <div className="col-12 col-lg-2 profile-info">
                                     <p>Full Name</p>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-12 col-lg-10 profile-info-cont">
                                     <p>{auth.firstname} {auth.middlename} {auth.lastname}</p>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-4">
+                            <div className="row profile-row">
+                                <div className="col-12 col-lg-2 profile-info">
                                     <p>Email</p>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-12 col-lg-10 profile-info-cont">
                                     <p>{auth.email}</p>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-4">
+                            <div className="row profile-row">
+                                <div className="col-12 col-lg-2 profile-info">
                                     <p>Address</p>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-12 col-lg-10 profile-info-cont">
                                     <p>{auth.address}</p>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-4">
+                            <div className="row profile-row">
+                                <div className="col-12 col-lg-2 profile-info">
                                     <p>Birthdate</p>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-12 col-lg-10 profile-info-cont">
                                     <p>{auth.birthdate}</p>
                                 </div>
                             </div>

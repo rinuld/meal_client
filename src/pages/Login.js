@@ -35,39 +35,50 @@ export default function Login({ setToken }) {
 
   return (
     <section>
-      <div className='form-box'>
-        <div className='form-value'>
-          <form onSubmit={handleSubmit(handleLogin)}>
-            {errors.username && <p className={errors ? "errmsg" : "offscreeen"}>{errors.username.message}</p>}
-            {errors.password && <p className={errors ? "errmsg" : "offscreeen"}>{errors.password.message}</p>}
-            <h2 className='login-h2'>Sign In</h2>
-            <div className="inputbox">
-              <i className="fa fa-user"></i>
-              <input
-                type="text"
-                id="username"
-                autoComplete="off"
-                {...register('username', { required: 'Username is required' })}
-              />
-              <label htmlFor='username'>Username</label>
+      <div className="container">
+        <div className="login-forms">
+          <div className="row gx-3">
+            <div className="col-12 col-md-7 test-row">
+              <div className='form-box'>
+                <div className='form-value'>
+                  <form onSubmit={handleSubmit(handleLogin)}>
+                    {errors.username && <p className={errors ? "errmsg" : "offscreeen"}>{errors.username.message}</p>}
+                    {errors.password && <p className={errors ? "errmsg" : "offscreeen"}>{errors.password.message}</p>}
+                    <h2 className='login-h2'></h2>
+                    <div className="inputbox">
+                      <i className="fa fa-user"></i>
+                      <input
+                        type="text"
+                        id="username"
+                        autoComplete="off"
+                        {...register('username', { required: 'Username is required' })}
+                      />
+                      <label htmlFor='username'>Username</label>
+                    </div>
+                    <div className="inputbox">
+                      <i className="fa fa-lock"></i>
+                      <input
+                        type="password"
+                        id="password"
+                        {...register('password', { required: 'Password is required' })}
+                      />
+                      <label htmlFor='password'>Password</label>
+                    </div>
+                    <ReCAPTCHA
+                      sitekey="6LcrxOImAAAAAHTHpKc7Rjb0cUmsM6xaYzjBO_HX"
+                      onChange={(value) => {
+                        setRecaptchaValue(value);
+                      }}
+                    />
+                    <button className='login-btn' type="submit">Login</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div className="inputbox">
-              <i className="fa fa-lock"></i>
-              <input
-                type="password"
-                id="password"
-                {...register('password', { required: 'Password is required' })}
-              />
-              <label htmlFor='password'>Password</label>
+            <div className="col-12 col-md-5 login-col">
+              <img src={require('../assets/images/favicon.png')} />
             </div>
-            <ReCAPTCHA
-              sitekey="6LcrxOImAAAAAHTHpKc7Rjb0cUmsM6xaYzjBO_HX"
-              onChange={(value) => {
-                setRecaptchaValue(value);
-              }}
-            />
-            <button className='login-btn' type="submit">Login</button>
-          </form>
+          </div>
         </div>
       </div>
     </section>

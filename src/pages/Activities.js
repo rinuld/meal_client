@@ -99,14 +99,14 @@ function Activity() {
         <div>
             <CreateForm header="Create Budgetline">
                 <form onSubmit={handleSubmit}>
-                    <div className="row form-rows">
-                        <div className="col-6">
+                    <div className="row gx-3">
+                        <div className="col-12 col-md-6">
                             <InputTexticon
                                 icon={`${projectID} -`}
                                 label="Activity Code"
                                 id="activitycode"
                                 type="text"
-                                placeholder="enter budgetline"
+                                placeholder="Enter budgetline"
                                 name="activitycode"
                                 value={activitycode}
                                 onChange={handleCodeChecker}
@@ -114,32 +114,32 @@ function Activity() {
                             />
                             {activitycode ? <Checker input={`${projectID}-${activitycode}`} tableValues={activityData} column="activityID" /> : ""}
                         </div>
-                        <div className="col-6">
+                        <div className="col-12 col-md-6">
                             <InputText
                                 label="Activity Name (Budgetline)"
                                 id="activityName"
                                 type="text"
-                                placeholder="enter budgetline"
+                                placeholder="Enter budgetline"
                                 name="activityName"
                                 value={activityName}
                                 onChange={(e) => setActivityName(e.target.value)}
                             />
                         </div>
                     </div>
-                    <div className="row form-rows">
-                        <div className="col-6">
+                    <div className="row gx-3">
+                        <div className="col-12 col-md-6">
                             <DatePickerInput
                                 label="Date"
                                 selectedDate={actDate}
                                 onChange={handleDateChange} />
                         </div>
-                        <div className="col-6">
+                        <div className="col-12 col-md-6">
                             <InputTexticon
                                 icon="Php "
                                 label="Budget"
                                 id="budget"
                                 type="text"
-                                placeholder="enter budget"
+                                placeholder="Enter budget"
                                 name="budget"
                                 value={budget}
                                 onChange={handleInputChange}

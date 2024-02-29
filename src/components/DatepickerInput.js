@@ -6,10 +6,10 @@ const DatePickerInput = ({selectedDate, onChange, label, disabled}) => {
     const parsedDate = new Date(selectedDate);
 
     return (
-        <div className='input-datepicker'>
+        <div>
         <label>{label}</label>
         <DatePicker
-            className='input'
+            className='input-text'
             selected={parsedDate}
             onChange={onChange}
             dateFormat="yyyy-MM-dd"

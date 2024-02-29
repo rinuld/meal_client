@@ -19,7 +19,7 @@ export default function CreateForm ({ header, children }) {
             {isOpen ?
                 <div className="create-forms">
                     <div className="modal-header">
-                        <h2>{header}</h2>
+                        <h4>{header}</h4>
                         <button className="button-close" onClick={closeModal}>x</button>
                     </div>
                     {children}

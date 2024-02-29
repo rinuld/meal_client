@@ -274,8 +274,8 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                 >
                     <div className="create-forms">
                         <form onSubmit={handleSubmit}>
-                            <div className="row">
-                                <div className="col-6">
+                            <div className="row gx-3">
+                                <div className="col-12 col-md-6">
                                     <InputText
                                         label="Indicator"
                                         id="indicator"
@@ -285,7 +285,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         value={indicatorName}
                                         onChange={(e) => setIndicatorName(e.target.value)}
                                     />
-                                </div><div className="col-6">
+                                </div><div className="col-12 col-md-6">
                                     <InputSelection
                                         label="Unit"
                                         value={unit}
@@ -294,8 +294,8 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-4">
+                            <div className="row gx-3">
+                                <div className="col-12 col-md-4">
                                     <InputSelection
                                         label="Format"
                                         value={format}
@@ -303,7 +303,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         onChange={(e) => setFormat(e)}
                                     />
                                 </div>
-                                <div className="col-4">
+                                <div className="col-12 col-md-4">
                                     <InputSelection
                                         label="Frequency of Reporting"
                                         value={freqReport}
@@ -311,22 +311,22 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         onChange={(e) => setFreqReport(e)}
                                     />
                                 </div>
-                                <div className="col-2">
+                                <div className="col-12 col-md-2">
                                     <InputText
                                         label="Target"
                                         id="target"
                                         type="text"
-                                        placeholder="enter target"
+                                        placeholder="Enter target"
                                         name="target"
                                         value={targetReach}
                                         onChange={(e) => setTarget(e.target.value)} />
                                 </div>
-                                <div className="col-2">
+                                <div className="col-12 col-md-2">
                                     <InputText
                                         label="Actuals"
                                         id="actuals"
                                         type="text"
-                                        placeholder="enter actuals"
+                                        placeholder="Enter actuals"
                                         name="actuals"
                                         value={actualReach}
                                         onChange={(e) => setActual(e.target.value)}
@@ -362,65 +362,65 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                         <div className="display-content">
                             <CreateForm header="Add participants">
                                 <form onSubmit={handlesubmitparticipants}>
-                                    <div className="row form-rows">
-                                        <div className="col-3">
+                                    <div className="row gx-3">
+                                        <div className="col-12 col-md-3">
                                             <InputText
                                                 label="Participants First Name"
                                                 id="name"
                                                 type="text"
-                                                placeholder="enter firstname"
+                                                placeholder="Enter first name"
                                                 name="name"
                                                 value={firstname}
                                                 onChange={(e) => setfirstname(e.target.value)}
                                             />
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-12 col-md-3">
                                             <InputText
                                                 label="Participants Last Name"
                                                 id="name"
                                                 type="text"
-                                                placeholder="enter lastname"
+                                                placeholder="Enter last name"
                                                 name="name"
                                                 value={lastname}
                                                 onChange={(e) => setlastname(e.target.value)}
                                             />
                                         </div>
-                                        <div className="col-3">
+                                        <div className="col-12 col-md-3">
                                             <InputText
                                                 label="Participants Middle Name"
                                                 id="name"
                                                 type="text"
-                                                placeholder="enter middle name"
+                                                placeholder="Enter middle name"
                                                 name="name"
                                                 value={middlename}
                                                 onChange={(e) => setmiddlename(e.target.value)}
                                             />
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-12 col-md-3">
                                             <InputText
                                                 label="Age"
                                                 id="age"
                                                 type="number"
-                                                placeholder="enter age"
+                                                placeholder="Enter age"
                                                 name="age"
                                                 value={age}
                                                 onChange={(e) => setAge(e.target.value)}
                                             />
                                         </div>
                                     </div>
-                                    <div className="row form-rows">
-                                        <div className="col-8">
+                                    <div className="row gx-3">
+                                        <div className="col-12 col-md-8">
                                             <InputText
                                                 label="Organization"
                                                 id="org"
                                                 type="text"
-                                                placeholder="enter organization"
+                                                placeholder="Enter organization"
                                                 name="org"
                                                 value={org}
                                                 onChange={(e) => setOrg(e.target.value)}
                                             />
                                         </div>
-                                        <div className="col-4">
+                                        <div className="col-12 col-md-4">
                                             <InputSelection
                                                 label="Sex"
                                                 value={sex}
@@ -429,8 +429,8 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                             />
                                         </div>
                                     </div>
-                                    <div className="row form-rows">
-                                        <div className="col-8">
+                                    <div className="row gx-3">
+                                        <div className="col-12 col-md-12">
                                             <InputSelection
                                                 label="Address"
                                                 value={address}

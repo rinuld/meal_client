@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
-import userimage from '../assets/images/user_default.svg';
-import logo from '../assets/images/logo.png';
+import userimage from '../assets/images/user_default_white.svg';
+import logo from '../assets/images/logowhite.png';
 import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar = memo(({ auth }) => {
