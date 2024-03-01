@@ -2,7 +2,7 @@ import { useState } from "react"
 import InputText from "../components/utils/InputText";
 import InputSelection from "../components/utils/InputSelection";
 import { InsertLogData } from "../components/InsertLogData";
-import { toast } from "react-toastify";
+import { Flip, toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 
 
@@ -10,6 +10,8 @@ export default function AddUser() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
   const [middlename, setMiddleName] = useState("");
+  const [address, setAddress] = useState("");
+  const [sex, setSex] = useState({});
   const [email, setEmail] = useState("");
   const [role, setRole] = useState({});
   const [password, setDefaultPassword] = useState("");
@@ -21,7 +23,7 @@ export default function AddUser() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ firstname, lastname, middlename, email, role: role.value, password }),
+      body: JSON.stringify({ firstname, lastname, middlename, address, sex: sex.value, email, role: role.value, password }),
     })
       .then(response => response.text())
       .then(data => {
@@ -29,26 +31,45 @@ export default function AddUser() {
         setLastName("");
         setEmail("");
         setMiddleName("");
+        setAddress("");
         setRole({});
+        setSex({});
         setDefaultPassword("");
         InsertLogData("Added new member " + firstname + " " + lastname);
         toast.success('Member Added', {
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,
-          hideProgressBar: true,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Flip,
         });
 
         emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
       })
       .catch(error => {
         toast.error(('Error inserting data:', error), {
-          position: toast.POSITION.TOP_RIGHT,
+          position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,
-          hideProgressBar: true,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Flip,
         });
         // console.log('Error inserting data:', error);
       });
   };
+
+  const selectSex = [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+  ];
 
   const selectRole = [
     { value: 'Super Admin', label: 'Super Admin' },
@@ -98,6 +119,27 @@ export default function AddUser() {
           </div>
           <div className="row gx-3">
             <div className="col-12 col-md-6">
+              <InputText
+                label="Address"
+                id="address"
+                type="text"
+                placeholder="Enter Address"
+                name="address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+            <div className="col-6">
+              <InputSelection
+                label="Sex"
+                value={sex}
+                data={selectSex}
+                onChange={(e) => setSex(e)}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
               <InputText
                 label="Email Address"
                 id="email"
