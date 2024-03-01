@@ -72,38 +72,33 @@ function CreateProjectForm({ onCreateProject }) {
     <>
       <div className="create-forms">
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-6">
+          <div className="row gx-3">
+            <div className="col-12 col-md-6">
               <InputText
                 label="Project ID"
                 id="newprojectID"
                 type="number"
-                placeholder="enter project ID"
+                placeholder="Enter project ID"
                 name="newprojectID"
                 value={projectID}
                 onChange={handleCodeChecker}
               />
               {projectID ? <Checker input={projectID} tableValues={projectData} column="projectID" /> : ""}
             </div>
-            <div className="col-6">
+            <div className="col-12 col-md-6">
               <InputText
                 label="Project Name"
                 id="newprojectName"
                 type="text"
-                placeholder="enter project name"
+                placeholder="Enter project name"
                 name="newprojectName"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
               />
             </div>
           </div>
-          <div className="">
-
-          </div>
-          <div className="row">
-            <div className="button-container">
-              <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
-            </div>
+          <div className="button-container">
+            <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
           </div>
         </form>
       </div>

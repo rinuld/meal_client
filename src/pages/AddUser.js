@@ -82,8 +82,8 @@ export default function AddUser() {
     <>
       <div className="create-forms">
         <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-4">
+          <div className="row gx-3">
+            <div className="col-12 col-md-4">
               <InputText
                 label="First Name"
                 id="firstname"
@@ -94,7 +94,7 @@ export default function AddUser() {
                 onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-4">
               <InputText
                 label="Last Name"
                 id="lastname"
@@ -105,7 +105,7 @@ export default function AddUser() {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
-            <div className="col-4">
+            <div className="col-12 col-md-4">
               <InputText
                 label="Middle Name"
                 id="middlename"
@@ -117,8 +117,8 @@ export default function AddUser() {
               />
             </div>
           </div>
-          <div className="row">
-            <div className="col-6">
+          <div className="row gx-3">
+            <div className="col-12 col-md-6">
               <InputText
                 label="Address"
                 id="address"
@@ -150,7 +150,7 @@ export default function AddUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="col-6">
+            <div className="col-12 col-md-6">
               <InputSelection
                 label="Role"
                 value={role}
@@ -159,8 +159,8 @@ export default function AddUser() {
               />
             </div>
           </div>
-          <div className="row">
-            <div className="col-6">
+          <div className="row gx-3">
+            <div className="col-12 col-md-6">
               <InputText
                 label="Password"
                 id="password"
@@ -170,6 +170,8 @@ export default function AddUser() {
                 value={password}
                 onChange={(e) => setDefaultPassword(e.target.value)}
               />
+            </div>
+            <div className="col-12 col-md-6">
             </div>
           </div>
           <div className="button-container">

@@ -75,12 +75,12 @@ function Indicators() {
         <>
             <CreateForm header="Create Objective">
                 <form onSubmit={handleSubmit}>
-                    <div className="row form-rows">
-                        <div className="col-12">
+                    <div className="row gx-3">
+                        <div className="col-12 col-md-12">
                             <InputTextArea
                                 label="Title"
                                 id="title"
-                                placeholder="enter title"
+                                placeholder="Enter title"
                                 name="title"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}

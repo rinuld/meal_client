@@ -6,42 +6,80 @@ section{
     min-height: 100vh;
     width: 100%;
     
-    background: url('../images/Negrosanon.png')no-repeat;
+    background: url('../images/Negrosanon-bg.png')no-repeat;
     background-position: center;
     background-size: cover;
 }
-.form-box{
-    position: relative;
-    width: 400px;
-    height: 450px;
-    background: transparent;
-    border: 2px solid rgba(255,255,255,0.5);
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
+
+.container {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+.login-forms {
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    width: 750px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-col img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    padding-right: 30px;
+}
+
+.test-row {
+    /* background-color: greenyellow; */
+}
+
+.test-row2 {
+    background-color: blue;
+}
+
+.form-box{
+    width: 100%;
+    /* background-color: blueviolet; */
+    padding: 35px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-h2{
     font-size: 2em;
-    color: #fff;
     text-align: center;
+}
+
+.login-h2::before {
+    content: "Sign ";
+    color: #ACCF4F;
+  }
+  
+.login-h2::after {
+    content: "In";
+    color: #106544;
 }
 
 .inputbox{
     position: relative;
     margin: 30px 0;
     width: 310px;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #106544;
 }
 .inputbox label{
     position: absolute;
     top: 50%;
     left: 5px;
     transform: translateY(-50%);
-    color: #fff;
+    color: #106544;
     font-size: 1em;
     pointer-events: none;
     transition: .5s;
@@ -58,13 +96,13 @@ top: -5px;
     outline: none;
     font-size: 1em;
     padding:0 35px 0 5px;
-    color: #fff;
+    color: #ACCF4F;
 }
 
 .inputbox i{
     position: absolute;
     right: 8px;
-    color: #fff;
+    color: #ACCF4F;
     font-size: 1.2em;
     top: 20px;
 }
@@ -72,7 +110,7 @@ top: -5px;
 .forget{
     margin: -15px 0 15px ;
     font-size: .9em;
-    color: #fff;
+    color: #ACCF4F;
     display: flex;
     justify-content: space-between;  
 }
@@ -82,7 +120,7 @@ top: -5px;
     
 }
 .forget label a{
-    color: #fff;
+    color: #ACCF4F;
     text-decoration: none;
 }
 .forget label a:hover{
@@ -92,7 +130,8 @@ top: -5px;
     width: 100%;
     height: 40px;
     border-radius: 40px;
-    background: #fff;
+    background: #ACCF4F;
+    color: white;
     border: none;
     outline: none;
     cursor: pointer;
@@ -102,13 +141,13 @@ top: -5px;
 }
 .register{
     font-size: .9em;
-    color: #fff;
+    color: black;
     text-align: center;
     margin: 25px 0 10px;
 }
 .register p a{
     text-decoration: none;
-    color: #fff;
+    color: black;
     font-weight: 600;
 }
 .register p a:hover{

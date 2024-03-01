@@ -187,14 +187,14 @@ function CreateVoucherForm() {
                                 <p>NO. {voucherNumber}</p>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-6">
+                        <div className="row gx-3">
+                            <div className="col-12 col-md-6">
                                 <DatePickerInput
                                     label="Date"
                                     selectedDate={selectedDate}
                                     onChange={handleDateChange} />
                             </div>
-                            <div className="col-6">
+                            <div className="col-12 col-md-6">
                                 <DatePickerInput
                                     label="Check Date"
                                     selectedDate={checkDate}
@@ -202,35 +202,35 @@ function CreateVoucherForm() {
                                     disabled={true} />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-6">
+                        <div className="row gx-3">
+                            <div className="col-12 col-md-6">
                                 <InputText
                                     label="Payee"
                                     id="payee"
                                     type="text"
-                                    placeholder="enter payee"
+                                    placeholder="Enter payee"
                                     name="payee"
                                     value={payee}
                                     onChange={(e) => setPayee(e.target.value)} />
                             </div>
-                            <div className="col-6">
+                            <div className="col-12 col-md-6">
                                 <InputText
                                     label="Check Number"
                                     id="checkNumber"
                                     type="text"
-                                    placeholder="check number"
+                                    placeholder="Enter check number"
                                     name="checkNumber"
                                     value={checkNumber}
                                     onChange={(e) => setCheckNumber(e.target.value)}
                                     disabled={true} />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-12">
+                        <div className="row gx-3">
+                            <div className="col-12 col-md-12">
                                 <InputTextArea
                                     label="Details"
                                     id="details"
-                                    placeholder="enter details"
+                                    placeholder="Enter details"
                                     name="details"
                                     value={details}
                                     onChange={(e) => setDetails(e.target.value)}
@@ -238,7 +238,7 @@ function CreateVoucherForm() {
                             </div>
                         </div>
                         <div className="add-entry">
-                            <button type="button" onClick={handleAddEntry}>Add Account</button>
+                            <button type="button" className="button-save" onClick={handleAddEntry}>Add Account</button>
                         </div>
                         <EntryTable entryData={entryTable} handleEntryChange={handleEntryChange} budgetLineData={budgetlinedata} />
                         <div className="approval-section">
