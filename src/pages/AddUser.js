@@ -3,6 +3,8 @@ import InputText from "../components/utils/InputText";
 import InputSelection from "../components/utils/InputSelection";
 import { InsertLogData } from "../components/InsertLogData";
 import { Flip, toast } from "react-toastify";
+import DatePicker from "react-datepicker";
+import { format } from 'date-fns';
 import emailjs from "@emailjs/browser";
 
 
@@ -11,6 +13,7 @@ export default function AddUser() {
   const [lastname, setLastName] = useState("");
   const [middlename, setMiddleName] = useState("");
   const [address, setAddress] = useState("");
+  const [birthdate, setBirthdate] = useState(new Date());
   const [sex, setSex] = useState({});
   const [email, setEmail] = useState("");
   const [role, setRole] = useState({});
@@ -18,12 +21,27 @@ export default function AddUser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Format the date as yyyy/MM/dd
+    const formattedDate = birthdate.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
+
     fetch('http://localhost:3001/api/insertUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ firstname, lastname, middlename, address, sex: sex.value, email, role: role.value, password }),
+
+      body: JSON.stringify({ 
+        firstname, 
+        lastname, 
+        middlename, 
+        address, 
+        sex: sex.value, 
+        birthdate: formattedDate,
+        email, 
+        role: role.value, 
+        password 
+      }),
     })
       .then(response => response.text())
       .then(data => {
@@ -34,6 +52,7 @@ export default function AddUser() {
         setAddress("");
         setRole({});
         setSex({});
+        setBirthdate(new Date());
         setDefaultPassword("");
         InsertLogData("Added new member " + firstname + " " + lastname);
         toast.success('Member Added', {
@@ -48,7 +67,10 @@ export default function AddUser() {
           transition: Flip,
         });
 
-        emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
+        console.log(birthdate);
+        console.log('Formatted Date:', formattedDate);
+
+        // emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
       })
       .catch(error => {
         toast.error(('Error inserting data:', error), {
@@ -129,7 +151,7 @@ export default function AddUser() {
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
-            <div className="col-6">
+            <div className="col-3">
               <InputSelection
                 label="Sex"
                 value={sex}
@@ -137,6 +159,15 @@ export default function AddUser() {
                 onChange={(e) => setSex(e)}
               />
             </div>
+            <div className="col-3">
+              <label htmlFor="Birthdate">Birthdate</label><br></br>
+              <DatePicker
+                selected={birthdate}
+                onChange={(date) => setBirthdate(date)}
+                dateFormat="yyyy/MM/dd"  
+              />
+            </div>
+            
           </div>
           <div className="row">
             <div className="col-6">
