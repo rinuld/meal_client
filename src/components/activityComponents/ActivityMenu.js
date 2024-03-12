@@ -52,7 +52,7 @@ function ActivityMenu() {
     }, [])
 
     const statusselection = [
-        { value: 'Implementation', label: 'Implementation' },
+        { value: 'Ongoing', label: 'Ongoing' },
         { value: 'Cancelled', label: 'Cancelled' },
         { value: 'Completed', label: 'Completed' },
         { value: 'Delayed', label: 'Delayed' },
@@ -182,13 +182,7 @@ function ActivityMenu() {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-6">
-                                        <DatePickerInput
-                                            label="Check Date"
-                                            selectedDate={selectedDate}
-                                            onChange={handleDateChange} />
-                                    </div>
-                                    <div className="col-6">
+                                    <div className="col-4">
                                         <InputSelection
                                             label="Status"
                                             value={status}
@@ -196,20 +190,27 @@ function ActivityMenu() {
                                             onChange={(e) => setStatus(e)}
                                         />
                                     </div>
+                                    <div className="col-4">
+                                        <InputTexticon
+                                            icon="Php "
+                                            label="Budget"
+                                            id="budget"
+                                            type="text"
+                                            placeholder="enter budget"
+                                            name="budget"
+                                            value={budget}
+                                            onChange={handleInputChange}
+                                            required={true}
+                                        />
+                                    </div>
+                                    <div className="col-4">
+                                        <DatePickerInput
+                                            label="Check Date"
+                                            selectedDate={selectedDate}
+                                            onChange={handleDateChange} />
+                                    </div>
                                 </div>
-                                <div className="row">
-                                    <InputTexticon
-                                        icon="Php "
-                                        label="Budget"
-                                        id="budget"
-                                        type="text"
-                                        placeholder="enter budget"
-                                        name="budget"
-                                        value={budget}
-                                        onChange={handleInputChange}
-                                        required={true}
-                                    />
-                                </div>
+                                
                                 <div className="button-container">
                                     <button type="submit" className="button-save">Save</button>
                                 </div>

@@ -106,6 +106,7 @@ export default function Profile() {
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                             />
+                            <br></br>
                              <InputText
                                 label="Confirm New Password"
                                 id="confirmPassword"

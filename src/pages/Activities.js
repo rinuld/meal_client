@@ -116,7 +116,7 @@ function Activity() {
                         </div>
                         <div className="col-12 col-md-6">
                             <InputText
-                                label="Activity Name (Budgetline)"
+                                label="Budgetline"
                                 id="activityName"
                                 type="text"
                                 placeholder="Enter budgetline"

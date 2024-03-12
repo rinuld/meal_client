@@ -162,15 +162,16 @@ export default function AddUser() {
             <div className="col-3">
               <label htmlFor="Birthdate">Birthdate</label><br></br>
               <DatePicker
+                className='input-text'
                 selected={birthdate}
                 onChange={(date) => setBirthdate(date)}
-                dateFormat="yyyy/MM/dd"  
+                dateFormat="yyyy/MM/dd"
               />
             </div>
             
           </div>
-          <div className="row">
-            <div className="col-6">
+          <div className="row gx-3">
+            <div className="col-12 col-md-6">
               <InputText
                 label="Email Address"
                 id="email"
@@ -181,7 +182,7 @@ export default function AddUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-3">
               <InputSelection
                 label="Role"
                 value={role}
@@ -189,9 +190,7 @@ export default function AddUser() {
                 onChange={(e) => setRole(e)}
               />
             </div>
-          </div>
-          <div className="row gx-3">
-            <div className="col-12 col-md-6">
+            <div className="col-12 col-md-3">
               <InputText
                 label="Password"
                 id="password"
@@ -201,8 +200,6 @@ export default function AddUser() {
                 value={password}
                 onChange={(e) => setDefaultPassword(e.target.value)}
               />
-            </div>
-            <div className="col-12 col-md-6">
             </div>
           </div>
           <div className="button-container">

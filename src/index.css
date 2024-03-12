@@ -1011,11 +1011,6 @@ table .datatable-row:hover {
   color: white;
 }
 
-/*profile*/
-.profile-div {
-
-}
-
 .profile-img {
   display: flex;
   flex-direction: column;

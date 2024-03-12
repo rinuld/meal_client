@@ -80,11 +80,11 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '10%' }} onClick={() => handleSort('code')}>Code</th>
-              <th style={{ width: '45%' }} onClick={() => handleSort('name')}>Name</th>
-              <th style={{ width: '15%' }}>Budget</th>
-              <th style={{ width: '15%' }}>Actuals</th>
-              <th style={{ width: '15%' }}>Balance</th>
+              <th style={{ width: '45%' }} onClick={() => handleSort('code')}>Activity</th>
+              <th style={{ width: '10%' }}>Status</th>
+              <th style={{ width: '10%' }}>Budget</th>
+              <th style={{ width: '10%' }}>Actuals</th>
+              <th style={{ width: '10%' }}>Balance</th>
             </tr>
           </thead>
           <tbody>
@@ -93,11 +93,11 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
                 <tr className='row-theme-1' key={activity.activityID} onMouseEnter={() => setRowVisible(activity.activityID)} onMouseLeave={() => setRowVisible(null)}>
                   <td>
                     <Link to={`/activityDetails/${activity.activityID}`} className='link-text'>
-                      <span className='activity-code-txt'> {activity.activityID} </span>
+                      <span className='activity-code-txt'> {activity.activityID} - {activity.activityName} </span>
                     </Link>
                   </td>
                   <td>
-                    <span className='activity-name-txt'> {activity.activityName} </span>
+                    {activity.status}
                   </td>
                   <td>{activity.budget !== undefined ? InputCurrency(activity.budget.toString()) : ''}</td>
                   <td>{activity.totalCreditAmount !== undefined ? InputCurrency(activity.totalCreditAmount.toString()) : ''}</td>
