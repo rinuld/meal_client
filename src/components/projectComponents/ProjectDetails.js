@@ -66,7 +66,7 @@ const ProjectDetails = memo(({ projectID }) => {
     const addBudgetData = { amount: addBudget.toString().replace(/,/g, ""), source, date, projectID };
 
     const statusselection = [
-        { value: 'Implementation', label: 'Implementation' },
+        { value: 'Ongoing', label: 'Ongoing' },
         { value: 'Cancelled', label: 'Cancelled' },
         { value: 'Completed', label: 'Completed' },
         { value: 'Delayed', label: 'Delayed' },

@@ -19,7 +19,7 @@ function ActivityDetails() {
                             }}
                             onMouseEnter={(e) => e.target.style.color = "#a3c639"}
                             onMouseLeave={(e) => e.target.style.color = "#106544"}
-                            to={`/activities`}>Activity
+                            to={`/activities`}>Activities
                         </Link> / Activity Details
                     </h2>
                 </div>

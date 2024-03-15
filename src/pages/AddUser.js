@@ -4,11 +4,13 @@ import InputSelection from "../components/utils/InputSelection";
 import { InsertLogData } from "../components/InsertLogData";
 import { Flip, toast } from "react-toastify";
 import DatePicker from "react-datepicker";
-import { format } from 'date-fns';
 import emailjs from "@emailjs/browser";
+import CreateForm from "../components/CreateForm";
+import UserTable from "./UserTable";
 
 
 export default function AddUser() {
+  const [showForm, setShowForm] = useState(false);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
   const [middlename, setMiddleName] = useState("");
@@ -102,111 +104,114 @@ export default function AddUser() {
 
   return (
     <>
-      <div className="create-forms">
-        <form onSubmit={handleSubmit}>
-          <div className="row gx-3">
-            <div className="col-12 col-md-4">
-              <InputText
-                label="First Name"
-                id="firstname"
-                type="text"
-                placeholder="Enter First Name"
-                name="firstname"
-                value={firstname}
-                onChange={(e) => setFirstname(e.target.value)}
-              />
+      <CreateForm header="Add a Member">
+        <div className="create-forms">
+          <form onSubmit={handleSubmit}>
+            <div className="row gx-3">
+              <div className="col-12 col-md-4">
+                <InputText
+                  label="First Name"
+                  id="firstname"
+                  type="text"
+                  placeholder="Enter First Name"
+                  name="firstname"
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
+                />
+              </div>
+              <div className="col-12 col-md-4">
+                <InputText
+                  label="Last Name"
+                  id="lastname"
+                  type="text"
+                  placeholder="Enter Last Name"
+                  name="lastname"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+              <div className="col-12 col-md-4">
+                <InputText
+                  label="Middle Name"
+                  id="middlename"
+                  type="text"
+                  placeholder="Enter Middle Name"
+                  name="middlename"
+                  value={middlename}
+                  onChange={(e) => setMiddleName(e.target.value)}
+                />
+              </div>
             </div>
-            <div className="col-12 col-md-4">
-              <InputText
-                label="Last Name"
-                id="lastname"
-                type="text"
-                placeholder="Enter Last Name"
-                name="lastname"
-                value={lastname}
-                onChange={(e) => setLastName(e.target.value)}
-              />
+            <div className="row gx-3">
+              <div className="col-12 col-md-6">
+                <InputText
+                  label="Address"
+                  id="address"
+                  type="text"
+                  placeholder="Enter Address"
+                  name="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+              <div className="col-3">
+                <InputSelection
+                  label="Sex"
+                  value={sex}
+                  data={selectSex}
+                  onChange={(e) => setSex(e)}
+                />
+              </div>
+              <div className="col-3">
+                <label htmlFor="Birthdate">Birthdate</label><br></br>
+                <DatePicker
+                  className='input-text'
+                  selected={birthdate}
+                  onChange={(date) => setBirthdate(date)}
+                  dateFormat="yyyy/MM/dd"
+                />
+              </div>
+              
             </div>
-            <div className="col-12 col-md-4">
-              <InputText
-                label="Middle Name"
-                id="middlename"
-                type="text"
-                placeholder="Enter Middle Name"
-                name="middlename"
-                value={middlename}
-                onChange={(e) => setMiddleName(e.target.value)}
-              />
+            <div className="row gx-3">
+              <div className="col-12 col-md-6">
+                <InputText
+                  label="Email Address"
+                  id="email"
+                  type="text"
+                  placeholder="Enter Email Address"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="col-12 col-md-3">
+                <InputSelection
+                  label="Role"
+                  value={role}
+                  data={selectRole}
+                  onChange={(e) => setRole(e)}
+                />
+              </div>
+              <div className="col-12 col-md-3">
+                <InputText
+                  label="Password"
+                  id="password"
+                  type="text"
+                  placeholder="Enter Password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setDefaultPassword(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
-          <div className="row gx-3">
-            <div className="col-12 col-md-6">
-              <InputText
-                label="Address"
-                id="address"
-                type="text"
-                placeholder="Enter Address"
-                name="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
+            <div className="button-container">
+              <button type="submit" className="button-save isNotDisabled">Save</button>
             </div>
-            <div className="col-3">
-              <InputSelection
-                label="Sex"
-                value={sex}
-                data={selectSex}
-                onChange={(e) => setSex(e)}
-              />
-            </div>
-            <div className="col-3">
-              <label htmlFor="Birthdate">Birthdate</label><br></br>
-              <DatePicker
-                className='input-text'
-                selected={birthdate}
-                onChange={(date) => setBirthdate(date)}
-                dateFormat="yyyy/MM/dd"
-              />
-            </div>
-            
-          </div>
-          <div className="row gx-3">
-            <div className="col-12 col-md-6">
-              <InputText
-                label="Email Address"
-                id="email"
-                type="text"
-                placeholder="Enter Email Address"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="col-12 col-md-3">
-              <InputSelection
-                label="Role"
-                value={role}
-                data={selectRole}
-                onChange={(e) => setRole(e)}
-              />
-            </div>
-            <div className="col-12 col-md-3">
-              <InputText
-                label="Password"
-                id="password"
-                type="text"
-                placeholder="Enter Password"
-                name="password"
-                value={password}
-                onChange={(e) => setDefaultPassword(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="button-container">
-            <button type="submit" className="button-save isNotDisabled">Save</button>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      </CreateForm>
+      <UserTable />
     </>
   )
 }

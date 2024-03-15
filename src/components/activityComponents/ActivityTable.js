@@ -80,7 +80,7 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '45%' }} onClick={() => handleSort('code')}>Activity</th>
+              <th style={{ width: '60%' }} onClick={() => handleSort('code')}>Activity</th>
               <th style={{ width: '10%' }}>Status</th>
               <th style={{ width: '10%' }}>Budget</th>
               <th style={{ width: '10%' }}>Actuals</th>

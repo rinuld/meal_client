@@ -363,7 +363,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                         </div>
                       ) : (
                         <p onClick={() => handleTitleClick(item.title, item.goalID)}>
-                          {shortenText(item.title)}
+                          {item.goalID} - {shortenText(item.title)}
                         </p>
                       )}
                     </td>
@@ -409,8 +409,8 @@ const IndicatorTable = memo(({ data, setData }) => {
                                 />
                               </div>
                             ) : (
-                              <p onClick={() => handleOutcomeTitleClick(outcome.title, outcome.outcomeID)}>
-                                {shortenText(outcome.title)}
+                              <p style={{ textIndent: '20px' }} onClick={() => handleOutcomeTitleClick(outcome.title, outcome.outcomeID)}>
+                                {outcome.outcomeID} - {shortenText(outcome.title)}
                               </p>
                             )}
                           </td>
@@ -503,7 +503,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           {selectedRowData.framework === "Objectives" ?
             <>
               <Modal.Header closeButton>
-                <Modal.Title>Create {selectedRowData.framework}</Modal.Title>
+                <Modal.Title>Create Outcomes</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className='modal-form'>
@@ -530,7 +530,7 @@ const IndicatorTable = memo(({ data, setData }) => {
             </> :
             <>
               <Modal.Header closeButton>
-                <Modal.Title>Create {selectedRowData.framework}</Modal.Title>
+                <Modal.Title>Create Indicators</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className='modal-form row'>
