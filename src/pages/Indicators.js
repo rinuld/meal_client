@@ -12,6 +12,7 @@ function Indicators() {
     const { project } = useContext(ProjectContext);
     const projectID = project ? project.split('-')[0] : '';
     const [data, setData] = useState([]);
+    const [insertionTrigger, setInsertionTrigger] = useState(0);
 
     const [title, setTitle] = useState("");
 
@@ -28,7 +29,7 @@ function Indicators() {
         }, 100); // 1 second delay
 
         return () => clearTimeout(timer); // Cleanup the timer when the component unmounts or when projectID changes
-    }, [projectID]);
+    }, [projectID, insertionTrigger]);
 
     const insertObjectiveData = {
         title,
@@ -53,6 +54,7 @@ function Indicators() {
                 };
                 setData([...data, newData]);
                 InsertLogData("Created Objective " + title, auth.firstname);
+                triggerInsertion();
                 toast.success('Objective Saved', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1000,
@@ -63,6 +65,10 @@ function Indicators() {
             .catch(error => {
                 console.log('Error inserting data:', error);
             })
+    };
+
+    const triggerInsertion = () => {
+        setInsertionTrigger(prevTrigger => prevTrigger + 1);
     };
 
     // const handleDeleteItem = (id) => {

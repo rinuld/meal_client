@@ -12,8 +12,10 @@ import AuthContext from '../../context/AuthProvider';
 
 const IndicatorTable = memo(({ data, setData }) => {
   const { auth } = useContext(AuthContext);
+  const [insertionTrigger, setInsertionTrigger] = useState(0);
   const [outcomeData, setOutcomeData] = useState([]);
-  const [indicatorOutcomeData, setIndicatorOutcomeData] = useState([]);
+  const [outputData, setOutputData] = useState([]);
+  const [indicatorOutputData, setIndicatorOutputData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedRowData, setSelectedRowData] = useState([]);
@@ -26,10 +28,14 @@ const IndicatorTable = memo(({ data, setData }) => {
   const [editingIDObj, seteditingIDObj] = useState("");
 
   const [editOutcome, seteditOutcome] = useState("");
-  const [editingIDOut, seteditingIDOut] = useState("");
+  const [editingIDOutcome, seteditingIDOutcome] = useState("");
+
+  const [editOutput, seteditOutput] = useState("");
+  const [editingIDOutput, seteditingIDOutput] = useState("");
 
   // modal inputs
   const [outcome, setOutcome] = useState("");
+  const [output, setOutput] = useState("");
 
   // inidcator data inputs
   const [indicator, setIndicator] = useState("");
@@ -46,60 +52,86 @@ const IndicatorTable = memo(({ data, setData }) => {
           fetch(`http://localhost:3001/api/outcomes/${item.goalID}`)
             .then(response => response.json())
         );
-        const fetchedIndicatorData = await Promise.all(outcomeDataPromises);
-        const mergedIndicatorData = fetchedIndicatorData.flat();
-        setOutcomeData(mergedIndicatorData);
+        const fetchedOutcomeData = await Promise.all(outcomeDataPromises);
+        const mergedOutcomeData = fetchedOutcomeData.flat();
+        setOutcomeData(mergedOutcomeData);
       } catch (error) {
-        console.log('Error fetching indicator data:', error);
+        console.log('Error fetching outcome data:', error);
       }
     };
-
+  
     if (data.length > 0) {
       fetchOutcomes();
     }
-  }, [data]);
-
+  }, [data, insertionTrigger]);
+  
   useEffect(() => {
-    const fetchIndicatorOutcomeData = async () => {
+    const fetchOutputs = async () => {
       try {
-        const indicatorDataPromises = outcomeData.map((item) =>
-          fetch(`http://localhost:3001/api/outcomeindicators/${item.outcomeID}`).then((response) =>
-            response.json()
-          )
+        const outputDataPromises = outcomeData.map(outcome =>
+          fetch(`http://localhost:3001/api/outputs/${outcome.outcomeID}`)
+            .then(response => {
+              console.log(response); // Log the response
+              return response.json();
+            })
+        );
+        const fetchedOutputData = await Promise.all(outputDataPromises);
+        const mergedOutputData = fetchedOutputData.flat();
+        setOutputData(mergedOutputData);
+      } catch (error) {
+        console.log('Error fetching output data:', error);
+      }
+    };
+    
+  
+    if (outcomeData.length > 0) {
+      fetchOutputs();
+    }
+  }, [outcomeData, insertionTrigger]);
+  
+  useEffect(() => {
+    const fetchIndicators = async () => {
+      try {
+        const indicatorDataPromises = outputData.map(output =>
+          fetch(`http://localhost:3001/api/indicators/${output.outputID}`)
+            .then(response => response.json())
         );
         const fetchedIndicatorData = await Promise.all(indicatorDataPromises);
         const mergedIndicatorData = fetchedIndicatorData.flat();
-        setIndicatorOutcomeData(mergedIndicatorData);
+        setIndicatorOutputData(mergedIndicatorData);
       } catch (error) {
         console.log('Error fetching indicator data:', error);
       }
     };
-
-    if (outcomeData.length > 0) {
-      fetchIndicatorOutcomeData();
+  
+    if (outputData.length > 0) {
+      fetchIndicators();
     }
-  }, [outcomeData]);
-
+  }, [outputData, insertionTrigger]);
+  
   useEffect(() => {
-    const fetchIndicatorDataActualsAndLastUpdates = async () => {
+    const fetchActualsLastUpdates = async () => {
       try {
-        const indicatorDataPromises = indicatorOutcomeData.map((item) =>
-          fetch(`http://localhost:3001/api/participants/${item.indicatorID}`).then((response) =>
-            response.json()
-          )
+        const actualsLastUpdatesPromises = indicatorOutputData.map(indicator =>
+          fetch(`http://localhost:3001/api/indicatorData/${indicator.indicatorID}`)
+            .then(response => response.json())
         );
-        const indicatorData = await Promise.all(indicatorDataPromises);
-        const mergedIndicatorData = indicatorData.flat();
-        setActualsLastUpdates(mergedIndicatorData);
+        const fetchedActualsLastUpdates = await Promise.all(actualsLastUpdatesPromises);
+        const mergedActualsLastUpdates = fetchedActualsLastUpdates.flat();
+        setActualsLastUpdates(mergedActualsLastUpdates);
       } catch (error) {
-        console.log('Error fetching indicator data:', error);
+        console.log('Error fetching actuals and last updates data:', error);
       }
     };
-
-    if (indicatorOutcomeData.length > 0) {
-      fetchIndicatorDataActualsAndLastUpdates();
+  
+    if (indicatorOutputData.length > 0) {
+      fetchActualsLastUpdates();
     }
-  }, [indicatorOutcomeData]);
+  }, [indicatorOutputData, insertionTrigger]);
+
+  const triggerInsertion = () => {
+    setInsertionTrigger(prevTrigger => prevTrigger + 1);
+  };
 
   const handleOpenModal = (rowData, framework) => {
     setSelectedRowData({ rowData, framework });
@@ -107,12 +139,15 @@ const IndicatorTable = memo(({ data, setData }) => {
   };
 
   const handleDelete = (rowData, framework) => {
+    console.log(rowData)
     setSelectedDeleteData({ rowData, framework });
     setShowDeleteModal(true);
   };
 
   const handleDeleteItem = (e, id, framework) => {
     e.preventDefault();
+
+    console.log(id, framework);
     if (framework === "Objectives") {
       Axios.put(`http://localhost:3001/api/updateDeleteObjectives/${id}`, {}, {
         headers: {
@@ -133,14 +168,14 @@ const IndicatorTable = memo(({ data, setData }) => {
           console.error(error);
         });
     }
-    else if (framework === "Indicator") {
-      Axios.put(`http://localhost:3001/api/updateDeleteIndicator/${id}`, {}, {
+    else if (framework === "Outcomes") {
+      Axios.put(`http://localhost:3001/api/updateDeleteOutcomes/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
         .then((response) => {
-          setIndicatorOutcomeData(prevData => prevData.filter(item => item.id !== id));
+          setOutcomeData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
           InsertLogData("Deleted Outcome " + response.title, auth.firstname);
           toast.success('Outcome Deleted', {
@@ -153,14 +188,34 @@ const IndicatorTable = memo(({ data, setData }) => {
           console.error(error);
         });
     }
-    else {
-      Axios.put(`http://localhost:3001/api/updateDeleteOutcomes/${id}`, {}, {
+    else if (framework === "Outputs")  {
+      Axios.put(`http://localhost:3001/api/updateDeleteOutputs/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
         .then((response) => {
-          setOutcomeData(prevData => prevData.filter(item => item.id !== id));
+          setOutputData(prevData => prevData.filter(item => item.id !== id));
+          setShowDeleteModal(false);
+          InsertLogData("Deleted Output " + response.title, auth.firstname);
+          toast.success('Output Deleted', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1000,
+            hideProgressBar: true,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    else if (framework === "Indicators") {
+      Axios.put(`http://localhost:3001/api/updateDeleteIndicator/${id}`, {}, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then((response) => {
+          setIndicatorOutputData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
           InsertLogData("Deleted Outcome " + response.title, auth.firstname);
           toast.success('Outcome Deleted', {
@@ -195,6 +250,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         setShowModal(false);
         setOutcomeData([...outcomeData, data]);
         InsertLogData("Created Outcome " + data.title, auth.firstname);
+        triggerInsertion();
         toast.success('Outcome Saved', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1000,
@@ -206,7 +262,34 @@ const IndicatorTable = memo(({ data, setData }) => {
       });
   };
 
-  const handleSubmitIndicator = (e, outcomeID) => {
+  const handleSubmitOutput = (e, outcomeID) => {
+    e.preventDefault();
+    fetch('http://localhost:3001/api/createOutput', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ output, outcomeID }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setOutput("");
+        setShowModal(false);
+        setOutputData([...outputData, data]);
+        InsertLogData("Created Output " + data.title, auth.firstname);
+        triggerInsertion();
+        toast.success('Output Saved', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
+      })
+      .catch(error => {
+        console.log('Error inserting data:', error);
+      });
+  };
+
+  const handleSubmitIndicator = (e, outputID) => {
     e.preventDefault();
     fetch('http://localhost:3001/api/createIndicators', {
       method: 'POST',
@@ -221,7 +304,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         unit: unit.value,
         format: format.value,
         freqreport: freqreport.value,
-        outcomeID: outcomeID,
+        outputID: outputID,
       }),
     })
       .then(response => response.json())
@@ -233,8 +316,9 @@ const IndicatorTable = memo(({ data, setData }) => {
         setFreqReport({ value: 'Yearly', label: 'Yearly' });
         setIskpi(0);
         setShowModal(false);
-        setIndicatorOutcomeData(prevData => [...prevData, data]);
+        setIndicatorOutputData(prevData => [...prevData, data]);
         InsertLogData("Created Indicator " + data.indicator, auth.firstname);
+        triggerInsertion();
         toast.success('Indicator Saved', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1000,
@@ -273,7 +357,12 @@ const IndicatorTable = memo(({ data, setData }) => {
 
   const handleOutcomeTitleClick = (title, id) => {
     seteditOutcome(title);
-    seteditingIDOut(id);
+    seteditingIDOutcome(id);
+  };
+
+  const handleOutputTitleClick = (title, id) => {
+    seteditOutput(title);
+    seteditingIDOutput(id);
   };
 
   const handleSaveTitle = (goalID) => {
@@ -324,8 +413,36 @@ const IndicatorTable = memo(({ data, setData }) => {
           })
         );
         seteditOutcome("");
-        seteditingIDOut("");
+        seteditingIDOutcome("");
         console.log("Outcome Saved!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleSaveOutputTitle = (outputID) => {
+    Axios.put(`http://localhost:3001/api/updateOutput/${outputID}`, { editOutput }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        InsertLogData("Updated Output title " + editOutput, auth.firstname);
+        setOutcomeData((prevData) =>
+          prevData.map((item) => {
+            if (item.outputID === outputID) {
+              return {
+                ...item,
+                title: editOutput,
+              };
+            }
+            return item;
+          })
+        );
+        seteditOutput("");
+        seteditingIDOutput("");
+        console.log("Output Saved!");
       })
       .catch((error) => {
         console.error(error);
@@ -347,7 +464,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           </thead>
           <tbody>
             {data.length > 0 ? (
-              data.map((item) => (
+              data.map((item, objectiveIndex) => (
                 <React.Fragment key={item.goalID}>
                   <tr className="objective-rows" onMouseEnter={() => setRowVisible(item.goalID)} onMouseLeave={() => setRowVisible(null)}>
                     <td colSpan={3}>
@@ -363,7 +480,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                         </div>
                       ) : (
                         <p onClick={() => handleTitleClick(item.title, item.goalID)}>
-                          {item.goalID} - {shortenText(item.title)}
+                          {`${objectiveIndex + 1}. ${item.title}`}
                         </p>
                       )}
                     </td>
@@ -394,11 +511,11 @@ const IndicatorTable = memo(({ data, setData }) => {
                   </tr>
                   {outcomeData
                     .filter((outcome) => outcome.goalID === item.goalID)
-                    .map((outcome) => (
+                    .map((outcome, outcomeIndex) => (
                       <React.Fragment key={outcome.outcomeID}>
                         <tr className="outcome-rows" key={outcome.outcomeID} onMouseEnter={() => setRowVisible(outcome.outcomeID)} onMouseLeave={() => setRowVisible(null)}>
                           <td colSpan={3}>
-                            {editingIDOut === outcome.outcomeID ? (
+                            {editingIDOutcome === outcome.outcomeID ? (
                               <div className="input-text">
                                 <input
                                   type="text"
@@ -409,8 +526,8 @@ const IndicatorTable = memo(({ data, setData }) => {
                                 />
                               </div>
                             ) : (
-                              <p style={{ textIndent: '20px' }} onClick={() => handleOutcomeTitleClick(outcome.title, outcome.outcomeID)}>
-                                {outcome.outcomeID} - {shortenText(outcome.title)}
+                              <p style={{ textIndent: '15px' }} onClick={() => handleOutcomeTitleClick(outcome.title, outcome.outcomeID)}>
+                                {`${objectiveIndex + 1}.${outcomeIndex + 1}. ${shortenText(outcome.title)}`}
                               </p>
                             )}
                           </td>
@@ -440,47 +557,92 @@ const IndicatorTable = memo(({ data, setData }) => {
                             }
                           </td>
                         </tr>
-                        {indicatorOutcomeData
-                          .filter((indicator) => indicator.objOutID === outcome.outcomeID)
-                          .map((indicator) => (
-                            <tr className="indicator-rows" key={indicator.indicatorID} onMouseEnter={() => setRowVisible(indicator.indicatorID)} onMouseLeave={() => setRowVisible(null)}>
-                              <td className="first-col" >
-                                <span className="indicator-front-box"></span>
-                                <Link
-                                  to={`/indicatordetails/${indicator.indicatorID}`}
-                                  className="link-text"
-                                >
-                                  <div className="cell-content indicator-data">
-                                    <span className="activity-code-txt">{indicator.indicator}</span>
-                                  </div>
-                                </Link>
-                              </td>
-                              <td className="indicator-data" >{indicator.format}</td>
-                              <td className="indicator-data" >{indicator.freqreport}</td>
-                              <td className="indicator-data no-padding">
-                                <div className='progress-with-button'>
-                                  <div className='progress-indicator'>
-                                    <p>
-                                      Actuals VS Target:{" "}
-                                      {actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length} / {indicator.targetreach}
+                        {outputData
+                          .filter((output) => output.objOutID === outcome.outcomeID)
+                          .map((output, outputIndex) => (
+                            <React.Fragment key={output.outputID}>
+                              <tr className="output-rows" key={output.outputID} onMouseEnter={() => setRowVisible(output.outputID)} onMouseLeave={() => setRowVisible(null)}>
+                                <td colSpan={3}>
+                                  {editingIDOutput === output.outputID ? (
+                                    <div className="input-text">
+                                      <input
+                                        type="text"
+                                        value={editOutput}
+                                        onChange={(e) => seteditOutput(e.target.value)}
+                                        onBlur={() => handleSaveOutputTitle(output.outputID)}
+                                        autoFocus
+                                      />
+                                    </div>
+                                  ) : (
+                                    <p style={{ textIndent: '45px' }} onClick={() => handleOutputTitleClick(output.title, output.outputID)}>
+                                      <span>{`${objectiveIndex + 1}.${outcomeIndex + 1}.${outputIndex + 1} ${shortenText(output.title)}`}</span>
                                     </p>
-                                    <progress value={(actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length / Number(indicator.targetreach)) * 100} max="100" />
-                                  </div>
-                                  <div className='delete-button-container'>
-                                    {rowVisible === indicator.indicatorID &&
+                                  )}
+                                </td>
+                                <td colSpan={1}>
+                                  {rowVisible === output.outputID && (
+                                    <div className="table-button">
                                       <button
                                         className="modal-add-button secondary"
                                         type="button"
-                                        onClick={() => handleDelete(indicator, "Indicator")}
-                                        style={{ marginLeft: '1rem' }}
+                                        data-toggle="modal"
+                                        data-target={`#indicator${output.outputID}`}
+                                        aria-expanded="false"
+                                        aria-haspopup="true"
+                                        onClick={() => handleOpenModal(output, "Outputs")}
+                                      >
+                                        <i className="fa fa-plus btn-add"></i>
+                                      </button>
+                                      <button
+                                        className="modal-add-button secondary"
+                                        type="button"
+                                        data-target={`#indicator${output.outputID}`}
+                                        onClick={() => handleDelete(output, "Outputs")}
                                       >
                                         <i className="fa fa-trash btn-add"></i>
                                       </button>
-                                    }
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
+                                    </div>
+                                  )}
+                                </td>
+                              </tr>
+                              {indicatorOutputData
+                                .filter((indicator) => indicator.objOutID === output.outputID)
+                                .map((indicator, indicatorIndex) => (
+                                  <tr className="indicator-rows" key={indicator.indicatorID} onMouseEnter={() => setRowVisible(indicator.indicatorID)} onMouseLeave={() => setRowVisible(null)}>
+                                    <td className="first-col">
+                                      <Link to={`/indicatordetails/${indicator.indicatorID}`} className="link-text">
+                                        <div className="cell-content indicator-data">
+                                          <span className="activity-code-txt" style={{ marginLeft: '75px' }}>{`${objectiveIndex + 1}.${outcomeIndex + 1}.${outputIndex + 1}.${indicatorIndex + 1} ${shortenText(indicator.indicator)}`}</span>
+                                        </div>
+                                      </Link>
+                                    </td>
+                                    <td className="indicator-data">{indicator.format}</td>
+                                    <td className="indicator-data">{indicator.freqreport}</td>
+                                    <td className="indicator-data no-padding">
+                                      <div className="progress-with-button">
+                                        <div className="progress-indicator">
+                                          <p>
+                                            Actuals VS Target: {actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length} / {indicator.targetreach}
+                                          </p>
+                                          <progress value={(actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length / Number(indicator.targetreach)) * 100} max="100" />
+                                        </div>
+                                        <div className="delete-button-container">
+                                          {rowVisible === indicator.indicatorID && (
+                                            <button
+                                              className="modal-add-button secondary"
+                                              type="button"
+                                              onClick={() => handleDelete(indicator, "Indicators")}
+                                              style={{ marginLeft: '1rem' }}
+                                            >
+                                              <i className="fa fa-trash btn-add"></i>
+                                            </button>
+                                          )}
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))}
+                            </React.Fragment>
                           ))}
                       </React.Fragment>
                     ))}
@@ -500,7 +662,7 @@ const IndicatorTable = memo(({ data, setData }) => {
       </div>
       {showModal && (
         <Modal className='d-flex align-items-center justify-content-center' show={showModal} onHide={handleCloseModal}>
-          {selectedRowData.framework === "Objectives" ?
+          { selectedRowData.framework === "Objectives" &&
             <>
               <Modal.Header closeButton>
                 <Modal.Title>Create Outcomes</Modal.Title>
@@ -527,142 +689,31 @@ const IndicatorTable = memo(({ data, setData }) => {
                   </form>
                 </div>
               </Modal.Body>
-            </> :
-            <>
-              <Modal.Header closeButton>
-                <Modal.Title>Create Indicators</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className='modal-form row'>
-                  <form onSubmit={(e) => handleSubmitIndicator(e, (selectedRowData.rowData).outcomeID)}>
-                    <div className='row'>
-                      <div className='col-12'>
-                        <InputTextArea
-                          label="Indicator"
-                          id="indicator"
-                          placeholder="enter indicator"
-                          name="indicator"
-                          value={indicator}
-                          onChange={(e) => setIndicator(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className='row'>
-                      <label>
-                        <input
-                          type="checkbox"
-                          checked={iskpi}
-                          onChange={(e) => setIskpi(e.target.checked)}
-                        />Is KPI (Key Performance Indicator)
-                      </label>
-                    </div>
-                    <div className='row'>
-                      <div className='col-6'>
-                        <InputText
-                          label="Target"
-                          id="target"
-                          type="number"
-                          placeholder="enter target"
-                          name="target"
-                          value={targetReach}
-                          onChange={(e) => setTargetReach(e.target.value)}
-                        />
-                      </div>
-                      <div className='col-6'>
-                        <InputSelection
-                          label="Unit"
-                          value={unit}
-                          data={unitDataSelection}
-                          onChange={(e) => setunit(e)}
-                        />
-                      </div>
-                    </div>
-                    <div className='row'>
-                      <div className='col-6'>
-                        <InputSelection
-                          label="Format"
-                          value={format}
-                          data={formatDataSelection}
-                          onChange={(e) => setFormat(e)}
-                        />
-                      </div>
-                      <div className='col-6'>
-                        <InputSelection
-                          label="Reporting"
-                          value={freqreport}
-                          data={reportingDataSelection}
-                          onChange={(e) => setFreqReport(e)}
-                        />
-                      </div>
-                    </div>
-                    <div className="button-container">
-                      <button type="submit" className="button-save">Save</button>
-                    </div>
-                  </form>
-                </div>
-              </Modal.Body>
             </>
           }
-        </Modal>
-      )}
-      {showDeleteModal && (
-        <Modal className='d-flex align-items-center justify-content-center' show={showDeleteModal} onHide={handleCloseModal}>
-          {selectedDeleteData.framework === "Objectives" ?
-            <>
-              <Modal.Header closeButton>
-                <Modal.Title>Please Confirm</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <div className='modal-form'>
-                  <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
-                    <div className='row'>
-                      <div className='delete-modal'>
-                        <p className='header-modal-title'>Are you sure you want to delete this Objective?</p>
-                        <p className='content-modal'>{selectedDeleteData.rowData.title}</p>
-                      </div>
-                      <div className="button-container text-center">
-                        <button type="submit" className="button-delete put-center">Delete</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </Modal.Body>
-            </> :
-            selectedDeleteData.framework === "Indicator" ?
+          
+          { selectedRowData.framework === "Outcomes" &&
               <>
                 <Modal.Header closeButton>
-                  <Modal.Title>Please Confirm</Modal.Title>
+                  <Modal.Title>Create Outputs</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <div className='modal-form'>
-                    <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
+                    <form onSubmit={(e) => handleSubmitOutput(e, (selectedRowData.rowData).outcomeID)}>
                       <div className='row'>
-                        <div className='delete-modal'>
-                          <p className='header-modal-title'>Are you sure you want to delete this Indicator?</p>
-                          <p className='content-modal'>{selectedDeleteData.rowData.indicator}</p>
+                        <div className='col-12'>
+                          <InputText
+                            label="Output"
+                            id="output"
+                            type="text"
+                            placeholder="enter output"
+                            name="output"
+                            value={output}
+                            onChange={(e) => setOutput(e.target.value)}
+                          />
                         </div>
-                        <div className="button-container text-center">
-                          <button type="submit" className="button-delete put-center">Delete</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </Modal.Body>
-              </> :
-              <>
-                <Modal.Header closeButton>
-                  <Modal.Title>Please Confirm</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div className='modal-form'>
-                    <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
-                      <div className='row'>
-                        <div className='delete-modal'>
-                          <p className='header-modal-title'>Are you sure you want to delete this Outcome?</p>
-                          <p className='content-modal'>{selectedDeleteData.rowData.title}</p>
-                        </div>
-                        <div className="button-container text-center">
-                          <button type="submit" className="button-delete put-center">Delete</button>
+                        <div className="button-container">
+                          <button type="submit" className="button-save">Save</button>
                         </div>
                       </div>
                     </form>
@@ -670,7 +721,179 @@ const IndicatorTable = memo(({ data, setData }) => {
                 </Modal.Body>
               </>
           }
+
+          { selectedRowData.framework === "Outputs" &&
+              <>
+                <Modal.Header closeButton>
+                  <Modal.Title>Create Indicators</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className='modal-form row'>
+                    <form onSubmit={(e) => handleSubmitIndicator(e, (selectedRowData.rowData).outputID)}>
+                      <div className='row'>
+                        <div className='col-12'>
+                          <InputTextArea
+                            label="Indicator"
+                            id="indicator"
+                            placeholder="enter indicator"
+                            name="indicator"
+                            value={indicator}
+                            onChange={(e) => setIndicator(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <div className='row'>
+                        <label>
+                          <input
+                            type="checkbox"
+                            checked={iskpi}
+                            onChange={(e) => setIskpi(e.target.checked)}
+                          />Is KPI (Key Performance Indicator)
+                        </label>
+                      </div>
+                      <div className='row'>
+                        <div className='col-6'>
+                          <InputText
+                            label="Target"
+                            id="target"
+                            type="number"
+                            placeholder="enter target"
+                            name="target"
+                            value={targetReach}
+                            onChange={(e) => setTargetReach(e.target.value)}
+                          />
+                        </div>
+                        <div className='col-6'>
+                          <InputSelection
+                            label="Unit"
+                            value={unit}
+                            data={unitDataSelection}
+                            onChange={(e) => setunit(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className='row'>
+                        <div className='col-6'>
+                          <InputSelection
+                            label="Format"
+                            value={format}
+                            data={formatDataSelection}
+                            onChange={(e) => setFormat(e)}
+                          />
+                        </div>
+                        <div className='col-6'>
+                          <InputSelection
+                            label="Reporting"
+                            value={freqreport}
+                            data={reportingDataSelection}
+                            onChange={(e) => setFreqReport(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className="button-container">
+                        <button type="submit" className="button-save">Save</button>
+                      </div>
+                    </form>
+                  </div>
+                </Modal.Body>
+              </>
+          }
         </Modal>
+      )}
+      {showDeleteModal && (
+        <Modal className='d-flex align-items-center justify-content-center' show={showDeleteModal} onHide={handleCloseModal}>
+        {selectedDeleteData.framework === "Objectives" &&
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Please Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='modal-form'>
+                <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
+                  <div className='row'>
+                    <div className='delete-modal'>
+                      <p className='header-modal-title'>Are you sure you want to delete this Objective?</p>
+                      <p className='content-modal'>{selectedDeleteData.rowData.title}</p>
+                    </div>
+                    <div className="button-container text-center">
+                      <button type="submit" className="button-delete put-center">Delete</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </Modal.Body>
+          </>
+        }
+        
+        {selectedDeleteData.framework === "Outcomes" &&
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Please Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='modal-form'>
+                <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
+                  <div className='row'>
+                    <div className='delete-modal'>
+                      <p className='header-modal-title'>Are you sure you want to delete this Outcome?</p>
+                      <p className='content-modal'>{selectedDeleteData.rowData.title}</p>
+                    </div>
+                    <div className="button-container text-center">
+                      <button type="submit" className="button-delete put-center">Delete</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </Modal.Body>
+          </>
+        }
+        
+        {selectedDeleteData.framework === "Outputs" &&
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Please Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='modal-form'>
+                <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
+                  <div className='row'>
+                    <div className='delete-modal'>
+                      <p className='header-modal-title'>Are you sure you want to delete this Output?</p>
+                      <p className='content-modal'>{selectedDeleteData.rowData.title}</p>
+                    </div>
+                    <div className="button-container text-center">
+                      <button type="submit" className="button-delete put-center">Delete</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </Modal.Body>
+          </>
+        }
+        
+        {selectedDeleteData.framework === "Indicators" &&
+          <>
+            <Modal.Header closeButton>
+              <Modal.Title>Please Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='modal-form'>
+                <form onSubmit={(e) => handleDeleteItem(e, (selectedDeleteData.rowData).id, selectedDeleteData.framework)}>
+                  <div className='row'>
+                    <div className='delete-modal'>
+                      <p className='header-modal-title'>Are you sure you want to delete this Indicator?</p>
+                      <p className='content-modal'>{selectedDeleteData.rowData.indicator}</p>
+                    </div>
+                    <div className="button-container text-center">
+                      <button type="submit" className="button-delete put-center">Delete</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </Modal.Body>
+          </>
+        }
+        </Modal>      
       )}
     </>
   );

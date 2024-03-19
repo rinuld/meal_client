@@ -476,7 +476,7 @@ button {
 .card-table table thead tr th,
 .card-table table tbody .row-theme-1 td,
 .card-table table tbody .objective-rows td,
-.card-table table tbody .outcome-rows td,
+.card-table table tbody .outcome-rows td, .output-rows td,
 .datatable table tbody .datatable-row td,
 .indicator-data {
   padding: 10px;
@@ -489,7 +489,7 @@ button {
 
 table .row-theme-1,
 table .objective-rows,
-table .outcome-rows,
+table .outcome-rows, table .output-rows,
 table .indicator-rows,
 table .datatable-row {
   border-top: 0.5px solid #ece9e9;
@@ -497,6 +497,9 @@ table .datatable-row {
 
 table .row-theme-1:hover,
 table .indicator-rows:hover,
+.objective-rows:hover,
+.outcome-rows:hover,
+.output-rows:hover,
 table .datatable-row:hover {
   background-color: #e9e6e6;
 }
@@ -523,11 +526,23 @@ table .datatable-row:hover {
 /* Indicator Styles Color */
 
 .objective-rows {
-  border-left: 3px solid green;
+  border-left: 3px solid darkgreen;
+  margin-left: 20px; /* Adjust the margin to change the level of indentation */
 }
 
 .outcome-rows {
-  border-left: 3px solid red;
+  border-left: 3px solid green ;
+  margin-left: 40px; /* Adjust the margin to change the level of indentation */
+}
+
+.output-rows {
+  border-left: 3px solid yellowgreen;
+  margin-left: 60px; /* Adjust the margin to change the level of indentation */
+}
+
+.indicator-rows {
+  border-left: 3px solid greenyellow;
+  margin-left: 80px; /* Adjust the margin to change the level of indentation */
 }
 
 /* Indicator Table */
@@ -557,7 +572,7 @@ table .datatable-row:hover {
 }
 
 .objective-rows p,
-.outcome-rows p {
+.outcome-rows p, .output-rows p {
   margin: 0;
 }
 
