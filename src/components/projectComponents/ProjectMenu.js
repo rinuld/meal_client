@@ -62,7 +62,7 @@ function ProjectMenu() {
                 id="contentpartners"
             >
                 <div id="sub-details">
-                    <Partners />
+                    <Partners projectID={projectID}></Partners>
                 </div>
             </div>
             </div>

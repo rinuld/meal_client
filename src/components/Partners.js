@@ -1,34 +1,45 @@
 import DataTable from "./DataTable";
 import React, { useMemo, useState, useEffect, memo } from 'react';
 
-const Partners = memo(() => {
+const Partners = memo(({ projectID }) => {
 
   // initialize the table content
-  const [teamData, setData] = useState([]);
+  const [partnerData, setData] = useState([]);
 
   // fetch data from the database and assign the value to the setData variable
   useEffect(() => {
-    fetch('http://localhost:3001/api/partners')
+    fetch(`http://localhost:3001/api/partners/${projectID}`)
       .then(response => response.json())
       .then(data => {
         setData(data);
       })
       .catch(error => {
-        console.log('Error fetching users:', error);
+        console.log('Error fetching partners:', error);
       });
-  }, []);
+  }, [projectID]);
+
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
 
   // setting up the table header and data
   const columns = useMemo(
     () => [
       {
-        Header: 'Partner',
-        accessor: 'partnerName',
+        Header: 'Name',
+        accessor: 'source',
       },
       {
-        Header: 'Country',
-        accessor: 'country',
+        Header: 'Amount',
+        accessor: 'amount',
+      },
+      {
+        Header: 'Date Added',
+        accessor: 'date',
+        Cell: ({ value }) => formatDate(value), // Use formatDate function to format the date
       },
     ],
     []
@@ -39,7 +50,7 @@ const Partners = memo(() => {
 
   return (
     <>
-      <DataTable columns={columns} data={teamData} />
+      <DataTable columns={columns} data={partnerData} />
     </>
   )
 })
