@@ -37,23 +37,32 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
     const [org, setOrg] = useState('');
 
     useEffect(() => {
-        fetchParticipantsData();
-    }, [indicatorDetails.indicatorID, reset]);
-
-    const fetchParticipantsData = () => {
-        axios.get(`http://localhost:3001/api/participants/${indicatorDetails.indicatorID}`)
+        // fetchParticipantsData();
+        axios.get(`http://localhost:3001/api/indicatordetails/${indicatorDetails.indicatorID}`)
             .then(response => {
-                const updatedData = response.data.map((participant, index) => ({
-                    ...participant,
-                    order: index + 1,
-                }));
-                setParticipantsData(updatedData);
-                setActual(updatedData.length);
+                const actualreach = response.data[0].actualreach; // Assuming the actualreach is stored in the 'actualreach' field of the response data
+                setActual(actualreach);
             })
             .catch(error => {
-                console.log('Error fetching participants data:', error);
+                console.log('Error fetching actual reach:', error);
             });
-    };
+        // fetchActualReach();
+    }, [indicatorDetails.indicatorID, reset]);
+
+    // const fetchParticipantsData = () => {
+    //     axios.get(`http://localhost:3001/api/participants/${indicatorDetails.indicatorID}`)
+    //         .then(response => {
+    //             const updatedData = response.data.map((participant, index) => ({
+    //                 ...participant,
+    //                 order: index + 1,
+    //             }));
+    //             setParticipantsData(updatedData);
+    //             setActual(updatedData.length);
+    //         })
+    //         .catch(error => {
+    //             console.log('Error fetching participants data:', error);
+    //         });
+    // };
 
     useEffect(() => {
         setIndicatorName(indicatorDetails.indicator || '');
@@ -61,7 +70,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
         setFormat({ value: indicatorDetails.format, label: indicatorDetails.format });
         setFreqReport({ value: indicatorDetails.freqreport, label: indicatorDetails.freqreport });
         setTarget(indicatorDetails.targetreach || 0);
-        setActual(indicatorDetails.actualreach || 0);
+        // setActual(indicatorDetails.actualreach || 0);
     }, [indicatorDetails.indicator, indicatorDetails.unit, indicatorDetails.format, indicatorDetails.freqreport, indicatorDetails.targetreach, indicatorDetails.actualreach])
 
     const handleTabClick = (tab) => {
@@ -74,7 +83,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:3001/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, unit: unit.value, format: format.value, freqReport: freqReport.value }, {
+        axios.put(`http://localhost:3001/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, actualReach, unit: unit.value, format: format.value, freqReport: freqReport.value }, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -330,7 +339,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         name="actuals"
                                         value={actualReach}
                                         onChange={(e) => setActual(e.target.value)}
-                                        disabled={true} />
+                                         />
                                 </div>
                             </div>
                             <div className="button-container">
