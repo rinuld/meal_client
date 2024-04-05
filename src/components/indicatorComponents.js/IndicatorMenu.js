@@ -163,7 +163,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
         setShowModal(true);
     };
 
-    const graphData = indicatorData === null
+    const graphData = indicatorData
         ? {
             years: ["Current"],
             targetReach: [indicatorDetails.targetreach],
@@ -175,7 +175,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
             actualReach: [...indicatorData.map(item => item.actualReach), actualReach],
         };
 
-    const historyTabledata = indicatorData === null
+    const historyTabledata = indicatorData
         ? [
             {
                 year: "Current",

@@ -622,9 +622,9 @@ const IndicatorTable = memo(({ data, setData }) => {
                                       <div className="progress-with-button">
                                         <div className="progress-indicator">
                                           <p>
-                                            Actuals VS Target: {actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length} / {indicator.targetreach}
+                                            Actuals VS Target: {indicator.actualreach} / {indicator.targetreach}
                                           </p>
-                                          <progress value={(actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length / Number(indicator.targetreach)) * 100} max="100" />
+                                          <progress value={(indicator.actualreach / indicator.targetreach) * 100} max="100" />
                                         </div>
                                         <div className="delete-button-container">
                                           {rowVisible === indicator.indicatorID && (
