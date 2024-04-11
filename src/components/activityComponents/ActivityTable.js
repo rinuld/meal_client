@@ -80,8 +80,8 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '60%' }} onClick={() => handleSort('code')}>Activity</th>
-              <th style={{ width: '10%' }}>Status</th>
+              <th style={{ width: '55%' }} onClick={() => handleSort('code')}>Activity</th>
+              <th style={{ width: '15%' }}>Status</th>
               <th style={{ width: '10%' }}>Budget</th>
               <th style={{ width: '10%' }}>Actuals</th>
               <th style={{ width: '10%' }}>Balance</th>
@@ -100,11 +100,11 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
                     {activity.status}
                   </td>
                   <td>{activity.budget !== undefined ? InputCurrency(activity.budget.toString()) : ''}</td>
-                  <td>{activity.totalCreditAmount !== undefined ? InputCurrency(activity.totalCreditAmount.toString()) : ''}</td>
+                  <td>{activity.actual !== undefined ? InputCurrency(activity.actual.toString()) : ''}</td>
                   <td>
                     <div className='progress-with-button'>
                       <div className='progress-indicator'>
-                        {activity.balance !== undefined ? InputCurrency(activity.balance.toString()) : ''}
+                        {(activity.budget - activity.actual) !== undefined ? InputCurrency((activity.budget - activity.actual).toString()) : ''}
                       </div>
                       <div className='delete-button-container'>
                         {rowVisible === activity.activityID &&

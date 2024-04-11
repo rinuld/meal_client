@@ -24,6 +24,7 @@ function ActivityMenu() {
     const [selectedDate, setSelectedDate] = useState(currentDate);
     const [status, setStatus] = useState({});
     const [budget, setBudget] = useState(0);
+    const [actual, setActual] = useState(0);
 
     // Get Details of a specific project
     useEffect(() => {
@@ -35,6 +36,7 @@ function ActivityMenu() {
                 setStatus({ value: activityData.status, label: activityData.status });
                 setSelectedDate(activityData.actDate);
                 setBudget(InputCurrency(activityData.budget));
+                setActual(InputCurrency(activityData.actual));
             })
             .catch(error => {
                 console.log('Error fetching activity details:', error);
@@ -56,9 +58,7 @@ function ActivityMenu() {
         { value: 'Cancelled', label: 'Cancelled' },
         { value: 'Completed', label: 'Completed' },
         { value: 'Delayed', label: 'Delayed' },
-        { value: 'Inactive', label: 'Inactive' },
         { value: 'On Hold', label: 'On Hold' },
-        { value: 'Under Review', label: 'Under Review' },
     ];
 
     const columns = useMemo(
@@ -87,7 +87,7 @@ function ActivityMenu() {
         []
       );
 
-    const updatedActivityData = { activityName, selectedDate, status: status.value, budget: budget.toString().replace(/,/g, "") };
+    const updatedActivityData = { activityName, selectedDate, status: status.value, budget: budget.toString().replace(/,/g, ""), actual: actual.toString().replace(/,/g, "") };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -118,10 +118,16 @@ function ActivityMenu() {
         setActiveTab(tab);
     };
 
-    const handleInputChange = (e) => {
+    const handleBudgetChange = (e) => {
         const value = e.target.value;
         const formattedValue = InputCurrency(value);
         setBudget(formattedValue);
+    };
+
+    const handleActualChange = (e) => {
+        const value = e.target.value;
+        const formattedValue = InputCurrency(value);
+        setActual(formattedValue);
     };
 
     return (
@@ -163,17 +169,18 @@ function ActivityMenu() {
                                             label="Budgetline"
                                             id="activity"
                                             type="text"
-                                            placeholder="enter budgetline"
+                                            placeholder="Enter Budgetline"
                                             name="activity"
                                             value={activityName}
                                             onChange={(e) => setActivityName(e.target.value)}
                                         />
-                                    </div><div className="col-6">
+                                    </div>
+                                    <div className="col-6">
                                         <InputText
                                             label="Code"
                                             id="activityCode"
                                             type="text"
-                                            placeholder="enter code"
+                                            placeholder="Enter Code"
                                             name="activityCode"
                                             value={activityCode}
                                             onChange={(e) => setActivityCode(e.target.value)}
@@ -182,7 +189,7 @@ function ActivityMenu() {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-4">
+                                    <div className="col-2">
                                         <InputSelection
                                             label="Status"
                                             value={status}
@@ -190,16 +197,29 @@ function ActivityMenu() {
                                             onChange={(e) => setStatus(e)}
                                         />
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col-3">
                                         <InputTexticon
                                             icon="Php "
                                             label="Budget"
                                             id="budget"
                                             type="text"
-                                            placeholder="enter budget"
+                                            placeholder="Enter Budget"
                                             name="budget"
                                             value={budget}
-                                            onChange={handleInputChange}
+                                            onChange={handleBudgetChange}
+                                            required={true}
+                                        />
+                                    </div>
+                                    <div className="col-3">
+                                        <InputTexticon
+                                            icon="Php "
+                                            label="Actual"
+                                            id="actual"
+                                            type="text"
+                                            placeholder="Enter Actual"
+                                            name="actual"
+                                            value={actual}
+                                            onChange={handleActualChange}
                                             required={true}
                                         />
                                     </div>
