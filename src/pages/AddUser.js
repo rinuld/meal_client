@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import InputText from "../components/utils/InputText";
 import InputSelection from "../components/utils/InputSelection";
 import { InsertLogData } from "../components/InsertLogData";
@@ -7,9 +7,11 @@ import DatePicker from "react-datepicker";
 import emailjs from "@emailjs/browser";
 import CreateForm from "../components/CreateForm";
 import UserTable from "./UserTable";
+import AuthContext from "../context/AuthProvider";
 
 
 export default function AddUser() {
+  const { auth } = useContext(AuthContext);
   const [showForm, setShowForm] = useState(false);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastName] = useState("");
@@ -56,7 +58,7 @@ export default function AddUser() {
         setSex({});
         setBirthdate(new Date());
         setDefaultPassword("");
-        InsertLogData("Added new member " + firstname + " " + lastname);
+        InsertLogData("Added a new member " + firstname, auth.firstname);
         toast.success('Member Added', {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,

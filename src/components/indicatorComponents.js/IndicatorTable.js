@@ -217,7 +217,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         .then((response) => {
           setIndicatorOutputData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
-          InsertLogData("Deleted Outcome " + response.title, auth.firstname);
+          InsertLogData("Deleted Indicator " + response.indicator, auth.firstname);
           toast.success('Outcome Deleted', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1000,

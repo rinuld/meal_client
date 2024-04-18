@@ -98,7 +98,7 @@ function ActivityMenu() {
             }
         })
             .then((response) => {
-                InsertLogData("Updated Activity Details of Project Code " + activityCode, auth.firstname);
+                InsertLogData("Updated Activity Details of " + activityName, auth.firstname);
                 toast.success('Activity Updated', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1000,

@@ -116,7 +116,7 @@ function CreateVoucherForm() {
             .then(response => response.text())
             .then(data => {
                 console.log(data);
-                InsertLogData("Voucher created by " + auth.firstname, auth.firstname);
+                InsertLogData("Created a Voucher", auth.firstname);
                 toast.success('Voucher created successfully', {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 1000,

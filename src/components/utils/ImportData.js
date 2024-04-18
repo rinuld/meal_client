@@ -23,7 +23,7 @@ const ImportData = ({ indicatorDetails, onChange }) => {
         .then((response) => {
           // console.log(response.data);
           if(response.data.success){
-            InsertLogData("Import indicator participants", auth.firstname);
+            InsertLogData("Imported indicator participants", auth.firstname);
             toast.success('Data Imported', {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 1000,
