@@ -18,8 +18,8 @@ root.render(
     <AuthProvider>
       <ProjectProvider>
         <App />
+        <ToastContainer />
       </ProjectProvider>
-      <ToastContainer />
     </AuthProvider>
   </BrowserRouter>
   </React.StrictMode>

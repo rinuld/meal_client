@@ -56,7 +56,7 @@ function Indicators() {
                 InsertLogData("Created Objective " + title, auth.firstname);
                 triggerInsertion();
                 toast.success('Objective Saved', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });

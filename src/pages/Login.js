@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import AuthContext from '../context/AuthProvider';
 import ReCAPTCHA from "react-google-recaptcha";
+import { toast } from 'react-toastify';
 
 const Login = ({ setToken }) => {
   const { setAuth } = useContext(AuthContext);
@@ -52,20 +53,45 @@ const Login = ({ setToken }) => {
       <div className="container">
         <div className="login-forms">
           <div className="row gx-3">
-            <div className="col-12 col-md-7 test-row">
+            <div className="col-12 col-md-7 ls-row1">
               <div className='form-box'>
                 <div className='form-value'>
                   <form onSubmit={handleSubmit(handleLogin)}>
-                    {errors.username && <p className={errors ? "errmsg" : "offscreeen"}>{errors.username.message}</p>}
-                    {errors.password && <p className={errors ? "errmsg" : "offscreeen"}>{errors.password.message}</p>}
+                    {errors.username && (
+                      toast.error("Username is required.", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      })
+                    )}
+                    {errors.password && (
+                      toast.error("Password is required.", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      })
+                    )}
+                    {/* {errors.password && <p className={errors ? "errmsg" : "offscreeen"}>{errors.password.message}</p>} */}
                     <h2 className='login-h2'></h2>
                     <div className="inputbox">
                       <i className="fa fa-user"></i>
                       <input
+                        style={{ paddingLeft: '25px'}}
                         type="text"
                         id="username"
                         autoComplete="off"
-                        {...register('username', { required: 'Username is required' })}
+                        {...register('username', { required: true })}
+                        // {...register('username', { required: 'Username is required' })}
                         value={storedCredentials.username}
                         onChange={(e) => setStoredCredentials({ ...storedCredentials, username: e.target.value })}
                       />
@@ -74,9 +100,11 @@ const Login = ({ setToken }) => {
                     <div className="inputbox">
                       <i className="fa fa-lock"></i>
                       <input
+                        style={{ paddingLeft: '25px'}}
                         type="password"
                         id="password"
-                        {...register('password', { required: 'Password is required' })}
+                        {...register('password', { required: true })}
+                        // {...register('password', { required: 'Password is required' })}
                         value={storedCredentials.password}
                         onChange={(e) => setStoredCredentials({ ...storedCredentials, password: e.target.value })}
                       />
@@ -89,9 +117,8 @@ const Login = ({ setToken }) => {
                         checked={rememberMe}
                         onChange={handleRememberMeChange}
                       />
-                      <label htmlFor="rememberMe" style={{ color: 'white' }}>Remember me</label>
+                      <label htmlFor="rememberMe" className="remember-me-txt"><p>Remember me</p></label>
                     </div>
-                    <Link to="/forgot-password">Forgot Password?</Link>
                     <ReCAPTCHA
                       sitekey="6LcrxOImAAAAAHTHpKc7Rjb0cUmsM6xaYzjBO_HX"
                       onChange={(value) => {
@@ -99,11 +126,12 @@ const Login = ({ setToken }) => {
                       }}
                     />
                     <button className='login-btn' type="submit">Login</button>
+                    <Link to="/forgot-password" className="forgot-password-txt"><p>Forgot your password?</p></Link>
                   </form>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-5 login-col">
+            <div className="col-12 col-md-5 login-col ls-row2">
               <img src={require('../assets/images/favicon.png')} />
             </div>
           </div>

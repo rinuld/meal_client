@@ -48,7 +48,7 @@ function CreateProjectForm({ onCreateProject }) {
         setRefreshData(!setRefreshData);
         InsertLogData("Created Project " + projectName);
         toast.success('Project Saved', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });

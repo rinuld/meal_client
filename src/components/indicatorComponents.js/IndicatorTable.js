@@ -159,7 +159,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Objective " + response.title, auth.firstname);
           toast.success('Objective Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -179,7 +179,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Outcome " + response.title, auth.firstname);
           toast.success('Outcome Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -219,7 +219,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Indicator " + response.indicator, auth.firstname);
           toast.success('Outcome Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -252,7 +252,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         InsertLogData("Created Outcome " + data.title, auth.firstname);
         triggerInsertion();
         toast.success('Outcome Saved', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });
@@ -320,7 +320,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         InsertLogData("Created Indicator " + data.indicator, auth.firstname);
         triggerInsertion();
         toast.success('Indicator Saved', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });
@@ -456,10 +456,10 @@ const IndicatorTable = memo(({ data, setData }) => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '40%' }}>Title</th>
-              <th style={{ width: '10%' }}>Format</th>
-              <th style={{ width: '20%' }}>Frequency of Reporting</th>
-              <th style={{ width: '30%' }}>Progress</th>
+              <th style={{ width: '25%' }}>Title</th>
+              <th style={{ width: '25%' }}>Format</th>
+              <th style={{ width: '25%' }}>Frequency of Reporting</th>
+              <th style={{ width: '25%' }}>Progress</th>
             </tr>
           </thead>
           <tbody>
@@ -557,6 +557,29 @@ const IndicatorTable = memo(({ data, setData }) => {
                             }
                           </td>
                         </tr>
+                        {indicatorOutcomeData
+                          .filter((indicator) => indicator.objOutID === outcome.outcomeID)
+                          .map((indicator) => (
+                            <tr className="indicator-rows" key={indicator.indicatorID} onMouseEnter={() => setRowVisible(indicator.indicatorID)} onMouseLeave={() => setRowVisible(null)}>
+                              <td className="first-col">
+                                <span className="indicator-front-box"></span>
+                                <Link
+                                  to={`/indicatordetails/${indicator.indicatorID}`}
+                                  className="link-text"
+                                >
+                                  <div className="cell-content indicator-data">
+                                    <span className="activity-code-txt">{indicator.indicator}</span>
+                                  </div>
+                                </Link>
+                              </td>
+                              <td className="indicator-data" >{indicator.format}</td>
+                              <td className="indicator-data" >{indicator.freqreport}</td>
+                              <td className="indicator-data no-padding">
+                                <div className='progress-with-button'>
+                                  <div className='progress-indicator'>
+                                    <p>
+                                      Actuals VS Target:{" "}
+                                      {actualsLastUpdates.filter((data) => data.indicatorID === indicator.indicatorID).length} / {indicator.targetreach}
                         {outputData
                           .filter((output) => output.objOutID === outcome.outcomeID)
                           .map((output, outputIndex) => (
@@ -676,7 +699,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           label="Outcome"
                           id="outcome"
                           type="text"
-                          placeholder="enter outcome"
+                          placeholder="Enter outcome"
                           name="outcome"
                           value={outcome}
                           onChange={(e) => setOutcome(e.target.value)}
@@ -685,6 +708,80 @@ const IndicatorTable = memo(({ data, setData }) => {
                       <div className="button-container">
                         <button type="submit" className="button-save">Save</button>
                       </div>
+                    </div>
+                  </form>
+                </div>
+              </Modal.Body>
+            </> :
+            <>
+              <Modal.Header closeButton>
+                <Modal.Title>Create {selectedRowData.framework}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div className='modal-form row'>
+                  <form onSubmit={(e) => handleSubmitIndicator(e, (selectedRowData.rowData).outcomeID)}>
+                    <div className='row'>
+                      <div className='col-12'>
+                        <InputTextArea
+                          label="Indicator"
+                          id="indicator"
+                          placeholder="Enter indicator"
+                          name="indicator"
+                          value={indicator}
+                          onChange={(e) => setIndicator(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={iskpi}
+                          onChange={(e) => setIskpi(e.target.checked)}
+                        />Is KPI (Key Performance Indicator)
+                      </label>
+                    </div>
+                    <div className='row'>
+                      <div className='col-6'>
+                        <InputText
+                          label="Target"
+                          id="target"
+                          type="number"
+                          placeholder="Enter target"
+                          name="target"
+                          value={targetReach}
+                          onChange={(e) => setTargetReach(e.target.value)}
+                        />
+                      </div>
+                      <div className='col-6'>
+                        <InputSelection
+                          label="Unit"
+                          value={unit}
+                          data={unitDataSelection}
+                          onChange={(e) => setunit(e)}
+                        />
+                      </div>
+                    </div>
+                    <div className='row'>
+                      <div className='col-6'>
+                        <InputSelection
+                          label="Format"
+                          value={format}
+                          data={formatDataSelection}
+                          onChange={(e) => setFormat(e)}
+                        />
+                      </div>
+                      <div className='col-6'>
+                        <InputSelection
+                          label="Reporting"
+                          value={freqreport}
+                          data={reportingDataSelection}
+                          onChange={(e) => setFreqReport(e)}
+                        />
+                      </div>
+                    </div>
+                    <div className="button-container">
+                      <button type="submit" className="button-save">Save</button>
                     </div>
                   </form>
                 </div>

@@ -100,7 +100,7 @@ function ActivityMenu() {
             .then((response) => {
                 InsertLogData("Updated Activity Details of " + activityName, auth.firstname);
                 toast.success('Activity Updated', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -230,7 +230,6 @@ function ActivityMenu() {
                                             onChange={handleDateChange} />
                                     </div>
                                 </div>
-                                
                                 <div className="button-container">
                                     <button type="submit" className="button-save">Save</button>
                                 </div>

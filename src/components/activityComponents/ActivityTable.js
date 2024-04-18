@@ -62,7 +62,7 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
         setShowDeleteModal(false);
         InsertLogData("Deleted Activity " + response.title, auth.firstname);
         toast.success('Activity Deleted', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });

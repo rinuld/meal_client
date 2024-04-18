@@ -39,24 +39,23 @@ function ProjectMenu() {
             </div>
 
             <div className="contents">
-            <div
-                className={`${activeTab === 'details' ? 'display-content' : 'tab-content '}`}
-                id="contentdetails"
-            >
-                <div id="sub-details">
-                    <ProjectDetails projectID={projectID}/>
+                <div
+                    className={`${activeTab === 'details' ? 'display-content' : 'tab-content '}`}
+                    id="contentdetails"
+                >
+                    <div id="sub-details">
+                        <ProjectDetails projectID={projectID}/>
+                    </div>
                 </div>
-            </div>
 
-            <div
-                className={`${activeTab === 'team' ? 'display-content' : 'tab-content '}`}
-                id="contentteam"
-            >
-                <div id="sub-details">
-                    <Team />
+                <div
+                    className={`${activeTab === 'team' ? 'display-content' : 'tab-content '}`}
+                    id="contentteam"
+                >
+                    <div id="sub-details">
+                        <Team />
+                    </div>
                 </div>
-            </div>
-
             <div
                 className={`${activeTab === 'partners' ? 'display-content' : 'tab-content '}`}
                 id="contentpartners"
@@ -64,7 +63,6 @@ function ProjectMenu() {
                 <div id="sub-details">
                     <Partners projectID={projectID}></Partners>
                 </div>
-            </div>
             </div>
         </>
     )

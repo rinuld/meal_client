@@ -47,24 +47,27 @@ function DataTable({ columns, data }) {
     return (
         <>
             <div className='datatable card-table'>
-
-                <select className='textbox show-page' value={pageSize} onChange={handlePageSizeChange}>
-                    {[10, 25, 50, 70, 100].map((pageSize) => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </select>
-
-                    <input
-                        className='search-btn'
-                        type="text"
-                        value={globalFilter}
-                        onChange={handleGlobalFilterChange}
-                        placeholder="Search..."
-                        defaultValue=""
-                    />
-
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                    <select className='textbox show-page' value={pageSize} onChange={handlePageSizeChange}>
+                        {[10, 25, 50, 70, 100].map((pageSize) => (
+                            <option key={pageSize} value={pageSize}>
+                                Show {pageSize}
+                            </option>
+                        ))}
+                    </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <input
+                            className='search-btn'
+                            type="text"
+                            value={globalFilter}
+                            onChange={handleGlobalFilterChange}
+                            placeholder="Search..."
+                            defaultValue=""
+                        />
+                    </div>
+                </div>
                 <table className='overflow-hidden nowrap' {...getTableProps()}>
                     <thead>
                         {headerGroups.map(headerGroup => (
@@ -106,43 +109,47 @@ function DataTable({ columns, data }) {
                         </tbody>
                     )}
                 </table>
+                <div class="row">
+                    <div class="col-12 col-md-6 show-page-number">               
+                        <span>
+                            | Go to page:{' '}
+                            <input className='textbox'
+                                type="number"
+                                defaultValue={pageIndex + 1}
+                                onChange={(e) => {
+                                    const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                                    gotoPage(page);
+                                }}
+                                style={{ width: '50px' }}
+                            />
+                        </span>{' '}
 
-                <span >
-                    | Go to page:{' '}
-                    <input className='textbox'
-                        type="number"
-                        defaultValue={pageIndex + 1}
-                        onChange={(e) => {
-                            const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                            gotoPage(page);
-                        }}
-                        style={{ width: '50px' }}
-                    />
-                </span>{' '}
-
-                <span className='row-count' >
-                    Showing {paginatedRows.length} of {data.length} entries
-                </span>
-
-                <div className="pagination">
-                    <button className='textbox' onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                        {'<<'}
-                    </button>{' '}
-                    <button className='textbox' onClick={() => previousPage()} disabled={!canPreviousPage}>
-                        {'<'}
-                    </button>{' '}
-                    <span>
-                        Page{' '}
-                        <strong>
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{' '}
-                    </span>
-                    <button className='textbox' onClick={() => nextPage()} disabled={!canNextPage}>
-                        {'>'}
-                    </button>{' '}
-                    <button className='textbox' onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                        {'>>'}
-                    </button>{' '}
+                        <span className='row-count' >
+                            Showing {paginatedRows.length} of {data.length} entries
+                        </span>
+                    </div> 
+                    <div class="col-12 col-md-6 show-pagination"> 
+                        <div className="pagination">
+                            <button className='textbox-page' onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                                {'<<'}
+                            </button>{' '}
+                            <button className='textbox-page' onClick={() => previousPage()} disabled={!canPreviousPage}>
+                                {'<'}
+                            </button>{' '}
+                            <span>
+                                Page{' '}
+                                <strong>
+                                    {pageIndex + 1} of {pageOptions.length}
+                                </strong>{' '}
+                            </span>
+                            <button className='textbox-page' onClick={() => nextPage()} disabled={!canNextPage}>
+                                {'>'}
+                            </button>{' '}
+                            <button className='textbox-page' onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                                {'>>'}
+                            </button>{' '}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

@@ -85,7 +85,7 @@ const ProjectDetails = memo(({ projectID }) => {
             .then((response) => {
                 InsertLogData("Updated Project Details of " + projectName, auth.firstname);
                 toast.success('Project Updated', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -108,7 +108,7 @@ const ProjectDetails = memo(({ projectID }) => {
             .then(data => {
                 InsertLogData("Added a budget on " + projectName, auth.firstname);
                 toast.success('Budget succesfully added!', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -126,7 +126,7 @@ const ProjectDetails = memo(({ projectID }) => {
     return (
         <>
             <div className="row">
-                <div className="col-8">
+                <div className="col-12 col-lg-8">
                     <div className="create-forms">
                         {/* <p>{id}</p> */}
                         <form onSubmit={handleSubmit}>
@@ -230,7 +230,7 @@ const ProjectDetails = memo(({ projectID }) => {
                         </form>
                     </CreateForm>
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-lg-4">
                     <div className="create-forms">
                         <PieChart expenses={parseFloat(expenses)} totalbudget={parseFloat(budget)} />
                     </div>
