@@ -70,7 +70,7 @@ function Activity() {
                 setData([...activityData, { ...requestData, totalCreditAmount: 0 }]);
                 InsertLogData("Created Budgetline " + activityName, auth.firstname);
                 toast.success('Activity Saved', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });

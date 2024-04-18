@@ -124,7 +124,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Objective " + response.title, auth.firstname);
           toast.success('Objective Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -144,7 +144,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Outcome " + response.title, auth.firstname);
           toast.success('Outcome Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -164,7 +164,7 @@ const IndicatorTable = memo(({ data, setData }) => {
           setShowDeleteModal(false);
           InsertLogData("Deleted Outcome " + response.title, auth.firstname);
           toast.success('Outcome Deleted', {
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
           });
@@ -196,7 +196,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         setOutcomeData([...outcomeData, data]);
         InsertLogData("Created Outcome " + data.title, auth.firstname);
         toast.success('Outcome Saved', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });
@@ -236,7 +236,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         setIndicatorOutcomeData(prevData => [...prevData, data]);
         InsertLogData("Created Indicator " + data.indicator, auth.firstname);
         toast.success('Indicator Saved', {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           hideProgressBar: true,
         });
@@ -339,10 +339,10 @@ const IndicatorTable = memo(({ data, setData }) => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '40%' }}>Title</th>
-              <th style={{ width: '10%' }}>Format</th>
-              <th style={{ width: '20%' }}>Frequency of Reporting</th>
-              <th style={{ width: '30%' }}>Progress</th>
+              <th style={{ width: '25%' }}>Title</th>
+              <th style={{ width: '25%' }}>Format</th>
+              <th style={{ width: '25%' }}>Frequency of Reporting</th>
+              <th style={{ width: '25%' }}>Progress</th>
             </tr>
           </thead>
           <tbody>
@@ -444,7 +444,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           .filter((indicator) => indicator.objOutID === outcome.outcomeID)
                           .map((indicator) => (
                             <tr className="indicator-rows" key={indicator.indicatorID} onMouseEnter={() => setRowVisible(indicator.indicatorID)} onMouseLeave={() => setRowVisible(null)}>
-                              <td className="first-col" >
+                              <td className="first-col">
                                 <span className="indicator-front-box"></span>
                                 <Link
                                   to={`/indicatordetails/${indicator.indicatorID}`}
@@ -514,7 +514,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           label="Outcome"
                           id="outcome"
                           type="text"
-                          placeholder="enter outcome"
+                          placeholder="Enter outcome"
                           name="outcome"
                           value={outcome}
                           onChange={(e) => setOutcome(e.target.value)}
@@ -540,7 +540,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                         <InputTextArea
                           label="Indicator"
                           id="indicator"
-                          placeholder="enter indicator"
+                          placeholder="Enter indicator"
                           name="indicator"
                           value={indicator}
                           onChange={(e) => setIndicator(e.target.value)}
@@ -562,7 +562,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           label="Target"
                           id="target"
                           type="number"
-                          placeholder="enter target"
+                          placeholder="Enter target"
                           name="target"
                           value={targetReach}
                           onChange={(e) => setTargetReach(e.target.value)}

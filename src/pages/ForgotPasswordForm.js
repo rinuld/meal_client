@@ -134,38 +134,51 @@ const ForgotPasswordForm = () => {
 
   return (
     <section>
-      <div className='form-box'>
-        <div className='form-value'>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h2 className='login-h2'>Forgot Password</h2>
-            <div className="inputbox">
-              <i className="fa fa-envelope"></i>
-              <input
-                type="email"
-                id="email"
-                autoComplete="off"
-                {...register('email', { required: 'Email is required' })}
-              />
-              <label htmlFor='email'>Email Address</label>
-              {errors.email && <p className="errmsg">{errors.email.message}</p>}
+      <div className="container">
+        <div className="login-forms">
+          <div className="row gx-3">
+            <div className="col-12 col-md-7 ls-row1">
+              <div className='form-box'>
+                <div className='form-value'>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <h2 className='forgotpass-h2'></h2>
+                    <div className="inputbox">
+                      <i className="fa fa-envelope"></i>
+                      <input
+                        style={{ paddingLeft: '25px'}}
+                        type="email"
+                        id="email"
+                        autoComplete="off"
+                        {...register('email', { required: 'Email is required' })}
+                      />
+                      <label htmlFor='email'>Email Address</label>
+                      {errors.email && <p className="errmsg">{errors.email.message}</p>}
+                    </div>
+                    <div className="inputbox">
+                      <i className="fa fa-key"></i>
+                      <input
+                        style={{ paddingLeft: '25px'}}
+                        type="text"
+                        id="verificationCode"
+                        autoComplete="off"
+                      />
+                      <label htmlFor='verificationCode'>Verification Code</label>
+                    </div>
+                    <button className='login-btn' type="button" onClick={handleSendVerificationCode} disabled={cooldown}>
+                      {cooldown ? `Resend in ${cooldownSeconds} seconds` : 'Send Verification Code'}
+                    </button>
+                    {verificationSent && (
+                      <button className='login-btn' type="button" onClick={handleVerify}>Verify</button>
+                    )}
+                    <button className='login-btn' onClick={handleBackToLogin}>Back to Login</button>
+                  </form>
+                </div>
+              </div>
             </div>
-            <div className="inputbox">
-              <i className="fa fa-key"></i>
-              <input
-                type="text"
-                id="verificationCode"
-                autoComplete="off"
-              />
-              <label htmlFor='verificationCode'>Verification Code</label>
+            <div className="col-12 col-md-5 login-col ls-row2">
+              <img src={require('../assets/images/favicon.png')} />
             </div>
-            <button className='login-btn' type="button" onClick={handleSendVerificationCode} disabled={cooldown}>
-              {cooldown ? `Resend in ${cooldownSeconds} seconds` : 'Send Verification Code'}
-            </button>
-            {verificationSent && (
-              <button className='login-btn' type="button" onClick={handleVerify}>Verify</button>
-            )}
-            <button className='login-btn' onClick={handleBackToLogin}>Back to Login</button>
-          </form>
+          </div>
         </div>
       </div>
     </section>

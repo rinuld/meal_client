@@ -23,34 +23,34 @@ const SideBar = memo(({auth}) => {
         <div className='sidebar-container'>
             <nav className="sidebar">
                 <p>Menu</p>
-                <div className='nav flex-column'>
+                <div className='nav sidebar-elements'>
                 <Link
                     to="/projects"
                     className={`nav-item ${activeItem === 'Projects' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Projects')}
                 >
-                    <img src={projectlogo} alt='PROJECTS' />Projects
+                    <img src={projectlogo} alt='PROJECTS' /><p>Projects</p>
                 </Link>
                 <Link
                     to="/details"
                     className={`nav-item project-sub-item ${activeItem === 'Details' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Details')}
                 >
-                    <img src={activitylogo} alt='DETAILS'/>Details
+                    <img src={activitylogo} alt='DETAILS'/><p>Details</p>
                 </Link>
                 <Link
                     to="/activities"
                     className={`nav-item project-sub-item ${activeItem === 'Activity' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Activity')}
                 >
-                    <img src={mobile} alt='ACTIVITIES'/>Activities
+                    <img src={mobile} alt='ACTIVITIES'/><p>Activities</p>
                 </Link>
                 <Link
                     to="/indicators"
                     className={`nav-item project-sub-item ${activeItem === 'Indicator' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Indicator')}
                 >
-                    <i className="fa fa-signal"></i>&nbsp;Indicators
+                    <i className="fa fa-signal"></i><p>Indicators</p>
                 </Link>
                 {auth.role==="Super Admin" &&
                 <Link
@@ -58,7 +58,7 @@ const SideBar = memo(({auth}) => {
                     className={`nav-item ${activeItem === 'Voucher' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Voucher')}
                 >
-                    <i className="fa fa-gift"></i>&nbsp;Make Payments
+                    <i className="fa fa-gift"></i><p>Make Payments</p>
                 </Link>
                 }
                 <Link
@@ -66,7 +66,7 @@ const SideBar = memo(({auth}) => {
                     className={`nav-item ${activeItem === 'Logs' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Logs')}
                 >
-                    <i className="fas fa-edit"></i>&nbsp;Logs
+                    <i className="fas fa-edit"></i><p>Logs</p>
                 </Link>
                 {/* <Link
                     to="/"

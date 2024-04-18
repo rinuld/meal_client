@@ -23,6 +23,7 @@ import Profile from './pages/Profile';
 import ForgotPasswordForm from './pages/ForgotPasswordForm';
 import ResetPasswordForm from './pages/ResetPasswordForm';
 
+
 export default function App() {
     const { auth, setAuth } = useContext(AuthContext);
     const { token, setToken } = useToken();
@@ -31,17 +32,13 @@ export default function App() {
     useEffect(() => {
         const usersession = localStorage.getItem('user');
         if (usersession != null) {
-            setAuth(JSON.parse(usersession));
+        setAuth(JSON.parse(usersession));
         }
     }, []);
 
     const handleProjectSelection = (value) => {
         setProject(value);
     };
-
-    // if (!token) {
-    //     return <Login setToken={setToken} />
-    // } 
 
     console.log("Role: " + auth.role);
     return (
@@ -186,5 +183,6 @@ export default function App() {
             </Routes>
         )}
         </>
+        
     );
 }

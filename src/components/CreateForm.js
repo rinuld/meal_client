@@ -20,7 +20,7 @@ export default function CreateForm ({ header, children }) {
                 <div className="create-forms">
                     <div className="modal-header">
                         <h4>{header}</h4>
-                        <button className="button-close" onClick={closeModal}>x</button>
+                        <button className="button-close" onClick={closeModal} >&times;</button>
                     </div>
                     {children}
                 </div> :

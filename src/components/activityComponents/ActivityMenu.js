@@ -100,7 +100,7 @@ function ActivityMenu() {
             .then((response) => {
                 InsertLogData("Updated Activity Details of Project Code " + activityCode, auth.firstname);
                 toast.success('Activity Updated', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -163,7 +163,7 @@ function ActivityMenu() {
                                             label="Budgetline"
                                             id="activity"
                                             type="text"
-                                            placeholder="enter budgetline"
+                                            placeholder="Enter budgetline"
                                             name="activity"
                                             value={activityName}
                                             onChange={(e) => setActivityName(e.target.value)}
@@ -173,7 +173,7 @@ function ActivityMenu() {
                                             label="Code"
                                             id="activityCode"
                                             type="text"
-                                            placeholder="enter code"
+                                            placeholder="Enter code"
                                             name="activityCode"
                                             value={activityCode}
                                             onChange={(e) => setActivityCode(e.target.value)}
@@ -203,7 +203,7 @@ function ActivityMenu() {
                                         label="Budget"
                                         id="budget"
                                         type="text"
-                                        placeholder="enter budget"
+                                        placeholder="Enter budget"
                                         name="budget"
                                         value={budget}
                                         onChange={handleInputChange}

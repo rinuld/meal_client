@@ -44,8 +44,12 @@ export default function Profile() {
                 <div className="row">
                     <div className="col-12 col-lg-3">
                         <div className="create-forms profile-div profile-img">
-                            <input className="user-profile" type="file" onChange={handleFileChange} />
-                            <button onClick={handleUpload}>Upload Image</button>
+                            <label className="custom-file-upload">
+                                <input className="user-profile" type="file" onChange={handleFileChange}/>
+                                Choose File
+                            </label>
+                            {/* <input className="user-profile" type="file" onChange={handleFileChange} /> */}
+                            <button className="button-save" onClick={handleUpload}>Upload Image</button>
                             {/* <p>{auth.firstname} {initials}</p>
                             <p>{auth.role}</p> */}
                         </div>

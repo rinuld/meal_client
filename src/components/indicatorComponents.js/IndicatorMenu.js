@@ -82,7 +82,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
             .then((response) => {
                 InsertLogData("Updated Indicator Details", auth.firstname);
                 toast.success('Indicator Updated', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -132,7 +132,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                 setParticipantsData([...participantsdata, newData]);
                 InsertLogData("Added participants " + firstname + lastname, auth.firstname);
                 toast.success('Participants Saved', {
-                    position: toast.POSITION.TOP_CENTER,
+                    position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
                     hideProgressBar: true,
                 });
@@ -280,7 +280,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         label="Indicator"
                                         id="indicator"
                                         type="text"
-                                        placeholder="enter indicator"
+                                        placeholder="Enter indicator"
                                         name="indicator"
                                         value={indicatorName}
                                         onChange={(e) => setIndicatorName(e.target.value)}
