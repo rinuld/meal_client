@@ -100,7 +100,7 @@ export default function App() {
                                         path="/activities"
                                         element={
                                             <div>
-                                                <Header title="Activity" />
+                                                <Header title="Activities" />
                                                 <SelectionProject onChange={handleProjectSelection}/>
                                                 <Activity />
                                             </div>
@@ -157,7 +157,7 @@ export default function App() {
                                         path="/addmember"
                                         element={
                                             <div>
-                                                <Header title="Add a Member" />
+                                                <Header title="Members" />
                                                 <AddUser />
                                             </div>
                                         }

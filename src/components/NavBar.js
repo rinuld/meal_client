@@ -41,7 +41,7 @@ const NavBar = memo(({ auth }) => {
                                 {auth.role === "Super Admin" &&
                                     <Link to="/addmember" className="nav-item">
                                         <i className="fa fa-user-plus"></i>
-                                        <span>Add Member</span>
+                                        <span>Members</span>
                                     </Link>}
                                 <Link
                                     className="nav-item"

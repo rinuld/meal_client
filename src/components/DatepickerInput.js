@@ -7,7 +7,7 @@ const DatePickerInput = ({selectedDate, onChange, label, disabled}) => {
 
     return (
         <div>
-        <label>{label}</label>
+        <label>{label}</label><br></br>
         <DatePicker
             className='input-text'
             selected={parsedDate}

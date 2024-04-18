@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../context/AuthProvider";
+import InputText from "../components/utils/InputText";
 import Axios from 'axios';
 
 export default function Profile() {
@@ -7,6 +8,8 @@ export default function Profile() {
     const [initials, setInitials] = useState('');
     const [id, setID] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
         if (auth && auth.middlename) {
@@ -17,6 +20,43 @@ export default function Profile() {
 
     const handleFileChange = (event) => {
       setSelectedFile(event.target.files[0]);
+    };
+
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+    
+        if (!newPassword || !confirmPassword) {
+          console.error('Please fill in all fields');
+          return;
+        }
+    
+        if (newPassword !== confirmPassword) {
+          console.error('Passwords do not match');
+          return;
+        }
+    
+        try {
+            const response = await fetch('http://localhost:3001/api/resetPassword', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: auth.email, newPassword }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to reset password');
+            }
+    
+            const data = await response.json();
+            console.log(data.message); // Password reset successful message
+            setNewPassword("");
+            setConfirmPassword("");
+
+        } catch (error) {
+            console.error('Error resetting password:', error);
+            // Handle error response from backend, if needed
+        }
     };
   
     const handleUpload = async () => {
@@ -38,20 +78,46 @@ export default function Profile() {
       }
     };
 
+    const formatBirthdate = (birthdate) => {
+        const date = new Date(birthdate);
+        return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
+    };
+
     return (
         <>
             <div className="profile-page">
                 <div className="row">
                     <div className="col-12 col-lg-3">
                         <div className="create-forms profile-div profile-img">
-                            <label className="custom-file-upload">
-                                <input className="user-profile" type="file" onChange={handleFileChange}/>
-                                Choose File
-                            </label>
-                            {/* <input className="user-profile" type="file" onChange={handleFileChange} /> */}
-                            <button className="button-save" onClick={handleUpload}>Upload Image</button>
+                            <label>Profile Picture</label>
+                            <input className="user-profile" type="file" onChange={handleFileChange}/>
+                            <br></br>
+                            <button onClick={handleUpload}>Upload Image</button>
                             {/* <p>{auth.firstname} {initials}</p>
                             <p>{auth.role}</p> */}
+                        </div>
+                        <div className="create-forms profile-div profile-img">
+                            <InputText
+                                label="New Password"
+                                id="newPassword"
+                                type="password"
+                                placeholder="New Password"
+                                name="password"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                            <br></br>
+                             <InputText
+                                label="Confirm New Password"
+                                id="confirmPassword"
+                                type="password"
+                                placeholder="Confirm New Password"
+                                name="password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            <br></br>
+                            <button onClick={handleResetPassword}>Change Password</button>
                         </div>
                     </div>
                     <div className="col-12 col-lg-9">
@@ -85,7 +151,7 @@ export default function Profile() {
                                     <p>Birthdate</p>
                                 </div>
                                 <div className="col-12 col-lg-10 profile-info-cont">
-                                    <p>{auth.birthdate}</p>
+                                    <p>{formatBirthdate(auth.birthdate)}</p>
                                 </div>
                             </div>
                         </div>

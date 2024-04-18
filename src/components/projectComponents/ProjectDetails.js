@@ -66,7 +66,7 @@ const ProjectDetails = memo(({ projectID }) => {
     const addBudgetData = { amount: addBudget.toString().replace(/,/g, ""), source, date, projectID };
 
     const statusselection = [
-        { value: 'Implementation', label: 'Implementation' },
+        { value: 'Ongoing', label: 'Ongoing' },
         { value: 'Cancelled', label: 'Cancelled' },
         { value: 'Completed', label: 'Completed' },
         { value: 'Delayed', label: 'Delayed' },
@@ -83,7 +83,7 @@ const ProjectDetails = memo(({ projectID }) => {
             }
         })
             .then((response) => {
-                InsertLogData("Updated Project Details of Project Code " + projectID, auth.firstname);
+                InsertLogData("Updated Project Details of " + projectName, auth.firstname);
                 toast.success('Project Updated', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
@@ -106,7 +106,7 @@ const ProjectDetails = memo(({ projectID }) => {
         })
             .then(response => response.json())
             .then(data => {
-                InsertLogData("Added a budget on " + projectID, auth.firstname);
+                InsertLogData("Added a budget on " + projectName, auth.firstname);
                 toast.success('Budget succesfully added!', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,

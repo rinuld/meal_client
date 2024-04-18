@@ -56,14 +56,12 @@ function ProjectMenu() {
                         <Team />
                     </div>
                 </div>
-
-                <div
-                    className={`${activeTab === 'partners' ? 'display-content' : 'tab-content '}`}
-                    id="contentpartners"
-                >
-                    <div id="sub-details">
-                        <Partners />
-                    </div>
+            <div
+                className={`${activeTab === 'partners' ? 'display-content' : 'tab-content '}`}
+                id="contentpartners"
+            >
+                <div id="sub-details">
+                    <Partners projectID={projectID}></Partners>
                 </div>
             </div>
         </>

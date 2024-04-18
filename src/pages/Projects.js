@@ -3,6 +3,7 @@ import DataTable from "../components/DataTable";
 import CreateProjectForm from '../components/projectComponents/ProjectForm';
 import InputCurrency from "../components/utils/InputCurrency";
 import { Link } from 'react-router-dom';
+import CreateForm from "../components/CreateForm";
 
 function Projects() {
 
@@ -66,7 +67,9 @@ function Projects() {
   console.log('Render Project.js');
   return (
     <>
-      <CreateProjectForm onCreateProject={handleCreateProject} />
+      <CreateForm header="Add a Project">
+        <CreateProjectForm onCreateProject={handleCreateProject} />
+      </CreateForm>
       <DataTable columns={columns} data={projectData} />
     </>
   )
