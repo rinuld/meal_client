@@ -83,7 +83,7 @@ const ProjectDetails = memo(({ projectID }) => {
             }
         })
             .then((response) => {
-                InsertLogData("Updated Project Details of " + projectName, auth.firstname);
+                InsertLogData("Updated Project Details", auth.firstname);
                 toast.success('Project Updated', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,

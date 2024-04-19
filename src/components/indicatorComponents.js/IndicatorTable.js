@@ -155,9 +155,10 @@ const IndicatorTable = memo(({ data, setData }) => {
         }
       })
         .then((response) => {
+          const objectiveName = response.data.title;
           setData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
-          InsertLogData("Deleted Objective " + response.title, auth.firstname);
+          InsertLogData("Deleted Objective: " + objectiveName, auth.firstname);
           toast.success('Objective Deleted', {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
@@ -175,9 +176,10 @@ const IndicatorTable = memo(({ data, setData }) => {
         }
       })
         .then((response) => {
+          const outcomeName = response.data.title;
           setOutcomeData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
-          InsertLogData("Deleted Outcome " + response.title, auth.firstname);
+          InsertLogData("Deleted Outcome: " + outcomeName, auth.firstname);
           toast.success('Outcome Deleted', {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
@@ -195,9 +197,10 @@ const IndicatorTable = memo(({ data, setData }) => {
         }
       })
         .then((response) => {
+          const outputName = response.data.title;
           setOutputData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
-          InsertLogData("Deleted Output " + response.title, auth.firstname);
+          InsertLogData("Deleted Output: " + outputName, auth.firstname);
           toast.success('Output Deleted', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1000,
@@ -215,10 +218,11 @@ const IndicatorTable = memo(({ data, setData }) => {
         }
       })
         .then((response) => {
+          const indicatorName = response.data.title;
           setIndicatorOutputData(prevData => prevData.filter(item => item.id !== id));
           setShowDeleteModal(false);
-          InsertLogData("Deleted Indicator " + response.indicator, auth.firstname);
-          toast.success('Outcome Deleted', {
+          InsertLogData("Deleted Indicator: " + indicatorName, auth.firstname);
+          toast.success('Indicator Deleted', {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1000,
             hideProgressBar: true,
@@ -372,7 +376,7 @@ const IndicatorTable = memo(({ data, setData }) => {
       }
     })
       .then((response) => {
-        InsertLogData("Updated Objective title " + editObjective, auth.firstname);
+        InsertLogData("Updated Objective Title", auth.firstname);
         setData((prevData) =>
           prevData.map((item) => {
             if (item.goalID === goalID) {
@@ -400,7 +404,7 @@ const IndicatorTable = memo(({ data, setData }) => {
       }
     })
       .then((response) => {
-        InsertLogData("Updated Outcome title " + editOutcome, auth.firstname);
+        InsertLogData("Updated Outcome Title", auth.firstname);
         setOutcomeData((prevData) =>
           prevData.map((item) => {
             if (item.outcomeID === outcomeID) {
@@ -428,7 +432,7 @@ const IndicatorTable = memo(({ data, setData }) => {
       }
     })
       .then((response) => {
-        InsertLogData("Updated Output title " + editOutput, auth.firstname);
+        InsertLogData("Updated Output Title", auth.firstname);
         setOutcomeData((prevData) =>
           prevData.map((item) => {
             if (item.outputID === outputID) {

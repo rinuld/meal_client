@@ -68,7 +68,7 @@ function Activity() {
             .then(response => response.text())
             .then(data => {
                 setData([...activityData, { ...requestData, totalCreditAmount: 0 }]);
-                InsertLogData("Created Budgetline " + activityName, auth.firstname);
+                InsertLogData("Created Activity: " + activityName, auth.firstname);
                 toast.success('Activity Saved', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
@@ -97,7 +97,7 @@ function Activity() {
     console.log('Render Activities.js');
     return (
         <div>
-            <CreateForm header="Create Budgetline">
+            <CreateForm header="Add an Activity">
                 <form onSubmit={handleSubmit}>
                     <div className="row gx-3">
                         <div className="col-12 col-md-6">

@@ -58,9 +58,10 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
       }
     })
       .then((response) => {
+        const activityName = response.data.title;
         setActivityData(prevData => prevData.filter(item => item.id !== id));
         setShowDeleteModal(false);
-        InsertLogData("Deleted Activity " + response.title, auth.firstname);
+        InsertLogData("Deleted Activity: " + activityName, auth.firstname);
         toast.success('Activity Deleted', {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,

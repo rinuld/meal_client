@@ -98,7 +98,7 @@ function ActivityMenu() {
             }
         })
             .then((response) => {
-                InsertLogData("Updated Activity Details of " + activityName, auth.firstname);
+                InsertLogData("Updated Activity Details", auth.firstname);
                 toast.success('Activity Updated', {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 1000,
