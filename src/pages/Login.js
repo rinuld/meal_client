@@ -30,6 +30,9 @@ const Login = ({ setToken }) => {
     try {
       const response = await Axios.post('http://localhost:3001/api/login', { ...data, recaptchaValue });
       const { token, user } = response.data;
+      
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', token);
       setToken({ token: token });
       setAuth(user);
       navigate("/projects");
