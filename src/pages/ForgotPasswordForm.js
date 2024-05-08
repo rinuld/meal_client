@@ -164,13 +164,13 @@ const ForgotPasswordForm = () => {
                       />
                       <label htmlFor='verificationCode'>Verification Code</label>
                     </div>
-                    <button className='login-btn' type="button" onClick={handleSendVerificationCode} disabled={cooldown}>
+                    <button className='login-btn-main' type="button" onClick={handleSendVerificationCode} disabled={cooldown}>
                       {cooldown ? `Resend in ${cooldownSeconds} seconds` : 'Send Verification Code'}
                     </button>
                     {verificationSent && (
-                      <button className='login-btn' type="button" onClick={handleVerify}>Verify</button>
+                      <button className='login-btn-main' type="button" onClick={handleVerify}>Verify</button>
                     )}
-                    <button className='login-btn' onClick={handleBackToLogin}>Back to Login</button>
+                    <button className='login-btn-main' onClick={handleBackToLogin}>Back to Login</button>
                   </form>
                 </div>
               </div>

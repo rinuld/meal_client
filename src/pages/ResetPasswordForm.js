@@ -74,8 +74,8 @@ const ResetPasswordForm = () => {
               />
               <label htmlFor='confirmPassword'>Confirm Password</label>
             </div>
-            <button className='login-btn' type="submit">Reset Password</button>
-            <button className='login-btn' onClick={handleBackToLogin}>Back to Login</button>
+            <button className='login-btn-main' type="submit">Reset Password</button>
+            <button className='login-btn-main' onClick={handleBackToLogin}>Back to Login</button>
           </form>
         </div>
       </div>
