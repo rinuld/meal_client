@@ -70,38 +70,36 @@ function CreateProjectForm({ onCreateProject }) {
   console.log("Render Project Form");
   return (
     <>
-      <div className="create-forms">
-        <form onSubmit={handleSubmit}>
-          <div className="row gx-3">
-            <div className="col-12 col-md-6">
-              <InputText
-                label="Project ID"
-                id="newprojectID"
-                type="number"
-                placeholder="Enter project ID"
-                name="newprojectID"
-                value={projectID}
-                onChange={handleCodeChecker}
-              />
-              {projectID ? <Checker input={projectID} tableValues={projectData} column="projectID" /> : ""}
-            </div>
-            <div className="col-12 col-md-6">
-              <InputText
-                label="Project Name"
-                id="newprojectName"
-                type="text"
-                placeholder="Enter project name"
-                name="newprojectName"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-              />
-            </div>
+      <form onSubmit={handleSubmit}>
+        <div className="row gx-3">
+          <div className="col-12 col-md-6">
+            <InputText
+              label="Project ID"
+              id="newprojectID"
+              type="number"
+              placeholder="Enter project ID"
+              name="newprojectID"
+              value={projectID}
+              onChange={handleCodeChecker}
+            />
+            {projectID ? <Checker input={projectID} tableValues={projectData} column="projectID" /> : ""}
           </div>
-          <div className="button-container">
-            <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
+          <div className="col-12 col-md-6">
+            <InputText
+              label="Project Name"
+              id="newprojectName"
+              type="text"
+              placeholder="Enter project name"
+              name="newprojectName"
+              value={projectName}
+              onChange={(e) => setProjectName(e.target.value)}
+            />
           </div>
-        </form>
-      </div>
+        </div>
+        <div className="button-container">
+          <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
+        </div>
+      </form>
     </>
   )
 }

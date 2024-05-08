@@ -40,6 +40,7 @@ const UserTable = () => {
 
   return (
     <>
+    <div className="card-container">
       <div className="card-table">
         <table>
           <thead>
@@ -54,13 +55,13 @@ const UserTable = () => {
           <tbody>
             {members.length > 0 ? (
               members.map(member => (
-                <tr key={member.id}>
+                <tr key={member.id} className='row-theme-1'>
                   <td>{member.firstname} {member.lastname}</td>
                   <td>{member.sex}</td>
                   <td>{member.email}</td>
                   <td>{member.role}</td>
                   <td>
-                    <button onClick={() => handleDelete(member)}>Delete</button>
+                    <button  className="button-delete" onClick={() => handleDelete(member)}>Delete</button>
                   </td>
                 </tr>
               ))
@@ -85,11 +86,12 @@ const UserTable = () => {
             Are you sure you want to delete {selectedMember && `${selectedMember.firstname} ${selectedMember.lastname}`}?
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleDeleteMember}>Delete</button>
-            <button onClick={() => setShowDeleteModal(false)}>Cancel</button>
+            <button onClick={handleDeleteMember} className="button-delete">Delete</button>
+            <button onClick={() => setShowDeleteModal(false)} className="button-save">Cancel</button>
           </Modal.Footer>
         </Modal>
       )}
+    </div>
     </>
   );
 };

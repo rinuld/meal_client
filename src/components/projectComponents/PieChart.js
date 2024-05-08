@@ -15,7 +15,7 @@ const PieChart = ({ expenses, totalbudget }) => {
         datasets: [
             {
                 data: [expenses, remaining],
-                backgroundColor: ['red', 'yellowgreen'],
+                backgroundColor: ['rgb(255, 65, 65)', '#A3C639'],
             },
         ],
     };
@@ -39,19 +39,24 @@ const PieChart = ({ expenses, totalbudget }) => {
                 },
             },
         },
+        elements: {
+            arc: {
+                borderWidth: 0
+            }
+        }
     };
 
     return (
         <>
-            <Pie data={data} options={options} />
+            <Pie data={data} options={options}  />
             <div className="pie-chart">
                 <div className="chart-labels">
-                    <div className="chart-label expenses"  style={{color: 'red'}}>
+                    <div className="chart-label expenses"  style={{color: 'rgb(255, 65, 65)'}}>
                         <span>Php {expensesCur}  </span>
                         <span>({expensesPercentage.toFixed(1)}%)  </span>
                         <span>Expenses</span>
                     </div>
-                    <div className="chart-label remaining"  style={{color: 'green'}}>
+                    <div className="chart-label remaining"  style={{color: '#A3C639'}}>
                         <span>Php {remainCur}  </span>
                         <span>({remainingPercentage.toFixed(1)}%)  </span>
                         <span>Remaining</span>

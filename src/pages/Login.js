@@ -125,7 +125,7 @@ const Login = ({ setToken }) => {
                         setRecaptchaValue(value);
                       }}
                     />
-                    <button className='login-btn' type="submit">Login</button>
+                    <button className='login-btn-main' type="submit">Login</button>
                     <Link to="/forgot-password" className="forgot-password-txt"><p>Forgot your password?</p></Link>
                   </form>
                 </div>

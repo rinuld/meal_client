@@ -61,11 +61,11 @@ export default function App() {
             <>
                 <NavBar auth={auth} />
                 <div className="container-fluid bg-light d-flex flex-column">
-                    <div className="row flex-grow-1">
-                        <div className="col-lg-2">
-                            <SideBar auth={auth} />
+                    <div className="row flex-grow-1 body-container">
+                        <div className="col-xl-2">
+                            <SideBar auth={auth} />                   
                         </div>
-                        <div className="col-lg-10 overflow-auto">
+                        <div className="col-xl-10 overflow-auto">
                             <div className="main-content">
                                 <Routes>
                                     <Route
@@ -183,6 +183,5 @@ export default function App() {
             </Routes>
         )}
         </>
-        
     );
 }
