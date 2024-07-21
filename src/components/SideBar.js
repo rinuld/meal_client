@@ -1,7 +1,6 @@
 // Used to create navigation routes to install use npm i react-router-dom@6
 import { Link } from 'react-router-dom';
 import React, { memo, useState } from 'react';
-import homelogo from '../assets/images/home.ico';
 import projectlogo from '../assets/images/folder.svg';
 import activitylogo from '../assets/images/document.svg';
 import mobile from '../assets/images/mobile.svg';
@@ -54,11 +53,11 @@ const SideBar = memo(({auth}) => {
                 </Link>
                 {auth.role==="Super Admin" &&
                 <Link
-                    to="/voucher"
-                    className={`nav-item ${activeItem === 'Voucher' ? 'active' : ''}`}
-                    onClick={() => handleMenuClick('Voucher')}
+                    to="/activityReport"
+                    className={`nav-item ${activeItem === 'Activity Report' ? 'active' : ''}`}
+                    onClick={() => handleMenuClick('Activity Report')}
                 >
-                    <i className="fa fa-gift"></i><p>Make Payments</p>
+                    <i className="fa fa-gift"></i><p>Activity Report</p>
                 </Link>
                 }
                 <Link
@@ -68,13 +67,6 @@ const SideBar = memo(({auth}) => {
                 >
                     <i className="fas fa-edit"></i><p>Logs</p>
                 </Link>
-                {/* <Link
-                    to="/"
-                    className={`nav-item ${activeItem === 'Dashboard' ? 'active' : ''}`}
-                    onClick={() => handleMenuClick('Dashboard')}
-                >
-                    <img src={homelogo} alt='DASHBOARD'/>Dashboard
-                </Link> */}
                 </div>
             </nav>
         </div>

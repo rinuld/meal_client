@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import Details from './pages/Details';
 import Activity from './pages/Activities';
-import Voucher from './pages/Vouchers';
+import ActivityReport from './pages/ActivityReport';
 import Indicators from './pages/Indicators';
 import ActivityDetails from './pages/ActivityDetails';
 import IndicatorDetails from './pages/IndicatorDetails';
@@ -119,11 +119,11 @@ export default function App() {
 
                                     {auth.role === "Super Admin" && (
                                         <Route
-                                            path="/voucher"
+                                            path="/activityReport"
                                             element={
                                                 <div>
-                                                    <Header title="Voucher" />
-                                                    <Voucher />
+                                                    <Header title="Activity Report" />
+                                                    <ActivityReport />
                                                 </div>
                                             }
                                         />
