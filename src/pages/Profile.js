@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../context/AuthProvider";
 import InputText from "../components/utils/InputText";
+import { DarkMode, toggleTheme, selectedTheme, Sun, Moon, setDarkMode, setLightMode } from "../components/theme/DarkMode";
 import Axios from 'axios';
 
 export default function Profile() {
@@ -91,8 +92,7 @@ export default function Profile() {
                         <div className="create-forms profile-div profile-img">
                             <label>Profile Picture</label>
                             <input className="user-profile" type="file" onChange={handleFileChange}/>
-                            <br></br>
-                            <button onClick={handleUpload}>Upload Image</button>
+                            <button className="login-btn" onClick={handleUpload}>Upload Image</button>
                             {/* <p>{auth.firstname} {initials}</p>
                             <p>{auth.role}</p> */}
                         </div>
@@ -107,7 +107,7 @@ export default function Profile() {
                                 onChange={(e) => setNewPassword(e.target.value)}
                             />
                             <br></br>
-                             <InputText
+                            <InputText
                                 label="Confirm New Password"
                                 id="confirmPassword"
                                 type="password"
@@ -116,8 +116,23 @@ export default function Profile() {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
-                            <br></br>
-                            <button onClick={handleResetPassword}>Change Password</button>
+                            <button className="login-btn" onClick={handleResetPassword}>Change Password</button>
+                        </div>
+                        <div className="create-forms profile-div profile-img">
+                            <label>Theme</label>
+                            <div className='dark_mode'>
+                                <input
+                                    className='dark_mode_input'
+                                    type='checkbox'
+                                    id='darkmode-toggle'
+                                    onChange={toggleTheme}
+                                    defaultChecked={localStorage.getItem("selectedTheme") === "dark"}
+                                />
+                                <label className='dark_mode_label' for='darkmode-toggle'>
+                                    <Sun />
+                                    <Moon />
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div className="col-12 col-lg-9">

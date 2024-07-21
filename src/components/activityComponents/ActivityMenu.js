@@ -164,7 +164,7 @@ function ActivityMenu() {
                         <div className="create-forms">
                             <form onSubmit={handleSubmit}>
                                 <div className="row">
-                                    <div className="col-6">
+                                    <div className="col-12 col-lg-6">
                                         <InputText
                                             label="Budgetline"
                                             id="activity"
@@ -175,7 +175,7 @@ function ActivityMenu() {
                                             onChange={(e) => setActivityName(e.target.value)}
                                         />
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-12 col-lg-6">
                                         <InputText
                                             label="Code"
                                             id="activityCode"
@@ -189,7 +189,7 @@ function ActivityMenu() {
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-2">
+                                    <div className="col-12 col-lg-2">
                                         <InputSelection
                                             label="Status"
                                             value={status}
@@ -197,7 +197,7 @@ function ActivityMenu() {
                                             onChange={(e) => setStatus(e)}
                                         />
                                     </div>
-                                    <div className="col-3">
+                                    <div className="col-12 col-lg-3">
                                         <InputTexticon
                                             icon="Php "
                                             label="Budget"
@@ -210,7 +210,7 @@ function ActivityMenu() {
                                             required={true}
                                         />
                                     </div>
-                                    <div className="col-3">
+                                    <div className="col-12 col-lg-3">
                                         <InputTexticon
                                             icon="Php "
                                             label="Actual"
@@ -223,7 +223,7 @@ function ActivityMenu() {
                                             required={true}
                                         />
                                     </div>
-                                    <div className="col-4">
+                                    <div className="col-12 col-lg-4">
                                         <DatePickerInput
                                             label="Check Date"
                                             selectedDate={selectedDate}

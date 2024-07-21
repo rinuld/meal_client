@@ -32,7 +32,7 @@ function SelectionProject({ onChange }) {
                 <select className='textbox' value={project} onChange={handleSelect}>
                     <option hidden disabled>{project}</option>
                     {projectList.map(project => (
-                        <option key={project.projectID} value={project.projectID + '-' + project.projectName}>
+                        <option key={project.projectID} value={project.projectID + '-' + project.projectName} style={{height: '2.5em'}}>
                             {project.projectName}
                         </option>
                     ))}

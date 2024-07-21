@@ -77,6 +77,7 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
   console.log("Activity Table");
   return (
     <>
+    <div className="card-container">
       <div className="card-table">
         <table>
           <thead>
@@ -157,6 +158,7 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
           </Modal.Body>
         </Modal>
       )}
+    </div>
     </>
   );
 });

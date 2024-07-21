@@ -28,28 +28,28 @@ const SideBar = memo(({auth}) => {
                     className={`nav-item ${activeItem === 'Projects' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Projects')}
                 >
-                    <img src={projectlogo} alt='PROJECTS' /><p>Projects</p>
+                    <i class="fa-solid fa-folder-open"></i><p>Projects</p>
                 </Link>
                 <Link
                     to="/details"
                     className={`nav-item project-sub-item ${activeItem === 'Details' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Details')}
                 >
-                    <img src={activitylogo} alt='DETAILS'/><p>Details</p>
+                    <i class="fa-solid fa-clipboard"></i><p>Details</p>
                 </Link>
                 <Link
                     to="/activities"
                     className={`nav-item project-sub-item ${activeItem === 'Activity' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Activity')}
                 >
-                    <img src={mobile} alt='ACTIVITIES'/><p>Activities</p>
+                    <i class="fa-solid fa-mobile-screen-button"></i><p>Activities</p>
                 </Link>
                 <Link
                     to="/indicators"
                     className={`nav-item project-sub-item ${activeItem === 'Indicator' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Indicator')}
                 >
-                    <i className="fa fa-signal"></i><p>Indicators</p>
+                    <i class="fa-solid fa-book-bookmark"></i><p>Indicators</p>
                 </Link>
                 {auth.role==="Super Admin" &&
                 <Link

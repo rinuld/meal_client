@@ -456,6 +456,7 @@ const IndicatorTable = memo(({ data, setData }) => {
   console.log('Render Indicator Table');
   return (
     <>
+    <div className="card-container">
       <div className="card-table">
         <table>
           <thead>
@@ -473,15 +474,14 @@ const IndicatorTable = memo(({ data, setData }) => {
                   <tr className="objective-rows" onMouseEnter={() => setRowVisible(item.goalID)} onMouseLeave={() => setRowVisible(null)}>
                     <td colSpan={3}>
                       {editingIDObj === item.goalID ? (
-                        <div className="input-text">
-                          <input
-                            type="text"
-                            value={editObjective}
-                            onChange={(e) => seteditObjective(e.target.value)}
-                            onBlur={() => handleSaveTitle(item.goalID)}
-                            autoFocus
-                          />
-                        </div>
+                        <input
+                          type="text"
+                          className="input-text-table"
+                          value={editObjective}
+                          onChange={(e) => seteditObjective(e.target.value)}
+                          onBlur={() => handleSaveTitle(item.goalID)}
+                          autoFocus
+                        />
                       ) : (
                         <p onClick={() => handleTitleClick(item.title, item.goalID)}>
                           {`${objectiveIndex + 1}. ${item.title}`}
@@ -520,15 +520,14 @@ const IndicatorTable = memo(({ data, setData }) => {
                         <tr className="outcome-rows" key={outcome.outcomeID} onMouseEnter={() => setRowVisible(outcome.outcomeID)} onMouseLeave={() => setRowVisible(null)}>
                           <td colSpan={3}>
                             {editingIDOutcome === outcome.outcomeID ? (
-                              <div className="input-text">
-                                <input
-                                  type="text"
-                                  value={editOutcome}
-                                  onChange={(e) => seteditOutcome(e.target.value)}
-                                  onBlur={() => handleSaveOutcomeTitle(outcome.outcomeID)}
-                                  autoFocus
-                                />
-                              </div>
+                              <input
+                                type="text"
+                                value={editOutcome}
+                                className="input-text-table"
+                                onChange={(e) => seteditOutcome(e.target.value)}
+                                onBlur={() => handleSaveOutcomeTitle(outcome.outcomeID)}
+                                autoFocus
+                              />
                             ) : (
                               <p style={{ textIndent: '15px' }} onClick={() => handleOutcomeTitleClick(outcome.title, outcome.outcomeID)}>
                                 {`${objectiveIndex + 1}.${outcomeIndex + 1}. ${shortenText(outcome.title)}`}
@@ -568,15 +567,14 @@ const IndicatorTable = memo(({ data, setData }) => {
                               <tr className="output-rows" key={output.outputID} onMouseEnter={() => setRowVisible(output.outputID)} onMouseLeave={() => setRowVisible(null)}>
                                 <td colSpan={3}>
                                   {editingIDOutput === output.outputID ? (
-                                    <div className="input-text">
-                                      <input
-                                        type="text"
-                                        value={editOutput}
-                                        onChange={(e) => seteditOutput(e.target.value)}
-                                        onBlur={() => handleSaveOutputTitle(output.outputID)}
-                                        autoFocus
-                                      />
-                                    </div>
+                                    <input
+                                      type="text"
+                                      value={editOutput}
+                                      className="input-text-table"
+                                      onChange={(e) => seteditOutput(e.target.value)}
+                                      onBlur={() => handleSaveOutputTitle(output.outputID)}
+                                      autoFocus
+                                    />
                                   ) : (
                                     <p style={{ textIndent: '45px' }} onClick={() => handleOutputTitleClick(output.title, output.outputID)}>
                                       <span>{`${objectiveIndex + 1}.${outcomeIndex + 1}.${outputIndex + 1} ${shortenText(output.title)}`}</span>
@@ -680,7 +678,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           label="Outcome"
                           id="outcome"
                           type="text"
-                          placeholder="enter outcome"
+                          placeholder="Enter outcome"
                           name="outcome"
                           value={outcome}
                           onChange={(e) => setOutcome(e.target.value)}
@@ -710,7 +708,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                             label="Output"
                             id="output"
                             type="text"
-                            placeholder="enter output"
+                            placeholder="Enter output"
                             name="output"
                             value={output}
                             onChange={(e) => setOutput(e.target.value)}
@@ -739,7 +737,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                           <InputTextArea
                             label="Indicator"
                             id="indicator"
-                            placeholder="enter indicator"
+                            placeholder="Enter indicator"
                             name="indicator"
                             value={indicator}
                             onChange={(e) => setIndicator(e.target.value)}
@@ -761,7 +759,7 @@ const IndicatorTable = memo(({ data, setData }) => {
                             label="Target"
                             id="target"
                             type="number"
-                            placeholder="enter target"
+                            placeholder="Enter target"
                             name="target"
                             value={targetReach}
                             onChange={(e) => setTargetReach(e.target.value)}
@@ -899,6 +897,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         }
         </Modal>      
       )}
+    </div>
     </>
   );
 });

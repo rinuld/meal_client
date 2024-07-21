@@ -46,6 +46,7 @@ function DataTable({ columns, data }) {
     console.log('Render Datatable.js');
     return (
         <>
+        <div className='card-container'>
             <div className='datatable card-table'>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -152,6 +153,7 @@ function DataTable({ columns, data }) {
                     </div>
                 </div>
             </div>
+        </div>
         </>
     );
 
