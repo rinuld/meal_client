@@ -5,11 +5,13 @@ import projectlogo from '../assets/images/folder.svg';
 import activitylogo from '../assets/images/document.svg';
 import mobile from '../assets/images/mobile.svg';
 
+
 const SideBar = memo(({auth}) => {
     const [activeItem, setActiveItem] = useState(() => {
     const activeItemFromStorage = localStorage.getItem('activeItem');
     console.log("active side bar item " + activeItemFromStorage);
     return activeItemFromStorage || "Projects";
+    
   });
 
     const handleMenuClick = (name) => {
@@ -57,7 +59,7 @@ const SideBar = memo(({auth}) => {
                     className={`nav-item ${activeItem === 'Activity Report' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Activity Report')}
                 >
-                    <i className="fa fa-gift"></i><p>Activity Report</p>
+                    <i className="fas fa-file-alt"></i><p>Activity Report</p>
                 </Link>
                 }
                 <Link
