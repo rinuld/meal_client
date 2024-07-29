@@ -53,7 +53,7 @@ function ProjectMenu() {
                     id="contentteam"
                 >
                     <div id="sub-details">
-                        <Team />
+                        <Team projectID={projectID}></Team>
                     </div>
                 </div>
                 <div

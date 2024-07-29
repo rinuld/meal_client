@@ -4,16 +4,19 @@ import Checker from "../Checker";
 import { InsertLogData } from "../InsertLogData";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TeamMembersModal from './TeamMembersModal';
+import { Button } from 'react-bootstrap';
 
 function CreateProjectForm({ onCreateProject }) {
   const [projectName, setProjectName] = useState("");
   const [projectID, setProjectID] = useState("");
+  const [teamMembers, setTeamMembers] = useState([]);
   const [refreshData, setRefreshData] = useState(true);
   const [projectData, setData] = useState([]);
   const [isProjectIDExists, setIsProjectIDExists] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const currentDate = new Date().toISOString();
 
-  // fetch data from the database and assign the value to the setData variable
   useEffect(() => {
     fetch('http://localhost:3001/api/projects')
       .then(response => response.json())
@@ -28,9 +31,9 @@ function CreateProjectForm({ onCreateProject }) {
   const requestData = {
     projectID,
     projectName,
-    startDate: currentDate
+    startDate: currentDate,
+    teamMembers: teamMembers.join(', ')
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +48,7 @@ function CreateProjectForm({ onCreateProject }) {
       .then(data => {
         onCreateProject(data);
         console.log(data)
-        setRefreshData(!setRefreshData);
+        setRefreshData(!refreshData);
         InsertLogData("Created Project " + projectName);
         toast.success('Project Saved', {
           position: toast.POSITION.TOP_RIGHT,
@@ -54,6 +57,7 @@ function CreateProjectForm({ onCreateProject }) {
         });
         setProjectID("");
         setProjectName("");
+        setTeamMembers([]);
       })
       .catch(error => {
         console.log('Error inserting data:', error);
@@ -64,10 +68,12 @@ function CreateProjectForm({ onCreateProject }) {
     setProjectID(value.target.value);
     const projectIDExists = projectData.some(row => row.projectID === value.target.value);
     setIsProjectIDExists(projectIDExists);
-  }
+  };
 
-  // console.log(projectData);
-  console.log("Render Project Form");
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const handleSaveMembers = (selectedMembers) => setTeamMembers(selectedMembers);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -96,12 +102,28 @@ function CreateProjectForm({ onCreateProject }) {
             />
           </div>
         </div>
+        <br></br>
+        <div className="col-12 col-md-6">
+          <div className="col-12">
+            <button className="button-save" onClick={handleOpenModal}>Team Members</button>
+            <div className="mt-3 team-members">
+              {teamMembers.length > 0 && (
+                <p>{teamMembers.join(", ")}</p> // Change ul to p and join the members
+              )}
+            </div>
+          </div>
+        </div>
         <div className="button-container">
           <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
         </div>
       </form>
+      <TeamMembersModal 
+        show={showModal} 
+        onClose={handleCloseModal} 
+        onSave={handleSaveMembers} 
+      />
     </>
-  )
+  );
 }
 
-export default CreateProjectForm
+export default CreateProjectForm;

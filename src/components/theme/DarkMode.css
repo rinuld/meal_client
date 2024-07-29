@@ -67,3 +67,10 @@
 .dark_mode_input:checked + .dark_mode_label svg.moon {
     fill: #fff;
 }
+body[data-theme='dark'] .team-members {
+    color: white;
+}
+body[data-theme='dark'] {
+    background-color: #121212;
+    color: white;
+}

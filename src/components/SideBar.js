@@ -23,7 +23,6 @@ const SideBar = memo(({auth}) => {
     return (
         <div className='sidebar-container'>
             <nav className="sidebar">
-                <p>Menu</p>
                 <div className='nav sidebar-elements'>
                 <Link
                     to="/projects"
