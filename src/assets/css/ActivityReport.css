@@ -1,0 +1,29 @@
+.arForm {
+    display: flex;
+    margin: 10px;
+}
+
+.arForm p {
+    margin: 0;
+}
+
+.arForm .form-check-input {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 2px solid #28a745;
+    cursor: pointer;
+}
+
+.arForm .form-check-input:checked {
+    background-color: green;
+    border-color: green;
+}
+
+#detailedDescription,
+#keyOutputs,
+#challenges,
+#successStories,
+#conclusions {
+    height: 100px;
+}
