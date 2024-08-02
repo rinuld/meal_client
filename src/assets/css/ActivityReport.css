@@ -20,6 +20,13 @@
     border-color: green;
 }
 
+.others {
+    align-items: center;
+    display: flex;
+    margin: 10px;
+    gap: 15px;
+}
+
 #detailedDescription,
 #keyOutputs,
 #challenges,

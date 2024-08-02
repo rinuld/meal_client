@@ -30,7 +30,6 @@ function ActivityReport() {
         "Local Government Units",
         "Government Officials",
         "Religious Institutions",
-        "Others, please specify:"
     ];
 
     const [detailedDescription, setDetailedDescription] = useState("");
@@ -203,8 +202,30 @@ function ActivityReport() {
         });
     };
 
+    const handleOtherInstitutionChange = (value) => {
+        setOtherInstitution(value);
+    };
+
+    const clearForm = () => {
+        setSelectedProject(null);
+        setSelectedActivity(null);
+        setSelectedObjective(null);
+        setSelectedOutcome(null);
+        setSelectedOutput(null);
+        setSelectedIndicator(null);
+        setGaddData(false);
+        setSelectedInstitutions([]);
+        setOtherInstitution("");
+        setDetailedDescription("");
+        setKeyOutputs("");
+        setChallenges("");
+        setSuccessStories("");
+        setConclusions("");
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        const updatedInstitutions = otherInstitution.trim() ? [...selectedInstitutions, otherInstitution] : selectedInstitutions;
         console.log({
             selectedProject,
             selectedActivity,
@@ -218,7 +239,7 @@ function ActivityReport() {
             challenges,
             successStories,
             conclusions,
-            selectedInstitutions,
+            selectedInstitutions: updatedInstitutions,
             otherInstitution
         });
     };
@@ -296,19 +317,21 @@ function ActivityReport() {
                                     checked={selectedInstitutions.includes(institution)}
                                     onChange={() => handleInstitutionChange(institution)}
                                 />
-                                <label htmlFor={institution} className="form-check-label">{institution}</label>
-                                {institution === "Others, please specify:" && selectedInstitutions.includes(institution) && (
-                                    <input
-                                        type="text"
-                                        className="form-control mt-2"
-                                        placeholder="Please specify"
-                                        value={otherInstitution}
-                                        onChange={(e) => setOtherInstitution(e.target.value)}
-                                    />
-                                )}
+                                <label htmlFor={institution} className="form-check-label">{institution}</label>         
                             </div>
                         </div>
                     ))}
+                    
+                    <div className="col-3 others">
+                        <label htmlFor="Others" className="">Others:</label>
+                        <input
+                            id="othersField"
+                            className="form-control mt-2"
+                            placeholder="Please specify"
+                            value={otherInstitution}
+                            onChange={(e) => handleOtherInstitutionChange(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <br></br>
                 <div className="row gx-3 mb-3">
@@ -328,7 +351,7 @@ function ActivityReport() {
                 <div className="row gx-3">
                     <div className="col-12">
                         <div className="mb-3">
-                            <label htmlFor="detailedDescription" className="form-label">Detailed Description of the Activity</label>
+                            <label htmlFor="detailedDescription" className="form-label"><h5>Detailed Description of the Activity</h5></label>
                             <textarea
                                 id="detailedDescription"
                                 className="form-control"
@@ -338,10 +361,11 @@ function ActivityReport() {
                         </div>
                     </div>
                 </div>
+                <br></br>
                 <div className="row gx-3">
                     <div className="col-12">
                         <div className="mb-3">
-                            <label htmlFor="keyOutputs" className="form-label">Key Outputs and Results</label>
+                            <label htmlFor="keyOutputs" className="form-label"><h5>Key Outputs and Results</h5></label>
                             <textarea
                                 id="keyOutputs"
                                 className="form-control"
@@ -351,10 +375,11 @@ function ActivityReport() {
                         </div>
                     </div>
                 </div>
+                <br></br>
                 <div className="row gx-3">
                     <div className="col-12">
                         <div className="mb-3">
-                            <label htmlFor="challenges" className="form-label">Challenges and Lessons Learned</label>
+                            <label htmlFor="challenges" className="form-label"><h5>Challenges and Lessons Learned</h5></label>
                             <textarea
                                 id="challenges"
                                 className="form-control"
@@ -364,10 +389,11 @@ function ActivityReport() {
                         </div>
                     </div>
                 </div>
+                <br></br>
                 <div className="row gx-3">
                     <div className="col-12">
                         <div className="mb-3">
-                            <label htmlFor="successStories" className="form-label">Success Stories</label>
+                            <label htmlFor="successStories" className="form-label"><h5>Success Stories</h5></label>
                             <textarea
                                 id="successStories"
                                 className="form-control"
@@ -377,10 +403,11 @@ function ActivityReport() {
                         </div>
                     </div>
                 </div>
+                <br></br>
                 <div className="row gx-3">
                     <div className="col-12">
                         <div className="mb-3">
-                            <label htmlFor="conclusions" className="form-label">Conclusions and Recommendations</label>
+                            <label htmlFor="conclusions" className="form-label"><h5>Conclusions and Recommendations</h5></label>
                             <textarea
                                 id="conclusions"
                                 className="form-control"
@@ -390,9 +417,11 @@ function ActivityReport() {
                         </div>
                     </div>
                 </div>
+                <br></br>
                 <div className="row gx-3 mb-3">
                     <div className="button-container">
-                        <button type="submit" className="button-save isNotDisabled">Save</button>
+                        <button type="button" style={{marginRight: 10}} className="button-create" onClick={clearForm}>Clear</button>
+                        <button type="submit" className="button-save isNotDisabled">Save</button> 
                     </div>
                 </div>
             </form>
