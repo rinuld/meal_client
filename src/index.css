@@ -716,7 +716,7 @@ span {
 
 
 .button-create {
-  background: #e8fad7;
+  background: #eaf3e2;
   border-radius: 5px;
   padding: 0.5em 1em;
   cursor: pointer;
@@ -758,8 +758,7 @@ span {
 
 .button-close:hover,
 .button-create:hover {
-  background-color: transparent;
-  color: #8bab28;
+  background-color: #ddeece;
   transition: 0.3s ease-in-out;
 }
 

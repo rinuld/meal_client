@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import Axios from 'axios';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import InputSelection from "../components/utils/InputSelection";
 import '../assets/css/ActivityReport.css';
+import '../assets/css/SaveToast.css';
+import html2pdf from 'html2pdf.js';
 
 function ActivityReport() {
     const initialState = {
@@ -263,6 +266,63 @@ function ActivityReport() {
         return preparedData;
     };
 
+    const normalizeData = (data) => {
+        return {
+            category: data.category,
+            male: data.male ?? 0,     
+            female: data.female ?? 0, 
+            lgbtqia: data.lgbtqia ?? 0
+        };
+    };
+
+    // Display success message with options
+    const showSuccessPopup = (activityReportID) => {
+        toast(
+            ({ closeToast }) => (
+            <div className="popup-container">
+                <p>Activity Report submitted successfully!</p>
+                <div className="button-group">          
+                    <button className="button-create" onClick={() => handleDownload(activityReportID, closeToast)}>Download as PDF</button>
+                    <button className="button-save" onClick={closeToast}>Close</button>
+                </div>
+            </div>
+            ),
+            {
+                autoClose: false,
+                closeOnClick: false,
+                position: 'top-right',
+                hideProgressBar: true,
+                closeButton: false,
+            }
+        );
+    };
+    
+    // Download form as PDF
+
+    const handleDownload = (activityReportID, closeToast) => {
+        console.log("Downloading PDF...");
+        const elementToPrint = document.getElementById('activityReportForm'); // Make sure to have an id for the form you want to print
+    
+        // Options for html2pdf
+        const options = {
+            margin:       1,
+            filename:     `${activityReportID}.pdf`, // Use the activity report ID as filename
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+    
+        // Generate PDF
+        html2pdf()
+            .from(elementToPrint)
+            .set(options)
+            .save()
+            .then(() => {
+                closeToast();
+                clearForm();
+            });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
     
@@ -302,17 +362,40 @@ function ActivityReport() {
             toast.error("Please select at least one institution or specify 'Others'.");
             return;
         }
+
+        const genderAgeDisabilityData = [
+            normalizeData({ category: 'Children', male: formData.genderAgeDisabilityData.children.male, female: formData.genderAgeDisabilityData.children.female, lgbtqia: formData.genderAgeDisabilityData.children.lgbtqia}),
+            normalizeData({ category: 'Youth', male: formData.genderAgeDisabilityData.youth.male, female: formData.genderAgeDisabilityData.youth.female, lgbtqia: formData.genderAgeDisabilityData.youth.lgbtqia}),
+            normalizeData({ category: 'Adults', male: formData.genderAgeDisabilityData.adults.male, female: formData.genderAgeDisabilityData.adults.female, lgbtqia: formData.genderAgeDisabilityData.adults.lgbtqia}),
+            normalizeData({ category: 'Indigenous People', male: formData.genderAgeDisabilityData.indigenousPeople.male, female: formData.genderAgeDisabilityData.indigenousPeople.female, lgbtqia: formData.genderAgeDisabilityData.indigenousPeople.lgbtqia}),
+            normalizeData({ category: 'Out-of-School Youth', male: formData.genderAgeDisabilityData.outOfSchoolYouth.male, female: formData.genderAgeDisabilityData.outOfSchoolYouth.female, lgbtqia: formData.genderAgeDisabilityData.outOfSchoolYouth.lgbtqia}),
+            normalizeData({ category: "People's Organization Representative", male: formData.genderAgeDisabilityData.peoplesOrgRep.male, female: formData.genderAgeDisabilityData.peoplesOrgRep.female, lgbtqia: formData.genderAgeDisabilityData.peoplesOrgRep.lgbtqia}),
+            normalizeData({ category: 'Internally Displaced Person', male: formData.genderAgeDisabilityData.internallyDisplacedPersons.male, female: formData.genderAgeDisabilityData.internallyDisplacedPersons.female, lgbtqia: formData.genderAgeDisabilityData.internallyDisplacedPersons.lgbtqia}),
+            normalizeData({ category: 'Persons with Disabilities', male: formData.genderAgeDisabilityData.pwd.male, female: formData.genderAgeDisabilityData.pwd.female, lgbtqia: formData.genderAgeDisabilityData.pwd.lgbtqia}),
+            normalizeData({ category: 'Duty Bearer', male: formData.genderAgeDisabilityData.dutyBearer.male, female: formData.genderAgeDisabilityData.dutyBearer.female, lgbtqia: formData.genderAgeDisabilityData.dutyBearer.lgbtqia}),
+        ];
+
+        if (formData.genderAgeDisabilityData.others.specification && formData.genderAgeDisabilityData.others.specification.trim() !== '') {
+            genderAgeDisabilityData.push(
+                normalizeData({
+                    category: formData.genderAgeDisabilityData.others.specification,
+                    male: formData.genderAgeDisabilityData.others.male,
+                    female: formData.genderAgeDisabilityData.others.female,
+                    lgbtqia: formData.genderAgeDisabilityData.others.lgbtqia
+                })
+            );
+        }
     
         // Prepare the data to be sent in the POST request
         const dataToPost = {
-            selectedProject: formData.selectedProject,
-            selectedActivity: formData.selectedActivity,
-            selectedObjective: formData.selectedObjective,
-            selectedOutcome: formData.selectedOutcome,
-            selectedOutput: formData.selectedOutput,
-            selectedIndicator: formData.selectedIndicator,
+            selectedProject: formData.selectedProject.label,
+            selectedActivity: formData.selectedActivity.label,
+            selectedObjective: formData.selectedObjective.label,
+            selectedOutcome: formData.selectedOutcome.label,
+            selectedOutput: formData.selectedOutput.label,
+            selectedIndicator: formData.selectedIndicator.label,
             selectedInstitutions: updatedInstitutions,
-            genderAgeDisabilityData: preparedData.genderAgeDisabilityData,
+            genderAgeDisabilityData,
             detailedDescription: preparedData.detailedDescription,
             keyOutputs: preparedData.keyOutputs,
             challenges: preparedData.challenges,
@@ -322,13 +405,17 @@ function ActivityReport() {
 
         console.log(dataToPost);
     
-        // // Post the data to the server
-        // Axios.post('http://localhost:3001/api/activity-report', dataToPost)
-        //     .then(response => {
-        //         toast.success("Activity report submitted successfully!");
-        //         clearForm(); // Clear the form after successful submission
-        //     })
-        //     .catch(error => handleApiError(error, 'Error submitting activity report'));
+        // Post the data to the server
+        Axios.post('http://localhost:3001/api/addActivityReport', dataToPost)
+            .then(response => {
+                const { activityReportID } = response.data;
+                showSuccessPopup(activityReportID);
+                // toast.success("Activity Report submitted successfully!");
+                // clearForm(); // Clear the form after successful submission
+            })
+            .catch(error => {
+                toast.error('Error submitting Activity Report');
+            });
     };
 
     const InstitutionCheckboxes = ({ institutions, selectedInstitutions, handleInstitutionChange }) => (
@@ -441,7 +528,7 @@ function ActivityReport() {
 
     return (
         <div className="create-forms">
-            <form onSubmit={handleSubmit}>
+            <form id="activityReportForm" onSubmit={handleSubmit}>
                 <div className="row gx-3">
                     <div className="col-3">
                         <InputSelection
