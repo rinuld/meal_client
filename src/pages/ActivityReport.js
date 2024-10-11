@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputSelection from "../components/utils/InputSelection";
+import ActivityReportPrint from '../components/ActivityReportPrint';
 import '../assets/css/ActivityReport.css';
 import '../assets/css/SaveToast.css';
 import html2pdf from 'html2pdf.js';
@@ -38,6 +39,8 @@ function ActivityReport() {
     };
 
     const [formData, setFormData] = useState(initialState);
+    const [PDFData, setPDFData] = useState(null);
+    const [PDFActivityReportID, setPDFActivityReportID] = useState(null);
 
     const [selections, setSelections] = useState({
         projects: [],
@@ -301,7 +304,7 @@ function ActivityReport() {
 
     const handleDownload = (activityReportID, closeToast) => {
         console.log("Downloading PDF...");
-        const elementToPrint = document.getElementById('activityReportForm'); // Make sure to have an id for the form you want to print
+        const elementToPrint = document.getElementById('formToPrint');
     
         // Options for html2pdf
         const options = {
@@ -410,8 +413,10 @@ function ActivityReport() {
             .then(response => {
                 const { activityReportID } = response.data;
                 showSuccessPopup(activityReportID);
+                setPDFData(dataToPost);
+                setPDFActivityReportID(activityReportID);
                 // toast.success("Activity Report submitted successfully!");
-                // clearForm(); // Clear the form after successful submission
+                clearForm(); // Clear the form after successful submission
             })
             .catch(error => {
                 toast.error('Error submitting Activity Report');
@@ -530,7 +535,7 @@ function ActivityReport() {
         <div className="create-forms">
             <form id="activityReportForm" onSubmit={handleSubmit}>
                 <div className="row gx-3">
-                    <div className="col-3">
+                    <div className="col-6">
                         <InputSelection
                             label="Project"
                             value={formData.selectedProject}
@@ -538,7 +543,7 @@ function ActivityReport() {
                             onChange={handleProjectChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-6">
                         <InputSelection
                             label="Activity"
                             value={formData.selectedActivity}
@@ -619,10 +624,11 @@ function ActivityReport() {
                 <br />
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="detailedDescription" className="form-label">Detailed Description of Key Activities Conducted:</label>
+                        <label htmlFor="detailedDescription" className="form-label">Detailed Description of the Activity:</label>
                         <textarea
                             id="detailedDescription"
                             className="form-control"
+                            placeholder="Describe the purpose and goals of the activity."
                             value={formData.detailedDescription}
                             onChange={handleInputChange}
                         />
@@ -630,10 +636,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="keyOutputs" className="form-label">Key Outputs:</label>
+                        <label htmlFor="keyOutputs" className="form-label">Key Outputs and Results:</label>
                         <textarea
                             id="keyOutputs"
                             className="form-control"
+                            placeholder="Please present the major outputs of the activity implementation, detailing the tangible results and milestones achieved."
                             value={formData.keyOutputs}
                             onChange={handleInputChange}
                         />
@@ -641,10 +648,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="challenges" className="form-label">Challenges:</label>
+                        <label htmlFor="challenges" className="form-label">Challenges and Lessons Learned:</label>
                         <textarea
                             id="challenges"
                             className="form-control"
+                            placeholder="Describe the challenges encountered and the key insights gained throughout the activity implementation."
                             value={formData.challenges}
                             onChange={handleInputChange}
                         />
@@ -656,6 +664,7 @@ function ActivityReport() {
                         <textarea
                             id="successStories"
                             className="form-control"
+                            placeholder="Please highlight the impactful achievements and positive outcomes from the activity implementation."
                             value={formData.successStories}
                             onChange={handleInputChange}
                         />
@@ -663,10 +672,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="conclusions" className="form-label">Conclusions:</label>
+                        <label htmlFor="conclusions" className="form-label">Conclusions and Recommendations:</label>
                         <textarea
                             id="conclusions"
                             className="form-control"
+                            placeholder="Please outline the key findings and suggestions for future improvements and strategies."
                             value={formData.conclusions}
                             onChange={handleInputChange}
                         />
@@ -679,6 +689,12 @@ function ActivityReport() {
                     </div>
                 </div>
             </form>
+
+            {PDFData && (
+                <div style={{ display: 'none' }}>
+                    <ActivityReportPrint PDFData={PDFData} activityReportID={PDFActivityReportID} />
+                </div>
+            )}
         </div>
     );
 }

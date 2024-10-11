@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Agrandir';
+    src: url('../fonts/Agrandir.otf') format('opentype');
+  }
+  
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto.ttf') format('truetype');
+}
+  
+* {
+    font-family: Agrandir;
+}
+
+#formToPrint {
+    background-color: white;
+    color: black;
+}
+
+#formToPrint h3 {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#formToPrint p {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.voucher-nyli-logo img {
+    max-width: 80%;
+    height: auto;
+}
+
+@media print {
+    #formToPrint {
+        margin: 0;
+        padding: 0;
+    }
+
+    .disaggregated-data-table {
+        page-break-inside: auto; /* Prevent breaking within the table */
+    }
+
+    tr {
+        page-break-inside: avoid; /* Prevent breaking within table rows */
+        page-break-after: auto; /* Control page breaks after table rows */
+    }
+}
