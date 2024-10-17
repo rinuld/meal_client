@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import Axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputSelection from "../components/utils/InputSelection";
+import InputText from "../components/utils/InputText";
 import ActivityReportPrint from '../components/ActivityReportPrint';
 import '../assets/css/ActivityReport.css';
 import '../assets/css/SaveToast.css';
 import html2pdf from 'html2pdf.js';
+import AuthContext from "../context/AuthProvider";
+import { InsertLogData } from "../components/InsertLogData";
+import DatePicker from "react-datepicker";
 
 function ActivityReport() {
     const initialState = {
@@ -17,6 +21,7 @@ function ActivityReport() {
         selectedOutput: null,
         selectedIndicator: null,
         selectedInstitutions: [],
+        location: "",
         otherInstitution: "",
         detailedDescription: "",
         keyOutputs: "",
@@ -38,10 +43,12 @@ function ActivityReport() {
         }
     };
 
+    const { auth } = useContext(AuthContext);
+    const [activityDate, setActivityDate] = useState(new Date());
     const [formData, setFormData] = useState(initialState);
     const [PDFData, setPDFData] = useState(null);
     const [PDFActivityReportID, setPDFActivityReportID] = useState(null);
-
+    const formattedDate = activityDate.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
     const [selections, setSelections] = useState({
         projects: [],
         activities: [],
@@ -308,10 +315,10 @@ function ActivityReport() {
     
         // Options for html2pdf
         const options = {
-            margin:       1,
+            margin:       0.5,
             filename:     `${activityReportID}.pdf`, // Use the activity report ID as filename
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
+            image:        { type: 'jpeg', quality: 1 },
+            html2canvas:  { scale: 1.5 },
             jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
     
@@ -343,6 +350,7 @@ function ActivityReport() {
             formData.selectedOutcome,
             formData.selectedOutput,
             formData.selectedIndicator,
+            preparedData.location,
             preparedData.detailedDescription,
             preparedData.keyOutputs,
             preparedData.challenges,
@@ -393,6 +401,8 @@ function ActivityReport() {
         const dataToPost = {
             selectedProject: formData.selectedProject.label,
             selectedActivity: formData.selectedActivity.label,
+            activityDate: formattedDate,
+            location: preparedData.location,
             selectedObjective: formData.selectedObjective.label,
             selectedOutcome: formData.selectedOutcome.label,
             selectedOutput: formData.selectedOutput.label,
@@ -415,7 +425,7 @@ function ActivityReport() {
                 showSuccessPopup(activityReportID);
                 setPDFData(dataToPost);
                 setPDFActivityReportID(activityReportID);
-                // toast.success("Activity Report submitted successfully!");
+                InsertLogData("Added an Activity Report", auth.firstname);
                 clearForm(); // Clear the form after successful submission
             })
             .catch(error => {
@@ -535,7 +545,7 @@ function ActivityReport() {
         <div className="create-forms">
             <form id="activityReportForm" onSubmit={handleSubmit}>
                 <div className="row gx-3">
-                    <div className="col-6">
+                    <div className="col-3">
                         <InputSelection
                             label="Project"
                             value={formData.selectedProject}
@@ -543,12 +553,32 @@ function ActivityReport() {
                             onChange={handleProjectChange}
                         />
                     </div>
-                    <div className="col-6">
+                    <div className="col-3">
                         <InputSelection
                             label="Activity"
                             value={formData.selectedActivity}
                             data={selections.activities}
                             onChange={handleActivityChange}
+                        />
+                    </div>
+                    <div className="col-3">
+                        <InputText
+                            label="Location"
+                            id="location"
+                            type="text"
+                            placeholder="Enter Activity Location"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                    <div className="col-3">
+                        <label htmlFor="Birthdate">Date of the Activity</label><br></br>
+                        <DatePicker
+                            className='input-text'
+                            selected={activityDate}
+                            onChange={(date) => setActivityDate(date)}
+                            dateFormat="yyyy/MM/dd"
                         />
                     </div>
                 </div>
