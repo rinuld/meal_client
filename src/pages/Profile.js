@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import AuthContext from "../context/AuthProvider";
 import InputText from "../components/utils/InputText";
-import { DarkMode, toggleTheme, selectedTheme, Sun, Moon, setDarkMode, setLightMode } from "../components/theme/DarkMode";
-import Axios from 'axios';
+import { toggleTheme, Sun, Moon } from "../components/theme/DarkMode";
 
 export default function Profile() {
     const { auth } = useContext(AuthContext);
     const [initials, setInitials] = useState('');
     const [id, setID] = useState('');
-    const [selectedFile, setSelectedFile] = useState(null);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -18,10 +16,6 @@ export default function Profile() {
             setID(auth.id);
         }
     }, [auth])
-
-    const handleFileChange = (event) => {
-      setSelectedFile(event.target.files[0]);
-    };
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
