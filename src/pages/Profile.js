@@ -59,25 +59,6 @@ export default function Profile() {
             // Handle error response from backend, if needed
         }
     };
-  
-    const handleUpload = async () => {
-      if (!selectedFile) {
-        alert('Please select an image.');
-        return;
-      }
-  
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      console.log(selectedFile);
-  
-      try {
-        const response = await Axios.put(`http://localhost:3001/api/updateImage/${id}`, formData);
-        console.log(response.data.path);
-      } catch (error) {
-        console.error(error);
-        // Handle error here
-      }
-    };
 
     const formatBirthdate = (birthdate) => {
         const date = new Date(birthdate);
