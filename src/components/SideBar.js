@@ -54,6 +54,12 @@ const SideBar = memo(({auth}) => {
                     <i className="fas fa-file-alt"></i><p>Activity Report</p>
                 </Link>
                 <Link
+                    to="/areaLog"
+                    className={`nav-item ${activeItem === 'Area Log' ? 'active' : ''}`}
+                    onClick={() => handleMenuClick('Area Log')}>
+                    <i className="fas fa-file-alt"></i><p>Area Log</p>
+                </Link>
+                <Link
                     to="/logs"
                     className={`nav-item ${activeItem === 'Logs' ? 'active' : ''}`}
                     onClick={() => handleMenuClick('Logs')}>
