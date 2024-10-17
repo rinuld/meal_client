@@ -3,11 +3,6 @@
     src: url('../fonts/Agrandir.otf') format('opentype');
   }
   
-@font-face {
-    font-family: 'Roboto';
-    src: url('../fonts/Roboto.ttf') format('truetype');
-}
-  
 * {
     font-family: Agrandir;
 }
@@ -17,19 +12,28 @@
     color: black;
 }
 
-#formToPrint h3 {
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
 #formToPrint p {
     font-size: 1rem;
     margin: 0.5rem 0;
 }
 
-.voucher-nyli-logo img {
-    max-width: 80%;
+.nyli-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+  
+.nyli-logo img {
+    width: 250px;
     height: auto;
+    margin: 20px;
+}
+
+.center {
+    margin: auto;
+    width: 90%;
+    padding: 15px;
 }
 
 @media print {
