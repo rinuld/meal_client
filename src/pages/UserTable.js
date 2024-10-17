@@ -45,10 +45,10 @@ const UserTable = () => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '20%' }}>Name</th>
-              <th style={{ width: '10%' }}>Sex</th>
-              <th style={{ width: '50%' }}>Email</th>
-              <th style={{ width: '10%' }}>Role</th>
+              <th style={{ width: '25%' }}>Name</th>
+              <th style={{ width: '15%' }}>Sex</th>
+              <th style={{ width: '30%' }}>Email</th>
+              <th style={{ width: '20%' }}>Role</th>
               <th style={{ width: '10%' }}>Action</th>
             </tr>
           </thead>
