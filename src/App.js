@@ -5,8 +5,7 @@ import Login from './pages/Login';
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from './context/AuthProvider';
 import ProjectContext, { ProjectProvider } from './context/ProjectProvider';
-import { Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Projects from './pages/Projects';
 import Details from './pages/Details';
 import Activity from './pages/Activities';
@@ -28,13 +27,21 @@ export default function App() {
     const { auth, setAuth } = useContext(AuthContext);
     const { token, setToken } = useToken();
     const { project, setProject } = useContext(ProjectContext);
+    const navigate = useNavigate();
+    const [hasRedirected, setHasRedirected] = useState(false);
 
     useEffect(() => {
         const usersession = localStorage.getItem('user');
         if (usersession != null) {
-        setAuth(JSON.parse(usersession));
+            const user = JSON.parse(usersession);
+            setAuth(user);
+
+            if (user.role === "Project Officer" && !hasRedirected) {
+                navigate('/activityReport');
+                setHasRedirected(true);
+            }
         }
-    }, []);
+    }, [setAuth, navigate, hasRedirected]);
 
     const handleProjectSelection = (value) => {
         setProject(value);
@@ -68,97 +75,90 @@ export default function App() {
                         <div className="col-xl-10 overflow-auto">
                             <div className="main-content">
                                 <Routes>
-                                    <Route
-                                        path="/"
-                                        element={
-                                            <div>
-                                                <Header title="Dashboard" />
-                                                <Dashboard />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/projects"
-                                        element={
-                                            <div>
-                                                <Header title="Projects" />
-                                                <Projects />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/details"
-                                        element={
-                                            <div>
-                                                <Header title="Details" />
-                                                <SelectionProject onChange={handleProjectSelection}/>
-                                                <Details />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/activities"
-                                        element={
-                                            <div>
-                                                <Header title="Activities" />
-                                                <SelectionProject onChange={handleProjectSelection}/>
-                                                <Activity />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/indicators"
-                                        element={
-                                            <div>
-                                                <Header title="Indicators" />
-                                                <SelectionProject onChange={handleProjectSelection}/>
-                                                <Indicators />
-                                            </div>
-                                        }
-                                    />
-
-                                    {auth.role === "Super Admin" && (
-                                        <Route
-                                            path="/activityReport"
-                                            element={
-                                                <div>
-                                                    <Header title="Activity Report" />
-                                                    <ActivityReport />
-                                                </div>
-                                            }
-                                        />
+                                    {auth.role === "Admin" && (
+                                        <>
+                                            <Route
+                                                path="/projects"
+                                                element={
+                                                    <div>
+                                                        <Header title="Projects" />
+                                                        <Projects />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/details"
+                                                element={
+                                                    <div>
+                                                        <Header title="Details" />
+                                                        <SelectionProject onChange={handleProjectSelection}/>
+                                                        <Details />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/activities"
+                                                element={
+                                                    <div>
+                                                        <Header title="Activities" />
+                                                        <SelectionProject onChange={handleProjectSelection}/>
+                                                        <Activity />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/indicators"
+                                                element={
+                                                    <div>
+                                                        <Header title="Indicators" />
+                                                        <SelectionProject onChange={handleProjectSelection}/>
+                                                        <Indicators />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/indicatorDetails/:id"
+                                                element={
+                                                    <div>
+                                                        <IndicatorDetails />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/activityDetails/:id"
+                                                element={
+                                                    <div>
+                                                        <ActivityDetails />
+                                                    </div>
+                                                }
+                                            />
+                                            <Route
+                                                path="/addmember"
+                                                element={
+                                                    <div>
+                                                        <Header title="Users" />
+                                                        <AddUser />
+                                                    </div>
+                                                }
+                                            />
+                                        </>
                                     )}
+
+                                    <Route
+                                        path="/activityReport"
+                                        element={
+                                            <div>
+                                                <Header title="Activity Report" />
+                                                <ActivityReport />
+                                            </div>
+                                        }
+                                    />
                                     <Route
                                         path="/logs"
                                         element={
                                             <div>
                                                 <Header title="Logs" />
                                                 <Logs />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/indicatorDetails/:id"
-                                        element={
-                                            <div>
-                                                <IndicatorDetails />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/activityDetails/:id"
-                                        element={
-                                            <div>
-                                                <ActivityDetails />
-                                            </div>
-                                        }
-                                    />
-                                    <Route
-                                        path="/addmember"
-                                        element={
-                                            <div>
-                                                <Header title="Members" />
-                                                <AddUser />
                                             </div>
                                         }
                                     />
