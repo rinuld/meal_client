@@ -74,7 +74,7 @@ export default function AddUser() {
         console.log(birthdate);
         console.log('Formatted Date:', formattedDate);
 
-        // emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
+        emailjs.sendForm('service_j7vp4dc', 'template_iuxhn7x', e.target, 'RdZBEODH7uDlfD4ME');
       })
       .catch(error => {
         toast.error(('Error inserting data:', error), {
@@ -97,16 +97,14 @@ export default function AddUser() {
     { value: 'Female', label: 'Female' },
   ];
 
-  const selectRole = [
-    { value: 'Super Admin', label: 'Super Admin' },
+  const selectRole = [,
     { value: 'Admin', label: 'Admin' },
-    { value: 'Finance Officer', label: 'Finance Officer' },
-    { value: 'Member', label: 'Member' },
+    { value: 'Project Officer', label: 'Project Officer' },
   ];
 
   return (
     <>
-      <CreateForm header="Add a Member">
+      <CreateForm header="Add a User">
         <form onSubmit={handleSubmit}>
           <div className="row gx-3">
             <div className="col-12 col-md-4">

@@ -58,13 +58,13 @@ const ForgotPasswordForm = () => {
 
     setVerificationSent(true);
 
-    // emailjs.send('service_j7vp4dc', 'template_rr8idxc', templateParams, 'RdZBEODH7uDlfD4ME')
-    //   .then(() => {
-    //     setVerificationSent(true); // Set verificationSent to true after sending email
-    //   })
-    //   .catch((error) => {
-    //     console.error('Email sending failed:', error);
-    //   });
+    emailjs.send('service_j7vp4dc', 'template_rr8idxc', templateParams, 'RdZBEODH7uDlfD4ME')
+      .then(() => {
+        setVerificationSent(true); // Set verificationSent to true after sending email
+      })
+      .catch((error) => {
+        console.error('Email sending failed:', error);
+      });
 
   };
 
