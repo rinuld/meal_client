@@ -58,8 +58,8 @@ export default function AddUser() {
         setSex({});
         setBirthdate(new Date());
         setDefaultPassword("");
-        InsertLogData("Added a new member " + firstname, auth.firstname);
-        toast.success('Member Added', {
+        InsertLogData("Added a new User " + firstname, auth.firstname);
+        toast.success('User Added', {
           position: toast.POSITION.BOTTOM_RIGHT,
           autoClose: 1000,
           hideProgressBar: false,
