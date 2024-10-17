@@ -25,7 +25,7 @@ const NavBar = memo(({ auth }) => {
                 <img src={logo} alt="NYLI" />
             </div>
             <div className="nav-right d-flex align-items-center">
-                <span className="user-name">{auth.email}</span>
+                <span className="user-name">{auth.firstname}</span>
                 <img src={userimage} alt="NYLI USER" className="user-image" />
                 <div className="dropdown-profile" onMouseLeave={() => setIsDropdownOpen(false)}>
                     <div className='ellipis-toggle' onMouseEnter={() => setIsDropdownOpen(true)}>
@@ -38,10 +38,10 @@ const NavBar = memo(({ auth }) => {
                                     <i className="fa fa-user"></i>
                                     <span>Profile</span>
                                 </Link>
-                                {auth.role === "Super Admin" &&
+                                {auth.role === "Admin" &&
                                     <Link to="/addmember" className="nav-item">
                                         <i className="fa fa-user-plus"></i>
-                                        <span>Members</span>
+                                        <span>Users</span>
                                     </Link>}
                                 <Link
                                     className="nav-item"
