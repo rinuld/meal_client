@@ -90,13 +90,6 @@ export default function Profile() {
                 <div className="row">
                     <div className="col-12 col-lg-3">
                         <div className="create-forms profile-div profile-img">
-                            <label>Profile Picture</label>
-                            <input className="user-profile" type="file" onChange={handleFileChange}/>
-                            <button className="login-btn" onClick={handleUpload}>Upload Image</button>
-                            {/* <p>{auth.firstname} {initials}</p>
-                            <p>{auth.role}</p> */}
-                        </div>
-                        <div className="create-forms profile-div profile-img">
                             <InputText
                                 label="New Password"
                                 id="newPassword"
