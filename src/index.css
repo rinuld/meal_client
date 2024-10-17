@@ -975,47 +975,14 @@ table .datatable-row:hover {
   box-shadow: 0 0 5px rgba(145, 142, 142, 0.5);
 }
 
-/* Voucher Page */
-
 .contentprint {
   min-width: calc(100% - 20mm);
   min-height: calc(100% - 20mm);
   margin: 10mm;
 }
 
-.voucher-menu {
-  margin-bottom: 20px !important;
-}
-
 .modal {
   z-index: 99999999;
-}
-
-/* Voucher NYLI logo */
-
-.voucher-nyli-logo {
-  display: flex;
-  align-items: center;
-}
-
-.voucher-nyli-logo img {
-  width: 200px;
-  height: auto;
-  margin-right: 10px;
-}
-
-.voucher-nyli-logo .right-title {
-  margin-left: auto;
-  margin-top: auto;
-}
-
-.voucher-nyli-logo .right-title h2 {
-  font-weight: 1000;
-}
-
-.voucher-nyli-logo .right-title p {
-  font-size: 14px;
-  font-weight: 100;
 }
 
 /* Entry Table */
