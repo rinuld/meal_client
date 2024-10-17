@@ -12,7 +12,6 @@ function CreateProjectForm({ onCreateProject }) {
   const [refreshData, setRefreshData] = useState(true);
   const [projectData, setData] = useState([]);
   const [isProjectIDExists, setIsProjectIDExists] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const currentDate = new Date().toISOString();
 
   useEffect(() => {
@@ -67,10 +66,6 @@ function CreateProjectForm({ onCreateProject }) {
     const projectIDExists = projectData.some(row => row.projectID === value.target.value);
     setIsProjectIDExists(projectIDExists);
   };
-
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-  const handleSaveMembers = (selectedMembers) => setTeamMembers(selectedMembers);
 
   return (
     <>
