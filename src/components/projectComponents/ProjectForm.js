@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function CreateProjectForm({ onCreateProject }) {
   const [projectName, setProjectName] = useState("");
   const [projectID, setProjectID] = useState("");
-  const [teamMembers, setTeamMembers] = useState([]);
   const [refreshData, setRefreshData] = useState(true);
   const [projectData, setData] = useState([]);
   const [isProjectIDExists, setIsProjectIDExists] = useState(false);
@@ -29,7 +28,6 @@ function CreateProjectForm({ onCreateProject }) {
     projectID,
     projectName,
     startDate: currentDate,
-    teamMembers: teamMembers.join(', ')
   };
 
   const handleSubmit = (e) => {
@@ -54,7 +52,6 @@ function CreateProjectForm({ onCreateProject }) {
         });
         setProjectID("");
         setProjectName("");
-        setTeamMembers([]);
       })
       .catch(error => {
         console.log('Error inserting data:', error);
