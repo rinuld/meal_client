@@ -24,23 +24,6 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
     }
   };
 
-  const sortedData = activityData.sort((a, b) => {
-    if (sortColumn === 'code') {
-      if (sortOrder === 'asc') {
-        return a.activityID.localeCompare(b.activityID);
-      } else {
-        return b.activityID.localeCompare(a.activityID);
-      }
-    } else if (sortColumn === 'name') {
-      if (sortOrder === 'asc') {
-        return a.activityName.localeCompare(b.activityName);
-      } else {
-        return b.activityName.localeCompare(a.activityName);
-      }
-    }
-    return 0;
-  });
-
   const handleCloseModal = () => {
     setShowDeleteModal(false);
   };
