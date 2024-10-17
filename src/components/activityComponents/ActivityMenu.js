@@ -132,29 +132,6 @@ function ActivityMenu() {
 
     return (
         <>
-            <div className="card-menu my-0">
-                <ul>
-                    <li className={`tab-header ${activeTab === 'activities' ? 'active-menu' : ''}`} onClick={() => handleTabClick('activities')}>
-                        <div className="menu-item">
-                            <i className="fas fa-clipboard-check"></i>&nbsp;
-                            <span>Activity Details</span>
-                        </div>
-                    </li>
-                    <li className={`tab-header ${activeTab === 'records' ? 'active-menu' : ''}`} onClick={() => handleTabClick('records')}>
-                        <div className="menu-item">
-                        <i className="fas fa-list-ul"></i>&nbsp;
-                            <span>Records</span>
-                        </div>
-                    </li>
-                    {/* <li className={`tab-header ${activeTab === 'calendar' ? 'active-menu' : ''}`} onClick={() => handleTabClick('calendar')}>
-                        <div className="menu-item">
-                            <i className="fas fa-users"></i>&nbsp;
-                            <span>Calendar</span>
-                        </div>
-                    </li> */}
-                </ul>
-            </div>
-
             <div className="contents">
                 <div
                     className={`${activeTab === 'activities' ? 'display-content' : 'tab-content '}`}
