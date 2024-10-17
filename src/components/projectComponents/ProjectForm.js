@@ -4,8 +4,6 @@ import Checker from "../Checker";
 import { InsertLogData } from "../InsertLogData";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TeamMembersModal from './TeamMembersModal';
-import { Button } from 'react-bootstrap';
 
 function CreateProjectForm({ onCreateProject }) {
   const [projectName, setProjectName] = useState("");
@@ -103,25 +101,10 @@ function CreateProjectForm({ onCreateProject }) {
           </div>
         </div>
         <br></br>
-        <div className="col-12 col-md-6">
-          <div className="col-12">
-            <button className="button-save" onClick={handleOpenModal}>Team Members</button>
-            <div className="mt-3 team-members">
-              {teamMembers.length > 0 && (
-                <p>{teamMembers.join(", ")}</p> // Change ul to p and join the members
-              )}
-            </div>
-          </div>
-        </div>
         <div className="button-container">
           <button type="submit" className={isProjectIDExists ? "button-save" : "button-save isNotDisabled"} disabled={isProjectIDExists}>Save</button>
         </div>
       </form>
-      <TeamMembersModal 
-        show={showModal} 
-        onClose={handleCloseModal} 
-        onSave={handleSaveMembers} 
-      />
     </>
   );
 }
