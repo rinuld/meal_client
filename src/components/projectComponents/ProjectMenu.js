@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import ProjectContext from "../../context/ProjectProvider";
-import Team from "../Team";
 import Partners from "../Partners.js";
 import ProjectDetails from "./ProjectDetails";
 
