@@ -106,7 +106,7 @@ function Activity() {
                                 label="Activity Code"
                                 id="activitycode"
                                 type="text"
-                                placeholder="Enter budgetline"
+                                placeholder="Enter Activity Code"
                                 name="activitycode"
                                 value={activitycode}
                                 onChange={handleCodeChecker}
@@ -116,10 +116,10 @@ function Activity() {
                         </div>
                         <div className="col-12 col-md-6">
                             <InputText
-                                label="Budgetline"
+                                label="Name"
                                 id="activityName"
                                 type="text"
-                                placeholder="Enter budgetline"
+                                placeholder="Enter Activity Name"
                                 name="activityName"
                                 value={activityName}
                                 onChange={(e) => setActivityName(e.target.value)}

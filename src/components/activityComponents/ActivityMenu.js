@@ -166,10 +166,10 @@ function ActivityMenu() {
                                 <div className="row">
                                     <div className="col-12 col-lg-6">
                                         <InputText
-                                            label="Budgetline"
+                                            label="Name"
                                             id="activity"
                                             type="text"
-                                            placeholder="Enter Budgetline"
+                                            placeholder="Enter Activity Name"
                                             name="activity"
                                             value={activityName}
                                             onChange={(e) => setActivityName(e.target.value)}
