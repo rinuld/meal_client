@@ -23,12 +23,6 @@ function ProjectMenu() {
                             <span>Details</span>
                         </div>
                     </li>
-                    <li className={`tab-header ${activeTab === 'team' ? 'active-menu' : ''}`} onClick={() => handleTabClick('team')}>
-                        <div className="menu-item">
-                            <i className="fas fa-users"></i>&nbsp;
-                            <span>Team</span>
-                        </div>
-                    </li>
                     <li className={`tab-header ${activeTab === 'partners' ? 'active-menu' : ''}`} onClick={() => handleTabClick('partners')}>
                         <div className="menu-item">
                             <i className="fas fa-handshake"></i>&nbsp;
@@ -45,15 +39,6 @@ function ProjectMenu() {
                 >
                     <div id="sub-details">
                         <ProjectDetails projectID={projectID}/>
-                    </div>
-                </div>
-
-                <div
-                    className={`${activeTab === 'team' ? 'display-content' : 'tab-content '}`}
-                    id="contentteam"
-                >
-                    <div id="sub-details">
-                        <Team projectID={projectID}></Team>
                     </div>
                 </div>
                 <div
