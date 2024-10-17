@@ -45,20 +45,14 @@ const ProjectDetails = memo(({ projectID }) => {
     }, [projectID]);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/getExpenses/${projectID}`)
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data);
-                if(data.length==0){
-                    setExpenses(0);
-                }else{
-                    const totalExpenses = data.reduce((total, item) => total + parseFloat(item.amount), 0);
-                    setExpenses(totalExpenses);
-                    console.log(totalExpenses);
-                }
+        Axios.get(`http://localhost:3001/api/getExpenses/${projectID}`)
+            .then(response => {
+                const totalActuals = response.data.totalActuals || 0; 
+                setExpenses(totalActuals);
             })
             .catch(error => {
-                console.log('Error fetching expenses details:', error);
+                console.log('Error fetching expenses:', error);
+                setExpenses(0);
             });
     }, [projectID]);
 
