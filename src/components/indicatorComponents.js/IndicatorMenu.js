@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import InputText from "../utils/InputText";
 import BarGraph from "../utils/BarChart";
 import ImportData from "../utils/ImportData";
-import ParticipantsTable from "./DataCollectionTable";
 import axios from "axios";
 import CreateForm from "../CreateForm";
 import InputSelection from "../utils/InputSelection";
@@ -268,12 +267,6 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                             <span>Summary Report</span>
                         </div>
                     </li>
-                    <li className={`tab-header ${activeTab === 'data' ? 'active-menu' : ''}`} onClick={() => handleTabClick('data')}>
-                        <div className="menu-item">
-                            <i className="fas fa-database"></i>&nbsp;
-                            <span>Data Collection</span>
-                        </div>
-                    </li>
                 </ul>
             </div>
 
@@ -455,7 +448,6 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                             </CreateForm>
                             <ButtonIcon label="Import Data" onClick={() => handleOpenModal()} icon={faFileImport} type="secondary" />
                         </div>
-                        <ParticipantsTable participantsdata={participantsdata} />
                     </>
                 )}
             </div>
