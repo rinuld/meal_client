@@ -10,6 +10,7 @@ import Projects from './pages/Projects';
 import Details from './pages/Details';
 import Activity from './pages/Activities';
 import ActivityReport from './pages/ActivityReport';
+import AreaLog from './pages/AreaLog';
 import Indicators from './pages/Indicators';
 import ActivityDetails from './pages/ActivityDetails';
 import IndicatorDetails from './pages/IndicatorDetails';
@@ -150,6 +151,15 @@ export default function App() {
                                             <div>
                                                 <Header title="Activity Report" />
                                                 <ActivityReport />
+                                            </div>
+                                        }
+                                    />
+                                    <Route
+                                        path="/areaLog"
+                                        element={
+                                            <div>
+                                                <Header title="Area Log" />
+                                                <AreaLog />
                                             </div>
                                         }
                                     />
