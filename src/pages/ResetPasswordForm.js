@@ -50,33 +50,40 @@ const ResetPasswordForm = () => {
 
   return (
     <section>
-      <div className='form-box'>
-        <div className='form-value'>
-          <form onSubmit={handleResetPassword}>
-            <h2 className='login-h2'>Reset Password</h2>
-            <div className="inputbox">
-              <i className="fa fa-lock"></i>
-              <input
-                type="password"
-                id="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <label htmlFor='newPassword'>New Password</label>
+      <div className="container" style={{width: '30%'}}>
+        <div className="login-forms">
+          <div className="row gx-3">
+            <div className="col-12 col-md-7 ls-row1"></div>
+              <div className='form-box'>
+                <div className='form-value'>
+                  <form onSubmit={handleResetPassword}>
+                    <h2 style={{textAlign: 'center', color: '#106544'}}>Reset Password</h2>
+                    <div className="inputbox">
+                      <input
+                        type="password"
+                        id="newPassword"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                      />
+                      
+                      <label htmlFor='newPassword'>New Password</label>
+                      
+                    </div>
+                    <div className="inputbox">
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                      <label htmlFor='confirmPassword'>Confirm Password</label>
+                    </div>
+                    <button className='login-btn-main' type="submit">Reset Password</button>
+                    <button className='login-btn-main' onClick={handleBackToLogin}>Back to Login</button>
+                  </form>
+              </div>
             </div>
-            <div className="inputbox">
-              <i className="fa fa-lock"></i>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <label htmlFor='confirmPassword'>Confirm Password</label>
-            </div>
-            <button className='login-btn-main' type="submit">Reset Password</button>
-            <button className='login-btn-main' onClick={handleBackToLogin}>Back to Login</button>
-          </form>
+          </div>
         </div>
       </div>
     </section>
