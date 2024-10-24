@@ -123,7 +123,7 @@ const Login = ({ setToken }) => {
                       <label htmlFor="rememberMe" className="remember-me-txt"><p>Remember me</p></label>
                     </div>
                     <ReCAPTCHA
-                      sitekey="6LcrxOImAAAAAHTHpKc7Rjb0cUmsM6xaYzjBO_HX"
+                      sitekey="6LdBamQqAAAAAG7Dj1Gk27cFltyRy7-0iFcb49to"
                       onChange={(value) => {
                         setRecaptchaValue(value);
                       }}
