@@ -87,8 +87,12 @@ const ActivityReportPrint = ({ PDFData, activityReportID }) => {
                     <p>{PDFData.keyOutputs}</p>
                 </div>
                 <div className="row">
-                    <p><strong style={{ color: '#106544' }}>Challenges and Lessons Learned:</strong></p>
+                    <p><strong style={{ color: '#106544' }}>Challenges and Obstacles Encountered:</strong></p>
                     <p>{PDFData.challenges}</p>
+                </div>
+                <div className="row">
+                    <p><strong style={{ color: '#106544' }}>Lessons Learned:</strong></p>
+                    <p>{PDFData.lessons}</p>
                 </div>
             </div>
 

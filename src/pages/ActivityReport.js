@@ -26,6 +26,7 @@ function ActivityReport() {
         detailedDescription: "",
         keyOutputs: "",
         challenges: "",
+        lessons: "",
         successStories: "",
         conclusions: "",
         genderAgeDisabilityData: {
@@ -354,6 +355,7 @@ function ActivityReport() {
             preparedData.detailedDescription,
             preparedData.keyOutputs,
             preparedData.challenges,
+            preparedData.lessons,
             preparedData.successStories,
             preparedData.conclusions
         ];
@@ -412,6 +414,7 @@ function ActivityReport() {
             detailedDescription: preparedData.detailedDescription,
             keyOutputs: preparedData.keyOutputs,
             challenges: preparedData.challenges,
+            lessons: preparedData.lessons,
             successStories: preparedData.successStories,
             conclusions: preparedData.conclusions
         };
@@ -678,12 +681,24 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="challenges" className="form-label">Challenges and Lessons Learned:</label>
+                        <label htmlFor="challenges" className="form-label">Challenges and Obstacles Encountered:</label>
                         <textarea
                             id="challenges"
                             className="form-control"
-                            placeholder="Describe the challenges encountered and the key insights gained throughout the activity implementation."
+                            placeholder="Describe the challenges and obstacles encountered throughout the activity implementation."
                             value={formData.challenges}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </div>
+                <div className="row gx-3 mb-3">
+                    <div className="col-12">
+                        <label htmlFor="lessons" className="form-label">Lessons Learned:</label>
+                        <textarea
+                            id="lessons"
+                            className="form-control"
+                            placeholder="Describe the lessons learned throughout the activity implementation."
+                            value={formData.lessons}
                             onChange={handleInputChange}
                         />
                     </div>
