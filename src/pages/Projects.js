@@ -12,7 +12,7 @@ function Projects() {
 
   // fetch data from the database and assign the value to the setData variable
   useEffect(() => {
-    fetch('http://localhost:3001/api/projects')
+    fetch('https://meal-server.negrosanonyoungleaders.org/api/projects')
       .then(response => response.json())
       .then(data => {
         setData(data);

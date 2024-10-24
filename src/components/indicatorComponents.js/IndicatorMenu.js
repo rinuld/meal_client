@@ -37,7 +37,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     useEffect(() => {
         // fetchParticipantsData();
-        axios.get(`http://localhost:3001/api/indicatordetails/${indicatorDetails.indicatorID}`)
+        axios.get(`https://meal-server.negrosanonyoungleaders.org/api/indicatordetails/${indicatorDetails.indicatorID}`)
             .then(response => {
                 const actualreach = response.data[0].actualreach; // Assuming the actualreach is stored in the 'actualreach' field of the response data
                 setActual(actualreach);
@@ -47,21 +47,6 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
             });
         // fetchActualReach();
     }, [indicatorDetails.indicatorID, reset]);
-
-    // const fetchParticipantsData = () => {
-    //     axios.get(`http://localhost:3001/api/participants/${indicatorDetails.indicatorID}`)
-    //         .then(response => {
-    //             const updatedData = response.data.map((participant, index) => ({
-    //                 ...participant,
-    //                 order: index + 1,
-    //             }));
-    //             setParticipantsData(updatedData);
-    //             setActual(updatedData.length);
-    //         })
-    //         .catch(error => {
-    //             console.log('Error fetching participants data:', error);
-    //         });
-    // };
 
     useEffect(() => {
         setIndicatorName(indicatorDetails.indicator || '');
@@ -82,7 +67,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`http://localhost:3001/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, actualReach, unit: unit.value, format: format.value, freqReport: freqReport.value }, {
+        axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, actualReach, unit: unit.value, format: format.value, freqReport: freqReport.value }, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -117,7 +102,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     const handlesubmitparticipants = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/api/createparticipants', {
+        fetch('https://meal-server.negrosanonyoungleaders.org/api/createparticipants', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

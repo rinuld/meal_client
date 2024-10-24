@@ -10,7 +10,7 @@ function IndicatorDetails() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            fetch(`http://localhost:3001/api/indicatordetails/${id}`)
+            fetch(`https://meal-server.negrosanonyoungleaders.org/api/indicatordetails/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data[0]);
@@ -26,7 +26,7 @@ function IndicatorDetails() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            fetch(`http://localhost:3001/api/indicatorData/${id}`)
+            fetch(`https://meal-server.negrosanonyoungleaders.org/api/indicatorData/${id}`)
                 .then(response => response.json())
                 .then(data => {
                     setIndicatorData(data);

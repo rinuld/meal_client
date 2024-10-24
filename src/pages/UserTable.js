@@ -10,7 +10,7 @@ const UserTable = () => {
 
   useEffect(() => {
     // Fetch members data from API
-    Axios.get('http://localhost:3001/api/members')
+    Axios.get('https://meal-server.negrosanonyoungleaders.org/api/members')
       .then(response => {
         setMembers(response.data);
       })
@@ -26,7 +26,7 @@ const UserTable = () => {
   };
 
   const handleDeleteMember = () => {
-    Axios.put(`http://localhost:3001/api/updateDeleteMember/${selectedMember.id}`)
+    Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteMember/${selectedMember.id}`)
       .then(response => {
         setMembers(prevMembers => prevMembers.filter(member => member.id !== selectedMember.id));
         setShowDeleteModal(false);

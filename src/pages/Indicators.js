@@ -18,7 +18,7 @@ function Indicators() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            fetch(`http://localhost:3001/api/objectives/${projectID}`)
+            fetch(`https://meal-server.negrosanonyoungleaders.org/api/objectives/${projectID}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);
@@ -38,7 +38,7 @@ function Indicators() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/api/createObjectives', {
+        fetch('https://meal-server.negrosanonyoungleaders.org/api/createObjectives', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

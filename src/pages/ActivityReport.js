@@ -70,7 +70,7 @@ function ActivityReport() {
     ];
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/api/projects')
+        Axios.get('https://meal-server.negrosanonyoungleaders.org/api/projects')
             .then(response => {
                 const formattedProjects = formatProjects(response.data);
                 setSelections(prev => ({ ...prev, projects: formattedProjects }));
@@ -102,14 +102,14 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`http://localhost:3001/api/activities/${selectedOption.value}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/activities/${selectedOption.value}`)
             .then(response => {
                 const formattedActivities = formatData(response.data, 'activityID', 'activityName');
                 setSelections(prev => ({ ...prev, activities: formattedActivities }));
             })
             .catch(error => handleApiError(error, 'Error fetching activities'));
 
-        Axios.get(`http://localhost:3001/api/objectives/${selectedOption.value}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/objectives/${selectedOption.value}`)
             .then(response => {
                 const formattedObjectives = formatData(response.data, 'goalID', 'title');
                 setSelections(prev => ({ ...prev, objectives: formattedObjectives }));
@@ -137,7 +137,7 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`http://localhost:3001/api/outcomes/${selectedOption.value}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/outcomes/${selectedOption.value}`)
             .then(response => {
                 const formattedOutcomes = formatData(response.data, 'outcomeID', 'title');
                 setSelections(prev => ({ ...prev, outcomes: formattedOutcomes }));
@@ -153,7 +153,7 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`http://localhost:3001/api/outputs/${selectedOption.value}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/outputs/${selectedOption.value}`)
             .then(response => {
                 const formattedOutputs = formatData(response.data, 'outputID', 'title');
                 setSelections(prev => ({ ...prev, outputs: formattedOutputs }));
@@ -168,7 +168,7 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`http://localhost:3001/api/indicators/${selectedOption.value}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/indicators/${selectedOption.value}`)
             .then(response => {
                 const formattedIndicators = formatData(response.data, 'indicatorID', 'indicator');
                 setSelections(prev => ({ ...prev, indicators: formattedIndicators }));
@@ -422,7 +422,7 @@ function ActivityReport() {
         console.log(dataToPost);
     
         // Post the data to the server
-        Axios.post('http://localhost:3001/api/addActivityReport', dataToPost)
+        Axios.post('https://meal-server.negrosanonyoungleaders.org/api/addActivityReport', dataToPost)
             .then(response => {
                 const { activityReportID } = response.data;
                 showSuccessPopup(activityReportID);

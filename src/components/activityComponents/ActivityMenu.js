@@ -28,7 +28,7 @@ function ActivityMenu() {
 
     // Get Details of a specific project
     useEffect(() => {
-        fetch(`http://localhost:3001/api/activityDetails/${id}`)
+        fetch(`https://meal-server.negrosanonyoungleaders.org/api/activityDetails/${id}`)
             .then(response => response.json())
             .then(data => {
                 const activityData = data[0];
@@ -44,7 +44,7 @@ function ActivityMenu() {
     }, [id]);
 
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/activityRecords/${id}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/activityRecords/${id}`)
             .then(response => {
                 setRecords(response.data);
             })
@@ -92,7 +92,7 @@ function ActivityMenu() {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(selectedDate);
-        Axios.put(`http://localhost:3001/api/updateactivity/${id}`, updatedActivityData, {
+        Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateactivity/${id}`, updatedActivityData, {
             headers: {
                 'Content-Type': 'application/json'
             }

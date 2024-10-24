@@ -15,7 +15,7 @@ function Logs(){
     
       const fetchLogs = async () => {
         try {
-          const response = await fetch('http://localhost:3001/api/logs');
+          const response = await fetch('https://meal-server.negrosanonyoungleaders.org/api/logs');
           const data = await response.json();
           const formattedData = data.map(item => {
             const date = new Date(item.date);

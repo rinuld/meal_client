@@ -28,7 +28,7 @@ const Login = ({ setToken }) => {
 
   const handleLogin = async (data) => {
     try {
-      const response = await Axios.post('http://localhost:3001/api/login', { ...data, recaptchaValue });
+      const response = await Axios.post('https://meal-server.negrosanonyoungleaders.org/api/login', { ...data, recaptchaValue });
       const { token, user } = response.data;
       
       localStorage.setItem('user', JSON.stringify(user));

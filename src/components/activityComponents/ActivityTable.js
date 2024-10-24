@@ -35,7 +35,7 @@ const ActivityTable = memo(({ activityData, setActivityData }) => {
 
   const handleDeleteItem = (e, id) => {
     e.preventDefault();
-    Axios.put(`http://localhost:3001/api/updateDeleteActivity/${id}`, {}, {
+    Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteActivity/${id}`, {}, {
       headers: {
         'Content-Type': 'application/json'
       }

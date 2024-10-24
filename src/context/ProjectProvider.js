@@ -10,7 +10,7 @@ export const ProjectProvider = ({ children }) => {
     useEffect(() => {
         {
             storedValue == null ?
-            fetch('http://localhost:3001/api/projects')
+            fetch('https://meal-server.negrosanonyoungleaders.org/api/projects')
                 .then(response => response.json())
                 .then(data => {
                     if (data.length > 0) {

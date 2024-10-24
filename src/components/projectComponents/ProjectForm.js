@@ -14,7 +14,7 @@ function CreateProjectForm({ onCreateProject }) {
   const currentDate = new Date().toISOString();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/projects')
+    fetch('https://meal-server.negrosanonyoungleaders.org/api/projects')
       .then(response => response.json())
       .then(data => {
         setData(data);
@@ -32,7 +32,7 @@ function CreateProjectForm({ onCreateProject }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/api/createProject', {
+    fetch('https://meal-server.negrosanonyoungleaders.org/api/createProject', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

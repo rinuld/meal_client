@@ -27,7 +27,7 @@ function Activity() {
 
     useEffect(() => {
         // const timer = setTimeout(() => {
-            fetch(`http://localhost:3001/api/activities/${projectID}`)
+            fetch(`https://meal-server.negrosanonyoungleaders.org/api/activities/${projectID}`)
                 .then(response => response.json())
                 .then(data => {
                     setData(data);
@@ -58,7 +58,7 @@ function Activity() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/api/createActivity', {
+        fetch('https://meal-server.negrosanonyoungleaders.org/api/createActivity', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

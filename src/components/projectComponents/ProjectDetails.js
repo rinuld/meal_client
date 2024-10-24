@@ -30,7 +30,7 @@ const ProjectDetails = memo(({ projectID }) => {
 
     // Get Details of a specific project
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/projectDetails/${projectID}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/projectDetails/${projectID}`)
             .then(response => {
                 // console.log(response.data);
                 const projectData = response.data;
@@ -45,7 +45,7 @@ const ProjectDetails = memo(({ projectID }) => {
     }, [projectID]);
 
     useEffect(() => {
-        Axios.get(`http://localhost:3001/api/getExpenses/${projectID}`)
+        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/getExpenses/${projectID}`)
             .then(response => {
                 const totalActuals = response.data.totalActuals || 0; 
                 setExpenses(totalActuals);
@@ -71,7 +71,7 @@ const ProjectDetails = memo(({ projectID }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Axios.put(`http://localhost:3001/api/updateproject/${projectID}`, updatedProjectData, {
+        Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateproject/${projectID}`, updatedProjectData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -91,7 +91,7 @@ const ProjectDetails = memo(({ projectID }) => {
 
     const handleAddBudget = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3001/api/createBudget', {
+        fetch('https://meal-server.negrosanonyoungleaders.org/api/createBudget', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
