@@ -27,6 +27,7 @@ import ResetPasswordForm from './pages/ResetPasswordForm';
 export default function App() {
     const { auth, setAuth } = useContext(AuthContext);
     const { token, setToken } = useToken();
+    const usertoken = localStorage.getItem('token');
     const { project, setProject } = useContext(ProjectContext);
     const navigate = useNavigate();
     const [hasRedirected, setHasRedirected] = useState(false);
@@ -36,6 +37,11 @@ export default function App() {
         if (usersession != null) {
             const user = JSON.parse(usersession);
             setAuth(user);
+
+            if (user.role === "Admin" && !hasRedirected) {
+                navigate('/projects');
+                setHasRedirected(true);
+            }
 
             if (user.role === "Project Officer" && !hasRedirected) {
                 navigate('/activityReport');
@@ -65,7 +71,7 @@ export default function App() {
                 }
             />
         </Routes>
-        {token ? (
+        {usertoken ? (
             <>
                 <NavBar auth={auth} />
                 <div className="container-fluid bg-light d-flex flex-column">
