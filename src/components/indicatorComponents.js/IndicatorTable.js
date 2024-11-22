@@ -41,7 +41,7 @@ const IndicatorTable = memo(({ data, setData }) => {
   const [indicator, setIndicator] = useState("");
   const [iskpi, setIskpi] = useState(0);
   const [targetReach, setTargetReach] = useState("");
-  const [unit, setunit] = useState({ value: 'Youth', label: 'Youth' });
+  const [unit, setunit] = useState("");
   const [format, setFormat] = useState({ value: 'Quantitative', label: 'Quantitative' });
   const [freqreport, setFreqReport] = useState({ value: 'Yearly', label: 'Yearly' });
 
@@ -305,7 +305,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         iskpi: iskpi,
         targetReach: targetReach,
         actualReach: 0,
-        unit: unit.value,
+        unit: unit,
         format: format.value,
         freqreport: freqreport.value,
         outputID: outputID,
@@ -333,15 +333,6 @@ const IndicatorTable = memo(({ data, setData }) => {
         console.log('Error inserting data:', error);
       });
   };
-
-  const unitDataSelection = [
-    { value: 'Youth', label: 'Youth' },
-    { value: 'Organization', label: 'Organization' },
-    { value: 'Software', label: 'Software' },
-    { value: 'Children', label: 'Children' },
-    { value: 'Adults', label: 'Adults' },
-    { value: 'infrastructure', label: 'infrastructure' },
-  ];
 
   const formatDataSelection = [
     { value: 'Quantitative', label: 'Quantitative' },
@@ -766,11 +757,14 @@ const IndicatorTable = memo(({ data, setData }) => {
                           />
                         </div>
                         <div className='col-6'>
-                          <InputSelection
+                          <InputText
                             label="Unit"
+                            id="unit"
+                            type="text"
+                            placeholder="Enter unit"
+                            name="unit"
                             value={unit}
-                            data={unitDataSelection}
-                            onChange={(e) => setunit(e)}
+                            onChange={(e) => setunit(e.target.value)}
                           />
                         </div>
                       </div>
