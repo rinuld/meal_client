@@ -29,7 +29,7 @@ export default function AddUser() {
     // Format the date as yyyy/MM/dd
     const formattedDate = birthdate.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '-');
 
-    fetch('https://meal-server.negrosanonyoungleaders.org/api/insertUser', {
+    fetch('http://localhost:3001/api/insertUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

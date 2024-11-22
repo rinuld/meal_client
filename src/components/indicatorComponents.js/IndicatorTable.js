@@ -49,7 +49,7 @@ const IndicatorTable = memo(({ data, setData }) => {
     const fetchOutcomes = async () => {
       try {
         const outcomeDataPromises = data.map(item =>
-          fetch(`https://meal-server.negrosanonyoungleaders.org/api/outcomes/${item.goalID}`)
+          fetch(`http://localhost:3001/api/outcomes/${item.goalID}`)
             .then(response => response.json())
         );
         const fetchedOutcomeData = await Promise.all(outcomeDataPromises);
@@ -69,7 +69,7 @@ const IndicatorTable = memo(({ data, setData }) => {
     const fetchOutputs = async () => {
       try {
         const outputDataPromises = outcomeData.map(outcome =>
-          fetch(`https://meal-server.negrosanonyoungleaders.org/api/outputs/${outcome.outcomeID}`)
+          fetch(`http://localhost:3001/api/outputs/${outcome.outcomeID}`)
             .then(response => {
               console.log(response); // Log the response
               return response.json();
@@ -93,7 +93,7 @@ const IndicatorTable = memo(({ data, setData }) => {
     const fetchIndicators = async () => {
       try {
         const indicatorDataPromises = outputData.map(output =>
-          fetch(`https://meal-server.negrosanonyoungleaders.org/api/indicators/${output.outputID}`)
+          fetch(`http://localhost:3001/api/indicators/${output.outputID}`)
             .then(response => response.json())
         );
         const fetchedIndicatorData = await Promise.all(indicatorDataPromises);
@@ -113,7 +113,7 @@ const IndicatorTable = memo(({ data, setData }) => {
     const fetchActualsLastUpdates = async () => {
       try {
         const actualsLastUpdatesPromises = indicatorOutputData.map(indicator =>
-          fetch(`https://meal-server.negrosanonyoungleaders.org/api/indicatorData/${indicator.indicatorID}`)
+          fetch(`http://localhost:3001/api/indicatorData/${indicator.indicatorID}`)
             .then(response => response.json())
         );
         const fetchedActualsLastUpdates = await Promise.all(actualsLastUpdatesPromises);
@@ -149,7 +149,7 @@ const IndicatorTable = memo(({ data, setData }) => {
 
     console.log(id, framework);
     if (framework === "Objectives") {
-      Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteObjectives/${id}`, {}, {
+      Axios.put(`http://localhost:3001/api/updateDeleteObjectives/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -170,7 +170,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         });
     }
     else if (framework === "Outcomes") {
-      Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteOutcomes/${id}`, {}, {
+      Axios.put(`http://localhost:3001/api/updateDeleteOutcomes/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -191,7 +191,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         });
     }
     else if (framework === "Outputs")  {
-      Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteOutputs/${id}`, {}, {
+      Axios.put(`http://localhost:3001/api/updateDeleteOutputs/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -212,7 +212,7 @@ const IndicatorTable = memo(({ data, setData }) => {
         });
     }
     else if (framework === "Indicators") {
-      Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateDeleteIndicator/${id}`, {}, {
+      Axios.put(`http://localhost:3001/api/updateDeleteIndicator/${id}`, {}, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -241,7 +241,7 @@ const IndicatorTable = memo(({ data, setData }) => {
 
   const handleSubmitOutcome = (e, goalID) => {
     e.preventDefault();
-    fetch('https://meal-server.negrosanonyoungleaders.org/api/createOutcome', {
+    fetch('http://localhost:3001/api/createOutcome', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -268,7 +268,7 @@ const IndicatorTable = memo(({ data, setData }) => {
 
   const handleSubmitOutput = (e, outcomeID) => {
     e.preventDefault();
-    fetch('https://meal-server.negrosanonyoungleaders.org/api/createOutput', {
+    fetch('http://localhost:3001/api/createOutput', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -295,7 +295,7 @@ const IndicatorTable = memo(({ data, setData }) => {
 
   const handleSubmitIndicator = (e, outputID) => {
     e.preventDefault();
-    fetch('https://meal-server.negrosanonyoungleaders.org/api/createIndicators', {
+    fetch('http://localhost:3001/api/createIndicators', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -370,7 +370,7 @@ const IndicatorTable = memo(({ data, setData }) => {
   };
 
   const handleSaveTitle = (goalID) => {
-    Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateObjective/${goalID}`, { editObjective }, {
+    Axios.put(`http://localhost:3001/api/updateObjective/${goalID}`, { editObjective }, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -398,7 +398,7 @@ const IndicatorTable = memo(({ data, setData }) => {
   };
 
   const handleSaveOutcomeTitle = (outcomeID) => {
-    Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateOutcome/${outcomeID}`, { editOutcome }, {
+    Axios.put(`http://localhost:3001/api/updateOutcome/${outcomeID}`, { editOutcome }, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -426,7 +426,7 @@ const IndicatorTable = memo(({ data, setData }) => {
   };
 
   const handleSaveOutputTitle = (outputID) => {
-    Axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateOutput/${outputID}`, { editOutput }, {
+    Axios.put(`http://localhost:3001/api/updateOutput/${outputID}`, { editOutput }, {
       headers: {
         'Content-Type': 'application/json'
       }

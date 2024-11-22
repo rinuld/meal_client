@@ -18,7 +18,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
     const [activeTab, setActiveTab] = useState('details');
     const [participantsdata, setParticipantsData] = useState([]);
     const [indicatorName, setIndicatorName] = useState('');
-    const [unit, setUnit] = useState({});
+    const [unit, setUnit] = useState('');
     const [format, setFormat] = useState({});
     const [freqReport, setFreqReport] = useState({});
     const [targetReach, setTarget] = useState(0);
@@ -37,7 +37,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     useEffect(() => {
         // fetchParticipantsData();
-        axios.get(`https://meal-server.negrosanonyoungleaders.org/api/indicatordetails/${indicatorDetails.indicatorID}`)
+        axios.get(`http://localhost:3001/api/indicatordetails/${indicatorDetails.indicatorID}`)
             .then(response => {
                 const actualreach = response.data[0].actualreach; // Assuming the actualreach is stored in the 'actualreach' field of the response data
                 setActual(actualreach);
@@ -50,11 +50,10 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     useEffect(() => {
         setIndicatorName(indicatorDetails.indicator || '');
-        setUnit({ value: indicatorDetails.unit, label: indicatorDetails.unit });
+        setUnit(indicatorDetails.unit || '' );
         setFormat({ value: indicatorDetails.format, label: indicatorDetails.format });
         setFreqReport({ value: indicatorDetails.freqreport, label: indicatorDetails.freqreport });
         setTarget(indicatorDetails.targetreach || 0);
-        // setActual(indicatorDetails.actualreach || 0);
     }, [indicatorDetails.indicator, indicatorDetails.unit, indicatorDetails.format, indicatorDetails.freqreport, indicatorDetails.targetreach, indicatorDetails.actualreach])
 
     const handleTabClick = (tab) => {
@@ -67,7 +66,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.put(`https://meal-server.negrosanonyoungleaders.org/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, actualReach, unit: unit.value, format: format.value, freqReport: freqReport.value }, {
+        axios.put(`http://localhost:3001/api/updateIndicator/${indicatorDetails.indicatorID}`, { indicatorName, targetReach, actualReach, unit, format: format.value, freqReport: freqReport.value }, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -102,7 +101,7 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
 
     const handlesubmitparticipants = (e) => {
         e.preventDefault();
-        fetch('https://meal-server.negrosanonyoungleaders.org/api/createparticipants', {
+        fetch('http://localhost:3001/api/createparticipants', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -216,15 +215,6 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
         { value: 'Valladolid', label: 'Valladolid' },
     ];
 
-    const unitDataSelection = [
-        { value: 'Youth', label: 'Youth' },
-        { value: 'Organization', label: 'Organization' },
-        { value: 'Software', label: 'Software' },
-        { value: 'Children', label: 'Children' },
-        { value: 'Adults', label: 'Adults' },
-        { value: 'infrastructure', label: 'infrastructure' },
-    ];
-
     const formatDataSelection = [
         { value: 'Quantitative', label: 'Quantitative' },
         { value: 'Qualitative', label: 'Qualitative' },
@@ -273,11 +263,14 @@ function IndicatorMenu({ indicatorDetails, indicatorData }) {
                                         onChange={(e) => setIndicatorName(e.target.value)}
                                     />
                                 </div><div className="col-12 col-md-6">
-                                    <InputSelection
+                                    <InputText
                                         label="Unit"
+                                        id="unit"
+                                        type="text"
+                                        placeholder="Enter unit"
+                                        name="unit"
                                         value={unit}
-                                        data={unitDataSelection}
-                                        onChange={(e) => setUnit(e)}
+                                        onChange={(e) => setUnit(e.target.value)}
                                     />
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ export const InsertLogData = (description, user) => {
       user
     };
   
-    fetch('https://meal-server.negrosanonyoungleaders.org/api/createlogs', {
+    fetch('http://localhost:3001/api/createlogs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

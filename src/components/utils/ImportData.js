@@ -19,7 +19,7 @@ const ImportData = ({ indicatorDetails, onChange }) => {
       formData.append('file', selectedFile);
 
       axios
-        .post(`https://meal-server.negrosanonyoungleaders.org/api/upload/${indicatorID}`, formData)
+        .post(`http://localhost:3001/api/upload/${indicatorID}`, formData)
         .then((response) => {
           // console.log(response.data);
           if(response.data.success){

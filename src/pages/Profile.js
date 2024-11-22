@@ -31,7 +31,7 @@ export default function Profile() {
         }
     
         try {
-            const response = await fetch('https://meal-server.negrosanonyoungleaders.org/api/resetPassword', {
+            const response = await fetch('http://localhost:3001/api/resetPassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

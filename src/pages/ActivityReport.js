@@ -70,7 +70,7 @@ function ActivityReport() {
     ];
 
     useEffect(() => {
-        Axios.get('https://meal-server.negrosanonyoungleaders.org/api/projects')
+        Axios.get('http://localhost:3001/api/projects')
             .then(response => {
                 const formattedProjects = formatProjects(response.data);
                 setSelections(prev => ({ ...prev, projects: formattedProjects }));
@@ -102,16 +102,22 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/activities/${selectedOption.value}`)
+        Axios.get(`http://localhost:3001/api/activities/${selectedOption.value}`)
             .then(response => {
-                const formattedActivities = formatData(response.data, 'activityID', 'activityName');
+                const formattedActivities = [
+                    { value: "N/A", label: "N/A" },
+                    ...formatData(response.data, 'activityID', 'activityName'),
+                ];
                 setSelections(prev => ({ ...prev, activities: formattedActivities }));
             })
             .catch(error => handleApiError(error, 'Error fetching activities'));
 
-        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/objectives/${selectedOption.value}`)
+        Axios.get(`http://localhost:3001/api/objectives/${selectedOption.value}`)
             .then(response => {
-                const formattedObjectives = formatData(response.data, 'goalID', 'title');
+                const formattedObjectives = [
+                    { value: "N/A", label: "N/A" },
+                    ...formatData(response.data, 'goalID', 'title'),
+                ];
                 setSelections(prev => ({ ...prev, objectives: formattedObjectives }));
             })
             .catch(error => handleApiError(error, 'Error fetching objectives'));
@@ -137,12 +143,26 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/outcomes/${selectedOption.value}`)
+        Axios.get(`http://localhost:3001/api/outcomes/${selectedOption.value}`)
             .then(response => {
-                const formattedOutcomes = formatData(response.data, 'outcomeID', 'title');
+                const formattedOutcomes = response.data.length > 0
+                    ? [{ value: "N/A", label: "N/A" }, ...formatData(response.data, 'outcomeID', 'title')]
+                    : [{ value: "N/A", label: "N/A" }];
                 setSelections(prev => ({ ...prev, outcomes: formattedOutcomes }));
+                setSelections(prev => ({
+                    ...prev,
+                    outputs: [{ value: "N/A", label: "N/A" }],
+                    indicators: [{ value: "N/A", label: "N/A" }],
+                }));
             })
-            .catch(error => handleApiError(error, 'Error fetching outcomes'));
+            .catch(() => {
+                setSelections(prev => ({
+                    ...prev,
+                    outcomes: [{ value: "N/A", label: "N/A" }],
+                    outputs: [{ value: "N/A", label: "N/A" }],
+                    indicators: [{ value: "N/A", label: "N/A" }],
+                }));
+            });
     };
 
     const handleOutcomeChange = (selectedOption) => {
@@ -153,12 +173,24 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/outputs/${selectedOption.value}`)
+        Axios.get(`http://localhost:3001/api/outputs/${selectedOption.value}`)
             .then(response => {
-                const formattedOutputs = formatData(response.data, 'outputID', 'title');
+                const formattedOutputs = response.data.length > 0
+                    ? [{ value: "N/A", label: "N/A" }, ...formatData(response.data, 'outputID', 'title')]
+                    : [{ value: "N/A", label: "N/A" }];
                 setSelections(prev => ({ ...prev, outputs: formattedOutputs }));
+                setSelections(prev => ({
+                    ...prev,
+                    indicators: [{ value: "N/A", label: "N/A" }],
+                }));
             })
-            .catch(error => handleApiError(error, 'Error fetching outputs'));
+            .catch(() => {
+                setSelections(prev => ({
+                    ...prev,
+                    outputs: [{ value: "N/A", label: "N/A" }],
+                    indicators: [{ value: "N/A", label: "N/A" }],
+                }));
+            });
     };
 
     const handleOutputChange = (selectedOption) => {
@@ -168,12 +200,19 @@ function ActivityReport() {
             selectedIndicator: null
         }));
 
-        Axios.get(`https://meal-server.negrosanonyoungleaders.org/api/indicators/${selectedOption.value}`)
+        Axios.get(`http://localhost:3001/api/indicators/${selectedOption.value}`)
             .then(response => {
-                const formattedIndicators = formatData(response.data, 'indicatorID', 'indicator');
+                const formattedIndicators = response.data.length > 0
+                    ? [{ value: "N/A", label: "N/A" }, ...formatData(response.data, 'indicatorID', 'indicator')]
+                    : [{ value: "N/A", label: "N/A" }];
                 setSelections(prev => ({ ...prev, indicators: formattedIndicators }));
             })
-            .catch(error => handleApiError(error, 'Error fetching indicators'));
+            .catch(() => {
+                setSelections(prev => ({
+                    ...prev,
+                    indicators: [{ value: "N/A", label: "N/A" }],
+                }));
+            });
     };
 
     const handleIndicatorChange = (selectedOption) => {
@@ -422,7 +461,7 @@ function ActivityReport() {
         console.log(dataToPost);
     
         // Post the data to the server
-        Axios.post('https://meal-server.negrosanonyoungleaders.org/api/addActivityReport', dataToPost)
+        Axios.post('http://localhost:3001/api/addActivityReport', dataToPost)
             .then(response => {
                 const { activityReportID } = response.data;
                 showSuccessPopup(activityReportID);

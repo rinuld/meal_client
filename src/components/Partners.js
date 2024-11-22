@@ -8,7 +8,7 @@ const Partners = memo(({ projectID }) => {
 
   // fetch data from the database and assign the value to the setData variable
   useEffect(() => {
-    fetch(`https://meal-server.negrosanonyoungleaders.org/api/partners/${projectID}`)
+    fetch(`http://localhost:3001/api/partners/${projectID}`)
       .then(response => response.json())
       .then(data => {
         setData(data);
