@@ -30,23 +30,46 @@ const Login = ({ setToken }) => {
     try {
       const response = await Axios.post('http://localhost:3001/api/login', { ...data, recaptchaValue });
       const { token, user } = response.data;
-      
+  
+      // Save user and token in localStorage
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
-      setToken({ token: token });
+      setToken({ token });
       setAuth(user);
       navigate("/projects");
-
+  
+      // Remember user credentials if checkbox is checked
       if (rememberMe) {
         localStorage.setItem('rememberedCredentials', JSON.stringify({ username: data.username, password: data.password }));
       } else {
         localStorage.removeItem('rememberedCredentials');
       }
     } catch (error) {
-      console.error('Login failed', error);
+      // Handle backend errors
+      if (error.response && error.response.data) {
+        const { error: errorMessage } = error.response.data; // Extract the `error` field from backend response
+        toast.error(errorMessage || "An unexpected error occurred", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      } else {
+        // Handle network or unexpected errors
+        toast.error("Network error. Please check your connection.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     }
   };
-
+  
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe);
   };
@@ -60,31 +83,7 @@ const Login = ({ setToken }) => {
               <div className='form-box'>
                 <div className='form-value'>
                   <form onSubmit={handleSubmit(handleLogin)}>
-                    {errors.username && (
-                      toast.error("Username is required.", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      })
-                    )}
-                    {errors.password && (
-                      toast.error("Password is required.", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                      })
-                    )}
-                    {/* {errors.password && <p className={errors ? "errmsg" : "offscreeen"}>{errors.password.message}</p>} */}
+          
                     <h2 className='login-h2'></h2>
                     <div className="inputbox">
                       <i className="fa fa-user"></i>
@@ -94,7 +93,7 @@ const Login = ({ setToken }) => {
                         id="username"
                         autoComplete="off"
                         {...register('username', { required: true })}
-                        // {...register('username', { required: 'Username is required' })}
+
                         value={storedCredentials.username}
                         onChange={(e) => setStoredCredentials({ ...storedCredentials, username: e.target.value })}
                       />

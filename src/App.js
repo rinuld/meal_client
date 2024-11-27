@@ -38,11 +38,6 @@ export default function App() {
             const user = JSON.parse(usersession);
             setAuth(user);
 
-            if (user.role === "Admin" && !hasRedirected) {
-                navigate('/projects');
-                setHasRedirected(true);
-            }
-
             if (user.role === "Project Officer" && !hasRedirected) {
                 navigate('/activityReport');
                 setHasRedirected(true);

@@ -14,6 +14,7 @@ const PieChart = ({ expenses, totalbudget }) => {
         labels: ['Expenses', 'Remaining'],
         datasets: [
             {
+                color: ['#FFFFFF'],
                 data: [expenses, remaining],
                 backgroundColor: ['rgb(255, 65, 65)', '#A3C639'],
             },

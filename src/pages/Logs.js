@@ -17,7 +17,8 @@ function Logs(){
         try {
           const response = await fetch('http://localhost:3001/api/logs');
           const data = await response.json();
-          const formattedData = data.map(item => {
+          const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          const formattedData = sortedData.map(item => {
             const date = new Date(item.date);
             const formattedDate = date.toLocaleString('en-US', {
               month: 'short',
