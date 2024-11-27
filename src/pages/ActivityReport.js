@@ -11,6 +11,7 @@ import html2pdf from 'html2pdf.js';
 import AuthContext from "../context/AuthProvider";
 import { InsertLogData } from "../components/InsertLogData";
 import DatePicker from "react-datepicker";
+import InputTextArea from "../components/utils/InputTextArea";
 
 function ActivityReport() {
     const initialState = {
@@ -535,7 +536,7 @@ function ActivityReport() {
                                 <tr key={category.key}>
                                     <td>
                                         {category.key === 'others' ? (
-                                            <input
+                                            <InputText
                                                 type="text"
                                                 className="form-control"
                                                 placeholder={category.label}
@@ -547,30 +548,36 @@ function ActivityReport() {
                                         )}
                                     </td>
                                     <td>
-                                        <input
+                                        <InputText
                                             type="number"
+                                            placeholder={"Enter a number"}
                                             className="form-control"
                                             value={formData.genderAgeDisabilityData[category.key].male}
                                             onChange={e => handleGenderAgeDisabilityChange(category.key, 'male', e.target.value)}
                                             min="0"
+                                            marginTop="0"
                                         />
                                     </td>
                                     <td>
-                                        <input
+                                        <InputText
                                             type="number"
+                                            placeholder={"Enter a number"}
                                             className="form-control"
                                             value={formData.genderAgeDisabilityData[category.key].female}
                                             onChange={e => handleGenderAgeDisabilityChange(category.key, 'female', e.target.value)}
                                             min="0"
+                                            paddingTop="-20px"
                                         />
                                     </td>
                                     <td>
-                                        <input
+                                        <InputText
                                             type="number"
+                                            placeholder={"Enter a number"}
                                             className="form-control"
                                             value={formData.genderAgeDisabilityData[category.key].lgbtqia}
                                             onChange={e => handleGenderAgeDisabilityChange(category.key, 'lgbtqia', e.target.value)}
                                             min="0"
+                                            marginTop="0"
                                         />
                                     </td>
                                 </tr>
@@ -587,7 +594,7 @@ function ActivityReport() {
         <div className="create-forms">
             <form id="activityReportForm" onSubmit={handleSubmit}>
                 <div className="row gx-3">
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Project"
                             value={formData.selectedProject}
@@ -595,7 +602,7 @@ function ActivityReport() {
                             onChange={handleProjectChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Activity"
                             value={formData.selectedActivity}
@@ -603,7 +610,7 @@ function ActivityReport() {
                             onChange={handleActivityChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputText
                             label="Location"
                             id="location"
@@ -614,8 +621,8 @@ function ActivityReport() {
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div className="col-3">
-                        <label htmlFor="Birthdate">Date of the Activity</label><br></br>
+                    <div className="col-12 col-md-3 col-lg-3">
+                        <label htmlFor="Birthdate">Date of the Activity</label>
                         <DatePicker
                             className='input-text'
                             selected={activityDate}
@@ -625,7 +632,7 @@ function ActivityReport() {
                     </div>
                 </div>
                 <div className="row gx-3">
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Objective"
                             value={formData.selectedObjective}
@@ -633,7 +640,7 @@ function ActivityReport() {
                             onChange={handleObjectiveChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Outcome"
                             value={formData.selectedOutcome}
@@ -641,7 +648,7 @@ function ActivityReport() {
                             onChange={handleOutcomeChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Output"
                             value={formData.selectedOutput}
@@ -649,7 +656,7 @@ function ActivityReport() {
                             onChange={handleOutputChange}
                         />
                     </div>
-                    <div className="col-3">
+                    <div className="col-12 col-md-3 col-lg-3">
                         <InputSelection
                             label="Indicator"
                             value={formData.selectedIndicator}
@@ -658,8 +665,6 @@ function ActivityReport() {
                         />
                     </div>
                 </div>
-
-                <br />
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <h5>Institutions and Institutional Groups</h5>
@@ -692,12 +697,10 @@ function ActivityReport() {
                         {renderGenderAgeDisabilityTable()}
                     </div>
                 </div>
-
-                <br />
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="detailedDescription" className="form-label">Detailed Description of the Activity:</label>
-                        <textarea
+                        <InputTextArea
                             id="detailedDescription"
                             className="form-control"
                             placeholder="Describe the purpose and goals of the activity."
@@ -709,7 +712,7 @@ function ActivityReport() {
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="keyOutputs" className="form-label">Key Outputs and Results:</label>
-                        <textarea
+                        <InputTextArea
                             id="keyOutputs"
                             className="form-control"
                             placeholder="Please present the major outputs of the activity implementation, detailing the tangible results and milestones achieved."
@@ -721,7 +724,7 @@ function ActivityReport() {
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="challenges" className="form-label">Challenges and Obstacles Encountered:</label>
-                        <textarea
+                        <InputTextArea
                             id="challenges"
                             className="form-control"
                             placeholder="Describe the challenges and obstacles encountered throughout the activity implementation."
@@ -733,7 +736,7 @@ function ActivityReport() {
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="lessons" className="form-label">Lessons Learned:</label>
-                        <textarea
+                        <InputTextArea
                             id="lessons"
                             className="form-control"
                             placeholder="Describe the lessons learned throughout the activity implementation."
@@ -745,7 +748,7 @@ function ActivityReport() {
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="successStories" className="form-label">Success Stories:</label>
-                        <textarea
+                        <InputTextArea
                             id="successStories"
                             className="form-control"
                             placeholder="Please highlight the impactful achievements and positive outcomes from the activity implementation."
@@ -757,7 +760,7 @@ function ActivityReport() {
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <label htmlFor="conclusions" className="form-label">Conclusions and Recommendations:</label>
-                        <textarea
+                        <InputTextArea
                             id="conclusions"
                             className="form-control"
                             placeholder="Please outline the key findings and suggestions for future improvements and strategies."

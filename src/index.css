@@ -267,7 +267,7 @@ label {
     box-shadow: 7.5px 7.5px 7.5px 7.5px var(--sidebar_boxshadow);
   }
   .sidebar-container .sidebar .nav-item{
-    width: 14.5vw;
+    width: 12.5vw;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -280,6 +280,7 @@ label {
   }
   .sidebar-container .sidebar .sidebar-elements {
     display: flex;
+    padding: 0;
     flex-direction: row;
   }
   .sidebar-container .sidebar .nav-item{
@@ -671,7 +672,7 @@ span {
 /* Text input style */
 .input-textarea textarea {
   width: 100%;
-  min-height: 35px;
+  min-height: 45px;
   border: 1px solid #939393;
   border-radius: 5px;
   outline-color: transparent;
@@ -688,6 +689,10 @@ span {
   outline-color: #ACCF4F;
   outline-style: solid;
   outline-width: 1px;
+}
+
+#activityReportForm .textarea {
+  height: 100px !important;
 }
 
 /* Buttons */
@@ -849,7 +854,7 @@ button {
   color: white;
 }
 
-table .row-theme-1,
+/* table .row-theme-1,
 table .objective-rows,
 table .outcome-rows, table .output-rows,
 table .indicator-rows,
@@ -865,7 +870,7 @@ table .indicator-rows:hover,
 table .datatable-row:hover {
   background-color: #e9e6e6;
   transition: 0.3s ease-in-out;
-}
+} */
 
 .row-theme-1 .link-text,
 .indicator-rows .link-text {
@@ -879,6 +884,7 @@ table .datatable-row:hover {
   font-size: 14px;
   text-decoration: none;
   font-weight: 500;
+  width: 100% !;
 }
 
 .activity-name-txt {
@@ -1499,4 +1505,31 @@ input[type="file"] {
 
 .modal-content {
   background-color: var(--sidebar_background) !important;
+}
+
+.first-col {
+  border: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  padding-top: 0px !important;
+}
+.indicator-rows .cell-content {
+  outline: none !important;
+}
+
+.center a {
+  color: #ACCF4F;
+  text-decoration: none;
+}
+
+.react-datepicker__input-container {
+  width: inherit;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.form-check-label {
+  padding-top: 0.25em;
 }
