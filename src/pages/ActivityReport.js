@@ -699,11 +699,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="detailedDescription" className="form-label">Detailed Description of the Activity:</label>
                         <InputTextArea
+                            label="Detailed Description of the Activity:"
                             id="detailedDescription"
-                            className="form-control"
                             placeholder="Describe the purpose and goals of the activity."
+                            name="detailedDescription"
                             value={formData.detailedDescription}
                             onChange={handleInputChange}
                         />
@@ -711,11 +711,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="keyOutputs" className="form-label">Key Outputs and Results:</label>
                         <InputTextArea
+                            label="Key Outputs and Results:"
                             id="keyOutputs"
-                            className="form-control"
                             placeholder="Please present the major outputs of the activity implementation, detailing the tangible results and milestones achieved."
+                            name="keyOutputs"
                             value={formData.keyOutputs}
                             onChange={handleInputChange}
                         />
@@ -723,11 +723,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="challenges" className="form-label">Challenges and Obstacles Encountered:</label>
                         <InputTextArea
+                            label="Challenges and Obstacles Encountered:"
                             id="challenges"
-                            className="form-control"
                             placeholder="Describe the challenges and obstacles encountered throughout the activity implementation."
+                            name="challenges"
                             value={formData.challenges}
                             onChange={handleInputChange}
                         />
@@ -735,11 +735,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="lessons" className="form-label">Lessons Learned:</label>
                         <InputTextArea
+                            label="Lessons Learned:"
                             id="lessons"
-                            className="form-control"
                             placeholder="Describe the lessons learned throughout the activity implementation."
+                            name="lessons"
                             value={formData.lessons}
                             onChange={handleInputChange}
                         />
@@ -747,11 +747,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="successStories" className="form-label">Success Stories:</label>
                         <InputTextArea
+                            label="Success Stories:"
                             id="successStories"
-                            className="form-control"
                             placeholder="Please highlight the impactful achievements and positive outcomes from the activity implementation."
+                            name="successStories"
                             value={formData.successStories}
                             onChange={handleInputChange}
                         />
@@ -759,11 +759,11 @@ function ActivityReport() {
                 </div>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
-                        <label htmlFor="conclusions" className="form-label">Conclusions and Recommendations:</label>
                         <InputTextArea
+                            label="Conclusions and Recommendations:"
                             id="conclusions"
-                            className="form-control"
                             placeholder="Please outline the key findings and suggestions for future improvements and strategies."
+                            name="conclusions"
                             value={formData.conclusions}
                             onChange={handleInputChange}
                         />

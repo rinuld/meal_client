@@ -5,6 +5,7 @@ const InputTextArea = ({ label, id, placeholder, name, value, onChange }) => {
         <div className='input-textarea'>
             <label htmlFor={id}>{label}</label>
             <textarea
+                id={id}
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
