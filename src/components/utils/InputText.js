@@ -4,7 +4,6 @@ const InputText = ({ label, id, type, placeholder, name, value, onChange, disabl
   return (
     <div>
       <label htmlFor={id}>{label}</label>
-      <br/>
       <input
         className='input-text'
         id={id}

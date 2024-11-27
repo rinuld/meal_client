@@ -28,8 +28,6 @@ const ActivityReportPrint = ({ PDFData, activityReportID }) => {
                     <p><strong>Rapid Post-Activity Report</strong> - {activityReportID}</p>
                 </div>     
             </div>
-
-            <br/>
             
             <div className="center">
                 <div className="row">
@@ -58,8 +56,6 @@ const ActivityReportPrint = ({ PDFData, activityReportID }) => {
                 </div>
             </div>
 
-            <br/>
-
             <div className="center">
                 <div className="row">
                     <p><strong style={{ color: '#106544' }}>Objective:</strong> {PDFData.selectedObjective}</p>
@@ -74,8 +70,6 @@ const ActivityReportPrint = ({ PDFData, activityReportID }) => {
                     <p><strong style={{ color: '#106544' }}>Indicator:</strong> {PDFData.selectedIndicator}</p>
                 </div>
             </div>
-
-            <br/>
 
             <div className='center'>
                 <div className="row">

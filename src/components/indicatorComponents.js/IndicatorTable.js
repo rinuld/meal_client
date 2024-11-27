@@ -602,11 +602,9 @@ const IndicatorTable = memo(({ data, setData }) => {
                                 .filter((indicator) => indicator.objOutID === output.outputID)
                                 .map((indicator, indicatorIndex) => (
                                   <tr className="indicator-rows" key={indicator.indicatorID} onMouseEnter={() => setRowVisible(indicator.indicatorID)} onMouseLeave={() => setRowVisible(null)}>
-                                    <td className="first-col">
+                                    <td className="indicator-data">
                                       <Link to={`/indicatordetails/${indicator.indicatorID}`} className="link-text">
-                                        <div className="cell-content indicator-data">
-                                          <span className="activity-code-txt" style={{ marginLeft: '75px' }}>{`${objectiveIndex + 1}.${outcomeIndex + 1}.${outputIndex + 1}.${indicatorIndex + 1} ${shortenText(indicator.indicator)}`}</span>
-                                        </div>
+                                          <span className="activity-code-txt" style={{ marginLeft: '75px'}}>{`${objectiveIndex + 1}.${outcomeIndex + 1}.${outputIndex + 1}.${indicatorIndex + 1} ${shortenText(indicator.indicator)}`}</span>
                                       </Link>
                                     </td>
                                     <td className="indicator-data">{indicator.format}</td>
