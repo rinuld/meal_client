@@ -34,7 +34,7 @@ const Login = ({ setToken }) => {
       // Save user and token in localStorage
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
-      setToken({ token });
+      setToken({ token: token });
       setAuth(user);
       navigate("/projects");
   
