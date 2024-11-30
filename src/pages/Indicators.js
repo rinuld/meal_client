@@ -1,7 +1,7 @@
 import CreateForm from "../components/CreateForm";
 import IndicatorTable from "../components/indicatorComponents.js/IndicatorTable";
 import { useContext, useEffect, useState } from "react";
-import InputTextArea from "../components/utils/InputTextArea";
+import InputText from "../components/utils/InputText";
 import ProjectContext from "../context/ProjectProvider";
 import AuthContext from "../context/AuthProvider";
 import { InsertLogData } from "../components/InsertLogData";
@@ -83,7 +83,7 @@ function Indicators() {
                 <form onSubmit={handleSubmit}>
                     <div className="row gx-3">
                         <div className="col-12 col-md-12">
-                            <InputTextArea
+                            <InputText
                                 label="Title"
                                 id="title"
                                 placeholder="Enter title"

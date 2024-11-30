@@ -665,6 +665,7 @@ function ActivityReport() {
                         />
                     </div>
                 </div>
+                <hr></hr>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <h5>Institutions and Institutional Groups</h5>
@@ -678,7 +679,7 @@ function ActivityReport() {
                     />
                     <div className="col-3 others">
                         <label htmlFor="Others">Others:</label>
-                        <input
+                        <InputText
                             id="othersField"
                             className="form-control mt-2"
                             placeholder="Please specify"
@@ -687,6 +688,7 @@ function ActivityReport() {
                         />
                     </div>
                 </div>
+                <hr></hr>
                 <div className="row gx-3 mb-3">
                     <div className="col-12">
                         <h5>Gender, Age, and Disability Disaggregated Data</h5>
